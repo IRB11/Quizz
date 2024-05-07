@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NUnit" Version="4.1.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.5.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="8.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Quizz.Common\Quizz.Common.csproj" />
+    <ProjectReference Include="..\Quizz.Domain.Core\Quizz.Domain.Core.csproj" />
+    <ProjectReference Include="..\Quizz.Domain.Infrastructure\Quizz.Domain.Infrastructure.csproj" />
+    <ProjectReference Include="..\Quizz\Quizz.csproj" />
+  </ItemGroup>
+
+</Project>
