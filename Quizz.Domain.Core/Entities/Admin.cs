@@ -16,7 +16,7 @@ namespace Quizz.Domain.Core.Entities
         public string PhoneNumber { get; set; }
         public Agent Agent { get; set; }
         public Question Question { get; set; }
-        public Quizz Quizz { get; set; }
+        public QuizzTest QuizzTest { get; set; }
         public Technologies Technologies { get; set; }
     }
 }

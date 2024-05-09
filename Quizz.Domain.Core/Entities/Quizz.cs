@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Quizz.Domain.Core.Entities
 {
-    public class Quizz
+    public class QuizzTest
     {
         public int Id { get; set; }
         public string Comment { get; set; }

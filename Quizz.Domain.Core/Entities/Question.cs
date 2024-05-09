@@ -16,6 +16,6 @@ namespace Quizz.Domain.Core.Entities
         public Level Level { get; set; }
         public AnswerOption AnswerOption { get; set; }
         public Technologies Technologies { get; set; }
-        public Quizz Quizz { get; set; }
+        public QuizzTest QuizzTest { get; set; }
     }
 }
