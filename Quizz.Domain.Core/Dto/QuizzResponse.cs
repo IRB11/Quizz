@@ -1,16 +1,17 @@
-﻿using System;
+﻿using Quizz.Domain.Core.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Quizz.Domain.Core.Entities
+namespace Quizz.Domain.Core.Dto
 {
-    public class QuizzTest
+    public class QuizzResponse
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string Comment { get; set; }
-        public decimal Completion { get; set; }
+        public decimal CompletionLevel { get; set; }
         public DateTime CompletionTime { get; set; }
         public bool IsValid { get; set; }
         public int NumberOfQuestion { get; set; }
@@ -21,7 +22,6 @@ namespace Quizz.Domain.Core.Entities
         public Admin Admin { get; set; }
         public Candidate Candidate { get; set; }
         public Status Status { get; set; }
-        public Question Question { get; set; }
         public QuizzAnswer QuizzAnswer { get; set; }
     }
 }

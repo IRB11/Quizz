@@ -1,19 +1,19 @@
-﻿using Quizz.Domain.Core.Interfaces;
+﻿using Quizz.Domain.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Quizz.Domain.Core.Entities
+namespace Quizz.Domain.Core.Dto
 {
-    public class Candidate : IUser
+    public class CandidateResponse
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string Name { get; set; }
-        public string LastName { get; set; }
-        public string EmailAddress { get; set; }
+        public string Lastname { get; set; }
         public string PhoneNumber { get; set; }
+        public string EmailAdress { get; set; }
         public Agent Agent { get; set; }
         public QuizzTest QuizzTest { get; set; }
     }

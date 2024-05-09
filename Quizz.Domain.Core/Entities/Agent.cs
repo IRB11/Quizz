@@ -15,6 +15,6 @@ namespace Quizz.Domain.Core.Entities
         public string EmailAddress { get; set; }
         public Admin Admin { get; set; }
         public Candidate Candidate { get; set; }
-        public Quizz Quizz { get; set; }
+        public QuizzTest Quizz { get; set; }
     }
 }
