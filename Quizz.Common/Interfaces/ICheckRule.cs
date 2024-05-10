@@ -5,6 +5,6 @@ namespace Quizz.Common.Interfaces
     public interface ICheckRule<in TUseCaseRequest>
     {
         string GetErrorMessage();
-        Task<bool> CheckRule();
+        Task<bool> CheckRule(TUseCaseRequest levelRequest);
     }
 }
