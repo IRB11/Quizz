@@ -26,7 +26,6 @@
 
   <ItemGroup>
     <Folder Include="Data\Config\" />
-    <Folder Include="Data\Entities\" />
     <Folder Include="Data\Repositories\" />
     <Folder Include="InMemory\" />
   </ItemGroup>
