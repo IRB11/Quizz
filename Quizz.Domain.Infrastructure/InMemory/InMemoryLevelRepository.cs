@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Quizz.Core.UnitTests.InMemory
+namespace Quizz.Domain.Infrastructure.InMemory
 {
     public class InMemoryLevelRepository : ILevelRepository
     {

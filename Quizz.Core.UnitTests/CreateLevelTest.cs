@@ -8,6 +8,7 @@ using Quizz.Domain.Core.UseCases;
 using System;
 using System.Threading.Tasks;
 using Quizz.Domain.Core.UseCases.Rules;
+using Quizz.Domain.Infrastructure.InMemory;
 
 namespace Quizz.Core.UnitTests
 {
