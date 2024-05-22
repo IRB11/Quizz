@@ -14,9 +14,9 @@ namespace Quizz.Domain.Core.Dto
         public string Type { get; set; }
         public bool IsValid { get; set; }
         public int Order {  get; set; }
-        public Admin Admin { get; set; }
-        public AnswerOption AnswerOption { get; set; }
+        public User Admin { get; set; }
+        public ICollection<Response>? Response { get; set; }
         public Level Level { get; set; }
-        public Technologies Technologies { get; set;}
+        public Technology Technology { get; set;}
     }
 }

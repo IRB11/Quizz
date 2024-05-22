@@ -2,17 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Quizz.Domain.Core.Dto
 {
-    public class LevelRequest
+    public class Response_Response
     {
-        public long? Id { get; set; }
+        public string Id { get; set; }
         public string Content { get; set; }
-
-        public int AdminId { get; set; }
+        public string Explanation { get; set; }
+        public bool isCorrect { get; set; }
     }
 }

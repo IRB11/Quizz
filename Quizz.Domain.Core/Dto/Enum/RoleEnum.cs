@@ -6,13 +6,10 @@ using System.Threading.Tasks;
 
 namespace Quizz.Domain.Core.Dto.Enum
 {
-    public enum StatusQuizzEnum
+    public enum RoleEnum
     {
-        Created = 0,
-        InProgress = 1,
-        Interrupted = 2,
-        Abandonned = 3,
-        Completed = 4
-
+            Admin = 1,
+            Agent = 2,
+            Candidat = 3,
     }
 }
