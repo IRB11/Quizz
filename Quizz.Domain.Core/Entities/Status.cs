@@ -9,7 +9,6 @@ namespace Quizz.Domain.Core.Entities
     public class Status
     {
         public int Id { get; set; }
-        public string StatusQuizz { get; set; }
-        public QuizzTest QuizzTest { get; set; }
+        public string QuizStatus { get; set; }
     }
 }
