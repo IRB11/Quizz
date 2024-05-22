@@ -9,10 +9,16 @@ namespace Quizz.Domain.Infrastructure.Data.Entities
         public string Content { get; set; }
         public string Type { get; set; }
         public bool IsValid { get; set; }
-        public EFAdmin Admin { get; set; }
+
+        public int AdminId { get; set; }
+        public EFUser Admin { get; set; }
+
+        public int LevelId { get; set; }
         public EFLevel Level { get; set; }
-        public ICollection<EFAnswerOption> AnswerOptions { get; set; }
-        public EFTechnologies Technologies { get; set; }
-        public ICollection<EFQuizzTest> QuizzTests { get; set; }
+
+        public int TechnologyId { get; set; }
+        public EFTechnology Technology { get; set; }
+        public ICollection<EFResponse> Responses { get; set; }
+
     }
 }
