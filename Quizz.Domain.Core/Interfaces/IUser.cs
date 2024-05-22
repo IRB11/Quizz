@@ -9,7 +9,7 @@ namespace Quizz.Domain.Core.Interfaces
     public interface IUser
     {
         int Id { get; set; }
-        string Name { get; set; }
+        string FirstName { get; set; }
         string LastName {  get; set; }        
         string EmailAddress { get; set; }
 
