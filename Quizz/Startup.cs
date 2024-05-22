@@ -64,8 +64,6 @@ namespace Quizz
             services.AddControllers();
 
             services.AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Latest)
-                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>())
                 .AddMvcOptions(i => i.EnableEndpointRouting = false).AddXmlSerializerFormatters();
 
             services.AddAutoMapper(cfg =>
@@ -111,7 +109,7 @@ namespace Quizz
         public void ConfigureContainer(ContainerBuilder builder)
         {
             builder.RegisterModule(new QuizzDomainCoreModule());
-            builder.RegisterModule(new FolderDomainInfrastructureModule());
+            builder.RegisterModule(new QuizzDomainInfrastructureModule());
 
             //builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).Where(t => t.Name.EndsWith("Presenter")).SingleInstance();
         }

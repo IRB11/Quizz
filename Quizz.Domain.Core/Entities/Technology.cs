@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Quizz.Domain.Core.Entities
 {
-    public class QuizzAnswer
+    public class Technology
     {
         public int Id { get; set; }
-        public string Content { get; set; }
-        public Answer Answer { get; set; }
-        public QuizzTest QuizzTest { get; set; }
+        public string Name { get; set; }
+        public ICollection<Quiz> Quizzes { get; set; }
+        public ICollection<Question> Questions { get; set; }
     }
 }

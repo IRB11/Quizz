@@ -10,7 +10,9 @@ namespace Quizz.Domain.Core.Dto.Enum
     {
         Created = 0,
         InProgress = 1,
-        Stopped = 2,
-        Completed = 3,
+        Interrupted = 2,
+        Abandonned = 3,
+        Completed = 4
+
     }
 }

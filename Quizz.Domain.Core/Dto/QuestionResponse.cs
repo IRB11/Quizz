@@ -15,7 +15,7 @@ namespace Quizz.Domain.Core.Dto
         public bool IsValid { get; set; }
         public int Order { get; set; }
         public Level Level { get; set; }
-        public AnswerOption AnswerOption { get; set; }
-        public Technologies Technologies { get; set; }
+        public ICollection<Response>? Response { get; set; }
+        public Technology Technology { get; set; }
     }
 }

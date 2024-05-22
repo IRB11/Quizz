@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Quizz.Domain.Core.Entities
+namespace Quizz.Domain.Core.Dto
 {
-    public class Technologies
+    public class RoleResponse
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public Admin Admin { get; set; }
-        public Question Question { get; set; }
     }
 }

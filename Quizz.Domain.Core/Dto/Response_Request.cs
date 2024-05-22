@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace Quizz.Domain.Core.Dto
 {
-    public class QuizzAnswerResponse
+    public class Response_Request
     {
-        public long Id { get; set; }
+        public long? Id { get; set; }
         public string Content { get; set; }
-        public AnswerOption AnswerOption { get; set; }
+        public string Explanation { get; set; }
+        public bool isCorrect { get; set; }
     }
 }
