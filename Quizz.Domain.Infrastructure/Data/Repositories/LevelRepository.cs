@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Quizz.Domain.Core.Dto;
 using Quizz.Domain.Core.Interfaces;
 using Quizz.Domain.Infrastructure.Data.Entities;
@@ -24,7 +25,7 @@ namespace Quizz.Domain.Infrastructure.Data.Repositories
         public async Task<LevelResponse> Add(LevelRequest levelRequest)
         {
             EFLevel eFLevel = mapper.Map<EFLevel>(levelRequest);
-            this.context.Add(eFLevel);
+            this.context.Levels.Add(eFLevel);
             await this.context.SaveChangesAsync();
             LevelResponse levelResponse = mapper.Map<LevelResponse>(eFLevel);
             return levelResponse;
@@ -32,7 +33,7 @@ namespace Quizz.Domain.Infrastructure.Data.Repositories
 
         public Task<bool> ContentIsNotAvailable(string Content)
         {
-            throw new NotImplementedException();
+            return Task.Run(() => context.Levels.Any(f => f.Content.ToLower().Equals(Content.ToLower())));
         }
 
         public Task<bool> IdIsNotAvailable(long? id)
