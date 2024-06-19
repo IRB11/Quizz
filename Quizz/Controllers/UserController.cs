@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Quizz.Domain.Core.Dto;
 using Quizz.Domain.Core.Interfaces;
 using Quizz.Domain.Core.UseCases;
@@ -11,13 +10,13 @@ namespace Quizz.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LevelController : ControllerBase
+    public class UserController : ControllerBase
     {
-        private readonly ICreateLevel createLevel;
+        private readonly ICreateUser createUser;
 
-        public LevelController(ICreateLevel createLevel)
+        public UserController(ICreateUser user)
         {
-            this.createLevel = createLevel;
+            this.createUser = user;
         }
         [HttpGet]
         public IEnumerable<string> Get()
@@ -30,11 +29,11 @@ namespace Quizz.Controllers
         {
             return "value";
         }
-        [Authorize(Roles = "admin")]
+
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] LevelRequest levelRequest)
+        public async Task<IActionResult> Post([FromBody] UserRequest userRequest)
         {
-            return Ok(await createLevel.Handle(levelRequest));
+            return Ok(await createUser.Handle(userRequest));
         }
 
         [HttpPut("{id}")]

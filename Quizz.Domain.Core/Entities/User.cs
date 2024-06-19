@@ -17,6 +17,7 @@ namespace Quizz.Domain.Core.Entities
         public string Password { get; set; }
         public string PhoneNumber { get; set; }
         public bool IsActive { get; set; }
+        public string Token { get; set; }
         public Role Role { get; set; }
     }
 }

@@ -20,7 +20,7 @@ namespace Quizz
                 .UseSerilog((context, configuration) =>
                 {
                     configuration.Enrich.FromLogContext().WriteTo.Console();
-                    configuration.Enrich.FromLogContext().WriteTo.File(new RenderedCompactJsonFormatter(), @$"{Directory.GetCurrentDirectory()}\appLog.json");
+                    configuration.Enrich.FromLogContext().WriteTo.File(new RenderedCompactJsonFormatter(), @$"{Directory.GetCurrentDirectory()}\appLog.json", rollingInterval: RollingInterval.Day);
                 }, writeToProviders: true)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {

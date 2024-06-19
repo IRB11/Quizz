@@ -1,25 +1,18 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using AutoMapper;
-using FluentValidation.AspNetCore;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Serilog;
-using System;
-using System.IO;
-using System.Linq;
-using System.Reflection;
 using Quizz.Common.Configuration;
 using Quizz.Domain.Core;
+using Quizz.Domain.Core.Entities;
 using Quizz.Domain.Infrastructure;
 using Quizz.Domain.Infrastructure.Data;
 using Quizz.Domain.Infrastructure.Data.Mapping;
+using Serilog;
+using System.Reflection;
+using System.Text;
 
 namespace Quizz
 {
@@ -60,8 +53,30 @@ namespace Quizz
             });
 
             services.AddLogging();
+            services.Configure<JWT>(Configuration.GetSection("JWT"));
+            var jwt = Configuration.GetSection("JWT").Get<JWT>();
+
 
             services.AddControllers();
+            // Configure JWT authentication
+            var keyBytes = Encoding.ASCII.GetBytes(jwt.JwtSecret);
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(keyBytes),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
 
             services.AddMvc()
                 .AddMvcOptions(i => i.EnableEndpointRouting = false).AddXmlSerializerFormatters();
@@ -92,14 +107,32 @@ namespace Quizz
                     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                     c.IncludeXmlComments(xmlPath);
-
+                    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                    {
+                        Name = "Authorization",
+                        Type = SecuritySchemeType.ApiKey,
+                        Scheme = "Bearer",
+                        BearerFormat = "JWT",
+                        In = ParameterLocation.Header,
+                        Description = "Enter 'Bearer' [space] and then your valid token in the text input below.\r\n\r\nExample: \"Bearer abcdefgh12345\"",
+                    });
+                    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                    {
+                        {
+                            new OpenApiSecurityScheme
+                            {
+                                Reference = new OpenApiReference
+                                {
+                                    Type = ReferenceType.SecurityScheme,
+                                    Id = "Bearer"
+                                }
+                            },
+                            Array.Empty<string>()
+                         }
+                     });
                 });
             }
-
-
-
             #endregion
-
         }
 
         /// <summary>
@@ -108,7 +141,9 @@ namespace Quizz
         /// <param name="builder"></param>
         public void ConfigureContainer(ContainerBuilder builder)
         {
-            builder.RegisterModule(new QuizzDomainCoreModule());
+            var jwt = Configuration.GetSection("JWT").Get<JWT>();
+
+            builder.RegisterModule(new QuizzDomainCoreModule(jwt.JwtSecret));
             builder.RegisterModule(new QuizzDomainInfrastructureModule());
 
             //builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).Where(t => t.Name.EndsWith("Presenter")).SingleInstance();
@@ -122,20 +157,22 @@ namespace Quizz
 
             if (env.IsDevelopment())
             {
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint(Configuration.GetSection(ConfigurationStrings.Sections.SwaggerConfiguration).GetValue<string>(ConfigurationStrings.SwaggerConfigurationElements.JsonPath), "Api V1");
+
+                });
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint(Configuration.GetSection(ConfigurationStrings.Sections.SwaggerConfiguration).GetValue<string>(ConfigurationStrings.SwaggerConfigurationElements.JsonPath), "Api V1");
 
-            });
 
             //app.UseHttpsRedirection();
 
             app.UseRouting();
             app.UseCors("CorsPolicy");
-            //app.UseAuthorization();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
