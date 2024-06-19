@@ -23,9 +23,10 @@ namespace Quizz.Domain.Core.UseCases
         private readonly JWTService jWTService;
 
 
-        public LoginUser(IUserRepository userRepository, JWTService jWTService)
+        public LoginUser(IUserRepository userRepository, IMapper mapper, JWTService jWTService)
         {
             this.userRepository = userRepository;
+            this.mapper = mapper;
             this.jWTService = jWTService;
         }
 
@@ -47,7 +48,9 @@ namespace Quizz.Domain.Core.UseCases
                 throw e;
             }
 
-            return user;
+            var response = mapper.Map<UserResponse>(user);
+
+            return response;
         }
     }
 }
