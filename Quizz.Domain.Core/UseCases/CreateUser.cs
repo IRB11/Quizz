@@ -17,10 +17,9 @@ namespace Quizz.Domain.Core.UseCases
         private readonly IMapper mapper;
         private readonly JWTService jwtService;
 
-        public CreateUser(IUserRepository userRepository, IMapper mapper, JWTService jWTService)
+        public CreateUser(IUserRepository userRepository, JWTService jWTService)
         {
             this.userRepository = userRepository;
-            this.mapper = mapper;
             this.jwtService = jWTService;   
         }
 
