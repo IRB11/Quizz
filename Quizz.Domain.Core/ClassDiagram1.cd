@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Quizz.Domain.Core.Entities.User">
+    <Position X="4.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAEAAAAAAAAAAEAAAQAAAAAAAAAACAAAAAgAAAAg=</HashCode>
+      <FileName>Entities\User.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Role" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Quizz.Domain.Core.Entities.Role">
+    <Position X="0.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Role.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Quizz.Domain.Core.Entities.Quiz">
+    <Position X="4.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAACEAAAAAAAAAAsAAQQCACABAAAAgAAAEAAAAAA=</HashCode>
+      <FileName>Entities\Quiz.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Admin" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Quizz.Domain.Core.Entities.Candidate">
+    <Position X="15.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAEAAAgAAAAAAAAEAQAAAAAAAAAAAAAAAAgAAAAg=</HashCode>
+      <FileName>Entities\Candidate.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Agent" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Quizzes" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Quizz.Domain.Core.Entities.Quiz_Question">
+    <Position X="7" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQACABAAAAAAAAAAAAAAAAAAIAAAAAAEAAAAAAQAAAA=</HashCode>
+      <FileName>Entities\Quiz_Question.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Question" />
+      <Property Name="Quiz" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Quizz.Domain.Core.Entities.Question">
+    <Position X="11.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAgAAAAAAAAgAAQAAAAAAgAABAQAAAAQAAAA=</HashCode>
+      <FileName>Entities\Question.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Level" />
+      <Property Name="Admin" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Quiz_Questions" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Quizz.Domain.Core.Entities.Technology">
+    <Position X="11.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAgAAAAAAAAAAAAQAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Technology.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Questions" />
+      <Property Name="Quizzes" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Quizz.Domain.Core.Entities.Level">
+    <Position X="14" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Level.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
