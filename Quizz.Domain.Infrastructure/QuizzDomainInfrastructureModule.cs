@@ -10,7 +10,8 @@ namespace Quizz.Domain.Infrastructure
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<LevelRepository>().As<ILevelRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<LevelRepository>().As<ILevelRepository>();
+            builder.RegisterType<UserRepository>().As<IUserRepository>();
             builder.RegisterType<DateTimeService>().As<IDateTimeService>();
             builder.RegisterType<CalendarService>().As<ICalendarService>();
         }
