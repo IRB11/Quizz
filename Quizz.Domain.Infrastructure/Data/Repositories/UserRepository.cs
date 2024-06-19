@@ -58,8 +58,11 @@ namespace Quizz.Domain.Infrastructure.Data.Repositories
 
             var user = new EFUser
             {
+                FirstName = createUserRequest.FirstName,
                 LastName = createUserRequest.LastName,
                 EmailAddress = createUserRequest.EmailAddress,
+                PhoneNumber = createUserRequest.PhoneNumber,
+                IsActive = createUserRequest.IsActive,
                 Password = createUserRequest.Password,
                 Role = role
             };
