@@ -2,9 +2,9 @@
 
 namespace Quizz.Common.Interfaces
 {
-    public interface ICheckRule<in TUseCaseRequest>
+    public interface ICheckRuleUser<in TUseCaseRequest>
     {
         string GetErrorMessage();
-        Task<bool> CheckRule(TUseCaseRequest request);
+        Task<bool> CheckRule(TUseCaseRequest UserRequest);
     }
 }
