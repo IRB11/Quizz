@@ -332,3 +332,4 @@ ASALocalRun/
 /Quizz/appLog.json
 /Quizz/appsettings.json
 /Quizz/appLog*.json
+/Quizz.Core.UnitTests/Stubs/Class1.cs
