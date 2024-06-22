@@ -3,6 +3,7 @@ using Quizz.Domain.Core.Interfaces;
 using Quizz.Domain.Core.Interfaces.Date;
 using Quizz.Domain.Infrastructure.Date;
 using Quizz.Domain.Infrastructure.Data.Repositories;
+using Quizz.Domain.Infrastructure.Utils;
 
 namespace Quizz.Domain.Infrastructure
 {
@@ -12,6 +13,7 @@ namespace Quizz.Domain.Infrastructure
         {
             builder.RegisterType<LevelRepository>().As<ILevelRepository>();
             builder.RegisterType<UserRepository>().As<IUserRepository>();
+            builder.RegisterType<HashingPassword>().As<IHashingPassword>();
             builder.RegisterType<DateTimeService>().As<IDateTimeService>();
             builder.RegisterType<CalendarService>().As<ICalendarService>();
         }
