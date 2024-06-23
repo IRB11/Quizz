@@ -14,5 +14,6 @@ namespace Quizz.Domain.Core.Dto
         public string Content { get; set; }
 
         public int AdminId { get; set; }
+        public bool IsActive { get; internal set; }
     }
 }
