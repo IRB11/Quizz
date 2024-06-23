@@ -12,16 +12,16 @@ namespace Quizz.Controllers
     {
         private readonly ICreateLevel createLevel;
         private readonly IUpdateLevel updateLevel;
-        private readonly IGetlevel getlevel;
+        private readonly IGetLevelById getLevelById;
         private readonly IGetAllLevels getAllLevels;
         private readonly IDeleteLevel deleteLevel;
 
-        public LevelController(ICreateLevel createLevel, IGetlevel getlevel, IUpdateLevel updateLevel, IDeleteLevel deleteLevel, IGetAllLevels getAllLevels)
+        public LevelController(ICreateLevel createLevel, IGetLevelById getLevelById, IUpdateLevel updateLevel, IDeleteLevel deleteLevel, IGetAllLevels getAllLevels)
         {
             this.createLevel = createLevel;
             this.updateLevel = updateLevel;
             this.deleteLevel = deleteLevel;
-            this.getlevel = getlevel;
+            this.getLevelById = getLevelById;
             this.getAllLevels = getAllLevels;
         }
         [HttpGet]
@@ -33,7 +33,7 @@ namespace Quizz.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            return Ok(await getlevel.Handle(id));
+            return Ok(await getLevelById.Handle(id));
         }
 
         [Authorize(Roles = "admin")]
@@ -44,9 +44,9 @@ namespace Quizz.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] LevelRequest value)
+        public async Task<IActionResult> Put(int id, [FromBody] LevelRequest levelRequest)
         {
-            return Ok(await updateLevel.Handle(value));
+            return Ok(await updateLevel.Handle(levelRequest));
         }
 
         [HttpDelete("{id}")]

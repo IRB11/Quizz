@@ -8,7 +8,7 @@ namespace Quizz.Domain.Core.Interfaces
         Task<bool> ContentIsNotAvailable(string Content);
         Task<bool> DeleteLevel(LevelRequest levelRequest);
         Task<List<LevelResponse>> getAllLevels();
-        Task<LevelResponse> GetLevel(int id);
+        Task<LevelResponse> GetLevelById(int id);
         Task<bool> IdIsNotAvailable(long? id);
         Task<bool> levelIsUsed(LevelRequest levelRequest);
         Task<LevelResponse> Update(LevelRequest levelRequest);

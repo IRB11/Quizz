@@ -4,12 +4,12 @@ using Quizz.Domain.Core.Interfaces;
 
 namespace Quizz.Domain.Core.UseCases
 {
-    public class GetLevel : IGetlevel
+    public class GetLevelById : IGetLevelById
     {
         private readonly IEnumerable<ICheckRuleLevel<LevelRequest>> _rules;
         private readonly ILevelRepository _levelRepository;
 
-        public GetLevel(ILevelRepository levelRepository, IEnumerable<ICheckRuleLevel<LevelRequest>> rules)
+        public GetLevelById(ILevelRepository levelRepository, IEnumerable<ICheckRuleLevel<LevelRequest>> rules)
         {
             _levelRepository = levelRepository;
             _rules = rules;
@@ -19,7 +19,7 @@ namespace Quizz.Domain.Core.UseCases
         {
             if (CheckIfRulesAreNotOK()) return null;
 
-            return await _levelRepository.GetLevel(id);
+            return await _levelRepository.GetLevelById(id);
 
 
 

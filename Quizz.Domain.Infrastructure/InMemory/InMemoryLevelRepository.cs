@@ -46,7 +46,7 @@ namespace Quizz.Domain.Infrastructure.InMemory
             return await Task.FromResult(levelResponses);
         }
 
-        public async Task<LevelResponse> GetLevel(int id)
+        public async Task<LevelResponse> GetLevelById(int id)
         {
             var level = await Task.Run(() => levels.FirstOrDefault(l => l.Id == id));
 
@@ -163,7 +163,6 @@ namespace Quizz.Domain.Infrastructure.InMemory
                        Content = "Junior"
                    }
                 }
-
             };
         }
     }

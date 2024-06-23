@@ -49,7 +49,7 @@ namespace Quizz.Domain.Infrastructure.Data.Repositories
             return levels;
         }
 
-        public async Task<LevelResponse> GetLevel(int id)
+        public async Task<LevelResponse> GetLevelById(int id)
         {
             EFLevel eFLevel = context.Levels.FirstOrDefault(l => l.Id == id);
             LevelResponse levelResponse = mapper.Map<LevelResponse>(eFLevel);
@@ -74,12 +74,8 @@ namespace Quizz.Domain.Infrastructure.Data.Repositories
             {
                 await Task.Run(() =>
                 {
-                    lock (context.Levels)
-                    {
-                        context.Levels.Update(efLevel);
-                        context.SaveChangesAsync();
-
-                    }
+                    context.Levels.Update(efLevel);
+                    context.SaveChangesAsync();                    
                 });
             }
             catch (Exception ex)

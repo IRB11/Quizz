@@ -19,7 +19,7 @@ namespace Quizz.Domain.Core
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<CreateLevel>().As<ICreateLevel>().InstancePerLifetimeScope();
-            builder.RegisterType<GetLevel>().As<IGetlevel>().InstancePerLifetimeScope();
+            builder.RegisterType<GetLevelById>().As<IGetLevelById>().InstancePerLifetimeScope();
             builder.RegisterType<GetAllLevels>().As<IGetAllLevels>().InstancePerLifetimeScope();
             builder.RegisterType<UpdateLevel>().As<IUpdateLevel>().InstancePerLifetimeScope();
             builder.RegisterType<DeleteLevel>().As<IDeleteLevel>().InstancePerLifetimeScope();
