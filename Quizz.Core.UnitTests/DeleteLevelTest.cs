@@ -2,15 +2,12 @@
 using Quizz.Common.Interfaces;
 using Quizz.Domain.Core.Dto;
 using Quizz.Domain.Core.Interfaces;
-using Quizz.Domain.Core.UseCases.Rules;
 using Quizz.Domain.Core.UseCases;
+using Quizz.Domain.Core.UseCases.Rules;
 using Quizz.Domain.Infrastructure.InMemory;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Quizz.Domain.Core.Entities;
+
 
 namespace Quizz.Core.UnitTests
 {
@@ -29,6 +26,7 @@ namespace Quizz.Core.UnitTests
             deleteLevel = new DeleteLevel(levelRepository, rules);
             level = GetLevelRequest();
         }
+
         #region Init
         private void InitRules()
         {
@@ -44,6 +42,7 @@ namespace Quizz.Core.UnitTests
             };
         }
         #endregion
+
         [Test]
         public async Task Should_Remove_Level_If_Not_Used()
         {
@@ -54,7 +53,7 @@ namespace Quizz.Core.UnitTests
             // Assert
             Assert.That(result.Id.Equals(-1));
             Assert.That(deletedLevel, Is.True);
-            
+
         }
 
         [Test]
@@ -64,7 +63,7 @@ namespace Quizz.Core.UnitTests
             level.Id = 1;
             // Act
             var result = await deleteLevel.Handle(level);
-            var deletedLevel = await levelRepository.GetLevel((int)level.Id);
+            var deletedLevel = await levelRepository.GetLevelById((int)level.Id);
 
             // Assert
             Assert.That(result.IsActive, Is.False);
