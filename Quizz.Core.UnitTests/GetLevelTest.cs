@@ -1,20 +1,18 @@
 ﻿using NUnit.Framework;
 using Quizz.Common.Interfaces;
 using Quizz.Domain.Core.Dto;
-using System.Collections.Generic;
-using Quizz.Core.UnitTests.InMemory;
 using Quizz.Domain.Core.Interfaces;
 using Quizz.Domain.Core.UseCases;
-using System;
-using System.Threading.Tasks;
 using Quizz.Domain.Core.UseCases.Rules;
 using Quizz.Domain.Infrastructure.InMemory;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Quizz.Core.UnitTests
 {
-    public class CreateLevelTest
+    public class GetLevelTest
     {
-        private ICreateLevel createLevel;
+        private IGetlevel getLevel;
         private ILevelRepository levelRepository;
         private LevelRequest level;
         List<ICheckRuleLevel<LevelRequest>> rules;
@@ -24,10 +22,9 @@ namespace Quizz.Core.UnitTests
         {
             levelRepository = new InMemoryLevelRepository();
             InitRules();
-            createLevel = new CreateLevel(levelRepository, rules);
+            getLevel = new GetLevel(levelRepository, rules);
             level = GetLevelRequest();
         }
-
         #region Init
         private void InitRules()
         {
@@ -43,22 +40,30 @@ namespace Quizz.Core.UnitTests
             };
         }
         #endregion
-
         [Test]
-        public async Task CreateLevel_WhenCalled_ReturnNull_IfLevelExist()
-        {            
-            LevelResponse result = await createLevel.Handle(level);
+        public async Task Should_Read_Level_By_Id()
+        {
+            // Arrange
+            var levelId = 1;
 
-            Assert.That(result, Is.Null);
+            // Act
+            var result = await getLevel.Handle(levelId);
+
+            // Assert
+            Assert.That(result.Id, Is.EqualTo(1));
+            Assert.That(result.Content, Is.EqualTo("Senior"));
         }
         [Test]
-        public async Task CreateLevel_WhenCalled_AddLevel_ReturnLevel()
+        public async Task Should_Return_Level_Not_Found_By_Id_When_Id_Not_Exist()
         {
-            level.Content = "Advanced";
+            // Arrange
+            level.Id = 99;
 
-            LevelResponse result = await createLevel.Handle(level);
+            // Act
+            var result = await getLevel.Handle((int)level.Id);
 
-            Assert.That(result.Content.Equals(level.Content));
+            // Assert
+            Assert.That(result, Is.Null);
         }
     }
 }
