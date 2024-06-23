@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace Quizz.Domain.Core.UseCases.Rules
 {
-    public class CheckAvailabilityOfLevelContent : ICheckRuleLevel<LevelRequest>
+    public class CheckAvailabilityOfLevelId : ICheckRuleLevel<LevelRequest>
     {
         private readonly ILevelRepository levelRepository;
         private string errorMessage = string.Empty;
 
         private bool isError => string.IsNullOrWhiteSpace(errorMessage) ? false : true;
 
-        public CheckAvailabilityOfLevelContent( ILevelRepository levelRepository)
+        public CheckAvailabilityOfLevelId( ILevelRepository levelRepository)
         {
             this.levelRepository = levelRepository;
         }
@@ -41,7 +41,7 @@ namespace Quizz.Domain.Core.UseCases.Rules
         public async Task<bool> CheckRule(int id)
         {
             bool IdExist = await levelRepository.IdIsNotAvailable(id);
-            if (!IdExist)
+            if (IdExist)
             {
                 errorMessage += $"Id {id} is not available";
             }
