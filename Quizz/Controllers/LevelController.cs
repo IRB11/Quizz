@@ -2,9 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Quizz.Domain.Core.Dto;
 using Quizz.Domain.Core.Interfaces;
-using Quizz.Domain.Core.UseCases;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 
 namespace Quizz.Controllers
@@ -14,22 +11,31 @@ namespace Quizz.Controllers
     public class LevelController : ControllerBase
     {
         private readonly ICreateLevel createLevel;
+        private readonly IUpdateLevel updateLevel;
+        private readonly IGetlevel getlevel;
+        private readonly IGetAllLevels getAllLevels;
+        private readonly IDeleteLevel deleteLevel;
 
-        public LevelController(ICreateLevel createLevel)
+        public LevelController(ICreateLevel createLevel, IGetlevel getlevel, IUpdateLevel updateLevel, IDeleteLevel deleteLevel, IGetAllLevels getAllLevels)
         {
             this.createLevel = createLevel;
+            this.updateLevel = updateLevel;
+            this.deleteLevel = deleteLevel;
+            this.getlevel = getlevel;
+            this.getAllLevels = getAllLevels;
         }
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IActionResult> Get()
         {
-            return new string[] { "value1", "value2" };
+            return Ok(await getAllLevels.Handle());
         }
 
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            return "value";
+            return Ok(await getlevel.Handle(id));
         }
+
         [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] LevelRequest levelRequest)
@@ -38,13 +44,15 @@ namespace Quizz.Controllers
         }
 
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Put(int id, [FromBody] LevelRequest value)
         {
+            return Ok(await updateLevel.Handle(value));
         }
 
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(LevelRequest levelRequest)
         {
+            return Ok(await deleteLevel.Handle(levelRequest));
         }
     }
 }
