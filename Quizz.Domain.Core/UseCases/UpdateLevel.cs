@@ -9,23 +9,22 @@ using System.Threading.Tasks;
 
 namespace Quizz.Domain.Core.UseCases
 {
-    public class CreateLevel : ICreateLevel
+    public class UpdateLevel : IUpdateLevel
     {
-        private readonly IEnumerable<ICheckRuleLevel<LevelRequest>> rules;
-        private readonly ILevelRepository levelRepository;
+        private readonly IEnumerable<ICheckRuleLevel<LevelRequest>> _rules;
+        private readonly ILevelRepository _levelRepository;
 
-        public CreateLevel(ILevelRepository levelRepository, IEnumerable<ICheckRuleLevel<LevelRequest>> rules)
+        public UpdateLevel(ILevelRepository levelRepository, IEnumerable<ICheckRuleLevel<LevelRequest>> rules)
         {
-            this.rules = rules;
-            this.levelRepository = levelRepository;
-
+            _levelRepository = levelRepository;
+            _rules = rules;
         }
 
         public async Task<LevelResponse> Handle(LevelRequest levelRequest)
         {
             if (CheckIfRulesAreNotOK()) return null;
 
-            return await levelRepository.Add(levelRequest);
+            return await _levelRepository.Update(levelRequest);
 
 
 
@@ -34,7 +33,7 @@ namespace Quizz.Domain.Core.UseCases
                 if (CheckIfRuleNotRespected(levelRequest))
                 {
                     List<string> errorList = new List<string>();
-                    rules.ToList().ForEach(r =>
+                    _rules.ToList().ForEach(r =>
                     {
                         string currentErrorMessage = r.GetErrorMessage();
                         if (!string.IsNullOrWhiteSpace(currentErrorMessage))
@@ -51,7 +50,7 @@ namespace Quizz.Domain.Core.UseCases
 
             bool CheckIfRuleNotRespected(LevelRequest levelRequest)
             {
-                return rules.Any(r => (r.CheckRule(levelRequest)).ConfigureAwait(false).GetAwaiter().GetResult() == true);
+                return _rules.Any(r => (r.CheckRule(levelRequest)).ConfigureAwait(false).GetAwaiter().GetResult() == true);
             }
         }
     }

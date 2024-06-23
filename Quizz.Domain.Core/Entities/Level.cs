@@ -10,6 +10,6 @@ namespace Quizz.Domain.Core.Entities
     {
         public int Id { get; set; }
         public string Content { get; set; }
-        
+        public bool IsActive { get; set; }
     }
 }

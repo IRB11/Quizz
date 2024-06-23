@@ -1,20 +1,19 @@
 ﻿using NUnit.Framework;
 using Quizz.Common.Interfaces;
 using Quizz.Domain.Core.Dto;
-using System.Collections.Generic;
-using Quizz.Core.UnitTests.InMemory;
 using Quizz.Domain.Core.Interfaces;
 using Quizz.Domain.Core.UseCases;
-using System;
-using System.Threading.Tasks;
 using Quizz.Domain.Core.UseCases.Rules;
 using Quizz.Domain.Infrastructure.InMemory;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
 
 namespace Quizz.Core.UnitTests
 {
-    public class CreateLevelTest
+    public class DeleteLevelTest
     {
-        private ICreateLevel createLevel;
+        private IDeleteLevel deleteLevel;
         private ILevelRepository levelRepository;
         private LevelRequest level;
         List<ICheckRuleLevel<LevelRequest>> rules;
@@ -24,7 +23,7 @@ namespace Quizz.Core.UnitTests
         {
             levelRepository = new InMemoryLevelRepository();
             InitRules();
-            createLevel = new CreateLevel(levelRepository, rules);
+            deleteLevel = new DeleteLevel(levelRepository, rules);
             level = GetLevelRequest();
         }
 
@@ -38,27 +37,37 @@ namespace Quizz.Core.UnitTests
         {
             return new LevelRequest()
             {
-                Id = 1,
-                Content = "Junior"
+                Id = 2,
+                Content = "To Delete"
             };
         }
         #endregion
 
         [Test]
-        public async Task CreateLevel_WhenCalled_ReturnNull_IfLevelExist()
-        {            
-            LevelResponse result = await createLevel.Handle(level);
-
-            Assert.That(result, Is.Null);
-        }
-        [Test]
-        public async Task CreateLevel_WhenCalled_AddLevel_ReturnLevel()
+        public async Task Should_Remove_Level_If_Not_Used()
         {
-            level.Content = "Advanced";
+            // Act
+            var result = await deleteLevel.Handle(level);
+            var deletedLevel = await levelRepository.IdIsNotAvailable((level.Id));
 
-            LevelResponse result = await createLevel.Handle(level);
+            // Assert
+            Assert.That(result.Id.Equals(-1));
+            Assert.That(deletedLevel, Is.True);
 
-            Assert.That(result.Content.Equals(level.Content));
+        }
+
+        [Test]
+        public async Task Should_Deactivate_Level_If_Used()
+        {
+            //Arrange 
+            level.Id = 1;
+            // Act
+            var result = await deleteLevel.Handle(level);
+            var deletedLevel = await levelRepository.GetLevelById((int)level.Id);
+
+            // Assert
+            Assert.That(result.IsActive, Is.False);
+            Assert.That(deletedLevel.IsActive, Is.False);
         }
     }
 }
