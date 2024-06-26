@@ -17,7 +17,7 @@ namespace Quizz.Domain.Infrastructure.Data.Config
                 .HasOne(c => c.Admin)
                 .WithMany(a => a.Technologies)
                 .HasPrincipalKey(k => k.Id)
-                .HasForeignKey(c => c.Id).OnDelete(DeleteBehavior.NoAction);
+                .HasForeignKey(c => c.AdminId).OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
