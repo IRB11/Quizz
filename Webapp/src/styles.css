@@ -1,1 +1,44 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base; 
+@tailwind components; 
+@tailwind utilities; 
+
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(45deg, rgb(35, 44, 212), rgb(200, 196, 234));
+    background-size: 400% 400%;
+    animation: gradientAnimation 15s ease infinite;
+}
+
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.container {
+    text-align: left;
+    color: white;
+    font-family: Arial, sans-serif;
+    max-width: 60%;
+}
+
+h1 {
+    font-size: 4em;
+    margin: 0;
+}
+
+p {
+    font-size: 1.5em;
+}
+footer {
+    text-align: center;
+    color: white;
+    border: 1px black solid;
+    border-radius: 15px;
+    padding: 15px;
+}  
+     
