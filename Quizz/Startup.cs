@@ -155,15 +155,15 @@ namespace Quizz
             app.UseSerilogRequestLogging();
             AutofacContainer = app.ApplicationServices.GetAutofacRoot();
 
-            if (env.IsDevelopment())
-            {
+            //if (env.IsDevelopment())
+            //{
                 app.UseSwaggerUI(c =>
                 {
                     c.SwaggerEndpoint(Configuration.GetSection(ConfigurationStrings.Sections.SwaggerConfiguration).GetValue<string>(ConfigurationStrings.SwaggerConfigurationElements.JsonPath), "Api V1");
 
                 });
                 app.UseDeveloperExceptionPage();
-            }
+            //}
 
 
 
