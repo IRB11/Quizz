@@ -19,6 +19,8 @@ namespace Quizz.Domain.Core.Entities
         public string PhoneNumber { get; set; }
         public bool IsActive { get; set; }
         public string Token { get; set; }
+        public byte[] Salt { get;  set; }
+        public int RoleId { get; set; }
         public Role Role { get; set; }
     }
 }

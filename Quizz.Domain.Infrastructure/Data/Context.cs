@@ -187,112 +187,112 @@ namespace Quizz.Domain.Infrastructure.Data
                 {
                     Id = 1,
                     Content = " Q1 Sample response content 1",
-                    isCorrect = true,
+                    IsCorrect = true,
                     QuestionId = 1
                 },
                 new EFResponse
                 {
                     Id = 2,
                     Content = " Q1 Sample response content 2",
-                    isCorrect = false,
+                    IsCorrect = false,
                     QuestionId = 1
                 },
                 new EFResponse
                 {
                     Id = 3,
                     Content = " Q1 Sample response content 3",
-                    isCorrect = true,
+                    IsCorrect = true,
                     QuestionId = 1
                 },
                 new EFResponse
                 {
                     Id = 4,
                     Content = "Q1 Sample response content 4",
-                    isCorrect = false,
+                    IsCorrect = false,
                     QuestionId = 1
                 },
                 new EFResponse
                 {
                     Id = 5,
                     Content = " Q2 Sample response content 1",
-                    isCorrect = true,
+                    IsCorrect = true,
                     QuestionId = 2
                 },
                 new EFResponse
                 {
                     Id = 6,
                     Content = " Q2 Sample response content 2",
-                    isCorrect = false,
+                    IsCorrect = false,
                     QuestionId = 2
                 },
                 new EFResponse
                 {
                     Id = 7,
                     Content = " Q2 Sample response content 3",
-                    isCorrect = true,
+                    IsCorrect = true,
                     QuestionId = 2
                 },
                 new EFResponse
                 {
                     Id = 8,
                     Content = "Q2 Sample response content 4",
-                    isCorrect = false,
+                    IsCorrect = false,
                     QuestionId = 2
                 },
                 new EFResponse
                 {
                     Id = 9,
                     Content = " Q3 Sample response content 1",
-                    isCorrect = true,
+                    IsCorrect = true,
                     QuestionId = 3
                 },
                 new EFResponse
                 {
                     Id = 10,
                     Content = " Q3 Sample response content 2",
-                    isCorrect = false,
+                    IsCorrect = false,
                     QuestionId = 3
                 },
                 new EFResponse
                 {
                     Id = 11,
                     Content = " Q3 Sample response content 3",
-                    isCorrect = true,
+                    IsCorrect = true,
                     QuestionId = 3
                 },
                 new EFResponse
                 {
                     Id = 12,
                     Content = "Q3 Sample response content 4",
-                    isCorrect = false,
+                    IsCorrect = false,
                     QuestionId = 3
                 },
                 new EFResponse
                 {
                     Id = 13,
                     Content = "Q4 Sample response content 4",
-                    isCorrect = false,
+                    IsCorrect = false,
                     QuestionId = 4
                 },
                 new EFResponse
                 {
                     Id = 14,
                     Content = " Q4 Sample response content 1",
-                    isCorrect = true,
+                    IsCorrect = true,
                     QuestionId = 4
                 },
                 new EFResponse
                 {
                     Id = 15,
                     Content = " Q4 Sample response content 2",
-                    isCorrect = false,
+                    IsCorrect = false,
                     QuestionId = 4
                 },
                 new EFResponse
                 {
                     Id = 16,
                     Content = " Q4 Sample response content 3",
-                    isCorrect = true,
+                    IsCorrect = true,
                     QuestionId = 4
                 }
 
