@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Quizz.Domain.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using Quizz.Domain.Infrastructure.Data;
 namespace Quizz.Domain.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20240626100313_Delete EFQuizId on table Question")]
+    partial class DeleteEFQuizIdontableQuestion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,26 +53,6 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
                     b.HasIndex("AgentId");
 
                     b.ToTable("Candidates");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AgentId = 1,
-                            EmailAddress = "john.doe@example.com",
-                            FirstName = "John",
-                            LastName = "Doe",
-                            PhoneNumber = "1234567890"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AgentId = 2,
-                            EmailAddress = "jane.smith@example.com",
-                            FirstName = "Jane",
-                            LastName = "Smith",
-                            PhoneNumber = "0987654321"
-                        });
                 });
 
             modelBuilder.Entity("Quizz.Domain.Infrastructure.Data.Entities.EFCandidateResponse", b =>
@@ -130,29 +113,6 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
                     b.HasIndex("AdminId");
 
                     b.ToTable("Levels");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AdminId = 1,
-                            Content = "Junior",
-                            IsActive = true
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AdminId = 1,
-                            Content = "intermediate",
-                            IsActive = true
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AdminId = 1,
-                            Content = "Senior",
-                            IsActive = true
-                        });
                 });
 
             modelBuilder.Entity("Quizz.Domain.Infrastructure.Data.Entities.EFQuestion", b =>
@@ -185,51 +145,11 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
 
                     b.HasIndex("AdminId");
 
+                    b.HasIndex("LevelId");
+
                     b.HasIndex("TechnologyId");
 
                     b.ToTable("Questions");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AdminId = 1,
-                            Content = "Sample question content 1",
-                            IsValid = true,
-                            LevelId = 1,
-                            TechnologyId = 1,
-                            Type = "Multiple Choice"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AdminId = 1,
-                            Content = "Sample question content 2",
-                            IsValid = true,
-                            LevelId = 2,
-                            TechnologyId = 2,
-                            Type = "Short Answer"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AdminId = 1,
-                            Content = "Sample question content 3",
-                            IsValid = true,
-                            LevelId = 2,
-                            TechnologyId = 2,
-                            Type = "Short Answer"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            AdminId = 1,
-                            Content = "Sample question content 4",
-                            IsValid = true,
-                            LevelId = 2,
-                            TechnologyId = 2,
-                            Type = "Short Answer"
-                        });
                 });
 
             modelBuilder.Entity("Quizz.Domain.Infrastructure.Data.Entities.EFQuiz", b =>
@@ -294,58 +214,6 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
                     b.HasIndex("TechnologyId");
 
                     b.ToTable("Quizzes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AdminId = 1,
-                            AgentId = 1,
-                            CandidateId = 1,
-                            Comment = "Sample comment 1",
-                            Completion = 0.5m,
-                            CompletionTime = new DateTime(2024, 6, 26, 19, 45, 6, 915, DateTimeKind.Utc).AddTicks(5206),
-                            IsValid = true,
-                            NumberOfQuestion = 10,
-                            QuizzNumber = "1",
-                            Result = 0.5m,
-                            StatusId = 1,
-                            TechnologyId = 1,
-                            URL = "https://example.com/quiz1"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AdminId = 1,
-                            AgentId = 2,
-                            CandidateId = 2,
-                            Comment = "Sample comment 2",
-                            Completion = 0.5m,
-                            CompletionTime = new DateTime(2024, 6, 26, 19, 45, 6, 915, DateTimeKind.Utc).AddTicks(5211),
-                            IsValid = false,
-                            NumberOfQuestion = 15,
-                            QuizzNumber = "2",
-                            Result = 0.8m,
-                            StatusId = 2,
-                            TechnologyId = 2,
-                            URL = "https://example.com/quiz2"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AdminId = 1,
-                            AgentId = 2,
-                            CandidateId = 2,
-                            Completion = 0m,
-                            CompletionTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsValid = true,
-                            NumberOfQuestion = 15,
-                            QuizzNumber = "3",
-                            Result = 0m,
-                            StatusId = 1,
-                            TechnologyId = 2,
-                            URL = "https://example.com/quiz2"
-                        });
                 });
 
             modelBuilder.Entity("Quizz.Domain.Infrastructure.Data.Entities.EFQuiz_Question", b =>
@@ -361,48 +229,6 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
                     b.HasIndex("QuestionId");
 
                     b.ToTable("QuizQuestions");
-
-                    b.HasData(
-                        new
-                        {
-                            QuizId = 1,
-                            QuestionId = 1
-                        },
-                        new
-                        {
-                            QuizId = 1,
-                            QuestionId = 2
-                        },
-                        new
-                        {
-                            QuizId = 1,
-                            QuestionId = 3
-                        },
-                        new
-                        {
-                            QuizId = 1,
-                            QuestionId = 4
-                        },
-                        new
-                        {
-                            QuizId = 2,
-                            QuestionId = 1
-                        },
-                        new
-                        {
-                            QuizId = 2,
-                            QuestionId = 2
-                        },
-                        new
-                        {
-                            QuizId = 2,
-                            QuestionId = 3
-                        },
-                        new
-                        {
-                            QuizId = 2,
-                            QuestionId = 4
-                        });
                 });
 
             modelBuilder.Entity("Quizz.Domain.Infrastructure.Data.Entities.EFResponse", b =>
@@ -427,120 +253,6 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
                     b.HasIndex("QuestionId");
 
                     b.ToTable("Responses");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Content = " Q1 Sample response content 1",
-                            QuestionId = 1,
-                            isCorrect = true
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Content = " Q1 Sample response content 2",
-                            QuestionId = 1,
-                            isCorrect = false
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Content = " Q1 Sample response content 3",
-                            QuestionId = 1,
-                            isCorrect = true
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Content = "Q1 Sample response content 4",
-                            QuestionId = 1,
-                            isCorrect = false
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Content = " Q2 Sample response content 1",
-                            QuestionId = 2,
-                            isCorrect = true
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Content = " Q2 Sample response content 2",
-                            QuestionId = 2,
-                            isCorrect = false
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Content = " Q2 Sample response content 3",
-                            QuestionId = 2,
-                            isCorrect = true
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Content = "Q2 Sample response content 4",
-                            QuestionId = 2,
-                            isCorrect = false
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Content = " Q3 Sample response content 1",
-                            QuestionId = 3,
-                            isCorrect = true
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Content = " Q3 Sample response content 2",
-                            QuestionId = 3,
-                            isCorrect = false
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Content = " Q3 Sample response content 3",
-                            QuestionId = 3,
-                            isCorrect = true
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Content = "Q3 Sample response content 4",
-                            QuestionId = 3,
-                            isCorrect = false
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Content = "Q4 Sample response content 4",
-                            QuestionId = 4,
-                            isCorrect = false
-                        },
-                        new
-                        {
-                            Id = 14,
-                            Content = " Q4 Sample response content 1",
-                            QuestionId = 4,
-                            isCorrect = true
-                        },
-                        new
-                        {
-                            Id = 15,
-                            Content = " Q4 Sample response content 2",
-                            QuestionId = 4,
-                            isCorrect = false
-                        },
-                        new
-                        {
-                            Id = 16,
-                            Content = " Q4 Sample response content 3",
-                            QuestionId = 4,
-                            isCorrect = true
-                        });
                 });
 
             modelBuilder.Entity("Quizz.Domain.Infrastructure.Data.Entities.EFRole", b =>
@@ -557,18 +269,6 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Roles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Admin"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Agent"
-                        });
                 });
 
             modelBuilder.Entity("Quizz.Domain.Infrastructure.Data.Entities.EFStatus", b =>
@@ -585,23 +285,6 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Statuses");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Status = "active"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Status = "passed"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Status = "delete"
-                        });
                 });
 
             modelBuilder.Entity("Quizz.Domain.Infrastructure.Data.Entities.EFTechnology", b =>
@@ -623,20 +306,6 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
                     b.HasIndex("AdminId");
 
                     b.ToTable("Technologies");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AdminId = 1,
-                            Name = "Technology1"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AdminId = 2,
-                            Name = "Technology2"
-                        });
                 });
 
             modelBuilder.Entity("Quizz.Domain.Infrastructure.Data.Entities.EFUser", b =>
@@ -682,34 +351,6 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ConfirmPassword = "hashedpassword",
-                            EmailAddress = "john.doe@example.com",
-                            FirstName = "John",
-                            IsActive = true,
-                            LastName = "Doe",
-                            Password = "hashedpassword",
-                            PhoneNumber = "1234567890",
-                            RoleId = 1,
-                            Token = "tokenvalue"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ConfirmPassword = "hashedpassword",
-                            EmailAddress = "jane.smith@example.com",
-                            FirstName = "Jane",
-                            IsActive = true,
-                            LastName = "Smith",
-                            Password = "hashedpassword",
-                            PhoneNumber = "0987654321",
-                            RoleId = 2,
-                            Token = "tokenvalue"
-                        });
                 });
 
             modelBuilder.Entity("Quizz.Domain.Infrastructure.Data.Entities.EFCandidate", b =>
@@ -754,9 +395,9 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("Quizz.Domain.Infrastructure.Data.Entities.EFLevel", "Level")
-                        .WithMany("Questions")
-                        .HasForeignKey("TechnologyId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .WithMany()
+                        .HasForeignKey("LevelId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Quizz.Domain.Infrastructure.Data.Entities.EFTechnology", "Technology")
@@ -870,11 +511,6 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
             modelBuilder.Entity("Quizz.Domain.Infrastructure.Data.Entities.EFCandidate", b =>
                 {
                     b.Navigation("Quizzes");
-                });
-
-            modelBuilder.Entity("Quizz.Domain.Infrastructure.Data.Entities.EFLevel", b =>
-                {
-                    b.Navigation("Questions");
                 });
 
             modelBuilder.Entity("Quizz.Domain.Infrastructure.Data.Entities.EFQuestion", b =>
