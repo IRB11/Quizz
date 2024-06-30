@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Quizz.Domain.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using Quizz.Domain.Infrastructure.Data;
 namespace Quizz.Domain.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20240630210156_Entities Annotation")]
+    partial class EntitiesAnnotation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -183,9 +186,7 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Content")
-                        .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsValid")
                         .HasColumnType("bit");
@@ -197,9 +198,7 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Type")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -327,7 +326,7 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
                             CandidateId = 1,
                             Comment = "Sample comment 1",
                             Completion = 0.5m,
-                            CompletionTime = new DateTime(2024, 6, 30, 21, 40, 51, 632, DateTimeKind.Utc).AddTicks(1547),
+                            CompletionTime = new DateTime(2024, 6, 30, 21, 1, 56, 189, DateTimeKind.Utc).AddTicks(7656),
                             IsValid = true,
                             NumberOfQuestion = 10,
                             QuizzNumber = "1",
@@ -344,7 +343,7 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
                             CandidateId = 2,
                             Comment = "Sample comment 2",
                             Completion = 0.5m,
-                            CompletionTime = new DateTime(2024, 6, 30, 21, 40, 51, 632, DateTimeKind.Utc).AddTicks(1552),
+                            CompletionTime = new DateTime(2024, 6, 30, 21, 1, 56, 189, DateTimeKind.Utc).AddTicks(7662),
                             IsValid = false,
                             NumberOfQuestion = 15,
                             QuizzNumber = "2",

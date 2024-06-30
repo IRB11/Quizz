@@ -25,6 +25,16 @@ namespace Quizz.Domain.Infrastructure.Data.Config
                 .WithMany(t => t.Questions)
                 .HasForeignKey(q => q.TechnologyId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasKey(e => e.Id);
+
+            builder.Property(e => e.Content)
+                .IsRequired()
+                .HasMaxLength(250);
+
+            builder.Property(e => e.Type)
+                .IsRequired()
+                .HasMaxLength(20);
         }
     }
 }
