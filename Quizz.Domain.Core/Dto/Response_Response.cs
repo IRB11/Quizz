@@ -9,7 +9,7 @@ namespace Quizz.Domain.Core.Dto
 {
     public class Response_Response
     {
-        public string Id { get; set; }
+        public long Id { get; set; }
         public string Content { get; set; }
         public string Explanation { get; set; }
         public bool isCorrect { get; set; }
