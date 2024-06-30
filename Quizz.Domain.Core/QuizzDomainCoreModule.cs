@@ -5,6 +5,7 @@ using Quizz.Domain.Core.Interfaces;
 using Quizz.Domain.Core.Services;
 using Quizz.Domain.Core.UseCases;
 using Quizz.Domain.Core.UseCases.Rules;
+using Quizz.Domain.Core.UseCases.Techno;
 
 namespace Quizz.Domain.Core
 {
@@ -23,6 +24,9 @@ namespace Quizz.Domain.Core
             builder.RegisterType<GetAllLevels>().As<IGetAllLevels>().InstancePerLifetimeScope();
             builder.RegisterType<UpdateLevel>().As<IUpdateLevel>().InstancePerLifetimeScope();
             builder.RegisterType<DeleteLevel>().As<IDeleteLevel>().InstancePerLifetimeScope();
+            builder.RegisterType<CreateTechno>().As<ICreateTechno>().InstancePerLifetimeScope();
+            builder.RegisterType<GetAllTechnos>().As<IGetAllTechnos>().InstancePerLifetimeScope();
+            builder.RegisterType<GetTechnoById>().As<IGetTechnoById>().InstancePerLifetimeScope();
             builder.RegisterInstance(new JWTService(_jwtSecret)).AsSelf().SingleInstance();
             builder.Register(c => new LoginUser(
                 c.Resolve<IUserRepository>(),

@@ -30,6 +30,8 @@ namespace Quizz.Domain.Infrastructure.Data.Mapping
                 .ForMember(dest => dest.Role, opt => opt.MapFrom(src => src.Role));
 
             CreateMap<EFRole, Role>();
+            CreateMap<EFTechnology, TechnologiesResponse>().ReverseMap();
+            CreateMap<EFTechnology, TechnologiesRequest>().ReverseMap();
 
             CreateMap<EFLevel, LevelResponse>().ReverseMap();
 

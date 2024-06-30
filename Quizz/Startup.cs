@@ -18,9 +18,8 @@ namespace Quizz
 {
     public class Startup
     {
-
         public IConfigurationRoot Configuration { get; }
-        public ILifetimeScope AutofacContainer { get; private set; }
+        public ILifetimeScope AutofacContainer { get; private set; } // Déclaration de AutofacContainer
 
         private readonly bool isDebugEnvironment;
 
@@ -56,9 +55,8 @@ namespace Quizz
             services.Configure<JWT>(Configuration.GetSection("JWT"));
             var jwt = Configuration.GetSection("JWT").Get<JWT>();
 
-
             services.AddControllers();
-            // Configure JWT authentication
+
             var keyBytes = Encoding.ASCII.GetBytes(jwt.JwtSecret);
             services.AddAuthentication(x =>
             {
@@ -85,89 +83,68 @@ namespace Quizz
             {
                 cfg.DisableConstructorMapping();
                 cfg.AddProfile(new InfraDataProfile());
-
             }, AppDomain.CurrentDomain.GetAssemblies());
-            //Culture information
+
             CultureConfiguration cultureConfig = Configuration.GetSection(ConfigurationStrings.Sections.CultureInfoConfiguration).Get<CultureConfiguration>();
             services.AddSingleton(cultureConfig);
 
-            //Mailing service
             MailConfiguration emailConfig = Configuration.GetSection(ConfigurationStrings.Sections.EmailConfiguration).Get<MailConfiguration>();
             services.AddSingleton(emailConfig);
 
-            SwaggerConfig();
-
-            #region local methods
-
-            void SwaggerConfig()
+            services.AddSwaggerGen(c =>
             {
-                services.AddSwaggerGen(c =>
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Quizz API", Version = "v1" });
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
-                    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Boilerplate Api", Version = "v1" });
-                    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                    c.IncludeXmlComments(xmlPath);
-                    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-                    {
-                        Name = "Authorization",
-                        Type = SecuritySchemeType.ApiKey,
-                        Scheme = "Bearer",
-                        BearerFormat = "JWT",
-                        In = ParameterLocation.Header,
-                        Description = "Enter 'Bearer' [space] and then your valid token in the text input below.\r\n\r\nExample: \"Bearer abcdefgh12345\"",
-                    });
-                    c.AddSecurityRequirement(new OpenApiSecurityRequirement
-                    {
-                        {
-                            new OpenApiSecurityScheme
-                            {
-                                Reference = new OpenApiReference
-                                {
-                                    Type = ReferenceType.SecurityScheme,
-                                    Id = "Bearer"
-                                }
-                            },
-                            Array.Empty<string>()
-                         }
-                     });
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "Enter 'Bearer' [space] and then your valid token in the text input below.\r\n\r\nExample: \"Bearer abcdefgh12345\"",
                 });
-            }
-            #endregion
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        Array.Empty<string>()
+                     }
+                 });
+            });
         }
 
-        /// <summary>
-        /// Ajout des modules
-        /// </summary>
-        /// <param name="builder"></param>
         public void ConfigureContainer(ContainerBuilder builder)
         {
             var jwt = Configuration.GetSection("JWT").Get<JWT>();
-
             builder.RegisterModule(new QuizzDomainCoreModule(jwt.JwtSecret));
             builder.RegisterModule(new QuizzDomainInfrastructureModule());
-
-            //builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).Where(t => t.Name.EndsWith("Presenter")).SingleInstance();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-
             app.UseSerilogRequestLogging();
-            AutofacContainer = app.ApplicationServices.GetAutofacRoot();
+            AutofacContainer = app.ApplicationServices.GetAutofacRoot(); // Initialisation de AutofacContainer
 
             if (env.IsDevelopment())
             {
+                app.UseDeveloperExceptionPage();
+                app.UseSwagger();
                 app.UseSwaggerUI(c =>
                 {
-                    c.SwaggerEndpoint(Configuration.GetSection(ConfigurationStrings.Sections.SwaggerConfiguration).GetValue<string>(ConfigurationStrings.SwaggerConfigurationElements.JsonPath), "Api V1");
-
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Quizz API V1");
+                    c.RoutePrefix = string.Empty;
                 });
-                app.UseDeveloperExceptionPage();
             }
-
-
-
-            //app.UseHttpsRedirection();
 
             app.UseRouting();
             app.UseCors("CorsPolicy");
@@ -176,10 +153,10 @@ namespace Quizz
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllers(
+                
+                    );
             });
-
-            app.UseSwagger();
         }
     }
 }

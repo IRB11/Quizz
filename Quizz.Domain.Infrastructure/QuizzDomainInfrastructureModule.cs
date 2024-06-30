@@ -14,6 +14,7 @@ namespace Quizz.Domain.Infrastructure
             builder.RegisterType<LevelRepository>().As<ILevelRepository>();
             builder.RegisterType<UserRepository>().As<IUserRepository>();
             builder.RegisterType<HashingPassword>().As<IHashingPassword>();
+            builder.RegisterType<TechnoRepository>().As<ITechnoRepository>();
             builder.RegisterType<DateTimeService>().As<IDateTimeService>();
             builder.RegisterType<CalendarService>().As<ICalendarService>();
         }
