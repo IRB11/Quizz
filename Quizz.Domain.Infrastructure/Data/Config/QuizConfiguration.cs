@@ -1,12 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Quizz.Domain.Infrastructure.Data.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Quizz.Domain.Infrastructure.Data.Config
 {
@@ -25,10 +19,10 @@ namespace Quizz.Domain.Infrastructure.Data.Config
                 .HasForeignKey(q => q.AdminId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-           builder
-                .HasOne(q => q.Status)
-                .WithMany(s => s.Quizzes)
-                .HasForeignKey(q => q.StatusId);
+            builder
+                 .HasOne(q => q.Status)
+                 .WithMany(s => s.Quizzes)
+                 .HasForeignKey(q => q.StatusId);
 
             builder
                 .HasOne(c => c.Candidate)
@@ -36,14 +30,31 @@ namespace Quizz.Domain.Infrastructure.Data.Config
                 .HasForeignKey(c => c.CandidateId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+
+            builder.HasKey(q => q.Id);
+
             builder
                 .Property(q => q.Completion)
                 .HasPrecision(18, 2);
+
             builder
                 .Property(q => q.Result)
-                .HasPrecision(18,2);
+                .HasPrecision(18, 2);
+
+            builder.Property(q => q.Comment)
+                  .HasMaxLength(500);
+
+            builder.Property(q => q.IsValid);
+
+            builder.Property(q => q.NumberOfQuestion);
+
+            builder.Property(q => q.QuizzNumber)
+                  .HasMaxLength(100);
+
+            builder.Property(q => q.URL)
+                  .HasMaxLength(2048);
         }
 
     }
-    
+
 }

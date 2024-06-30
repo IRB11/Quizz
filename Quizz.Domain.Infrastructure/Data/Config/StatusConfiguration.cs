@@ -17,6 +17,11 @@ namespace Quizz.Domain.Infrastructure.Data.Config
                 .HasMany(c => c.Quizzes)
                 .WithOne(c => c.Status)
                 .HasForeignKey(f => f.StatusId);
+            builder.HasKey(e => e.Id);
+
+            builder.Property(e => e.Status)
+                .IsRequired()
+                .HasMaxLength(50);
         }
     }
 }
