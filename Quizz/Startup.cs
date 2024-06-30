@@ -11,6 +11,7 @@ using Quizz.Domain.Infrastructure;
 using Quizz.Domain.Infrastructure.Data;
 using Quizz.Domain.Infrastructure.Data.Mapping;
 using Serilog;
+using System.Diagnostics;
 using System.Reflection;
 using System.Text;
 
@@ -28,8 +29,9 @@ namespace Quizz
         {
             var builder = new ConfigurationBuilder()
                .SetBasePath(env.ContentRootPath)
-               .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+               .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+               .AddJsonFile("appsettings.Secrets.json", optional: true, reloadOnChange: true)
                .AddEnvironmentVariables();
             isDebugEnvironment = env.IsDevelopment();
             Configuration = builder.Build();
@@ -145,8 +147,6 @@ namespace Quizz
 
             builder.RegisterModule(new QuizzDomainCoreModule(jwt.JwtSecret));
             builder.RegisterModule(new QuizzDomainInfrastructureModule());
-
-            //builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).Where(t => t.Name.EndsWith("Presenter")).SingleInstance();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -164,10 +164,6 @@ namespace Quizz
                 });
                 app.UseDeveloperExceptionPage();
             //}
-
-
-
-            //app.UseHttpsRedirection();
 
             app.UseRouting();
             app.UseCors("CorsPolicy");

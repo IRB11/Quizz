@@ -36,7 +36,7 @@ namespace Quizz.Controllers
             return Ok(await getLevelById.Handle(id));
         }
 
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] LevelRequest levelRequest)
         {

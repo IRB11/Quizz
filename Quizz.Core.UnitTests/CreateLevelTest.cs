@@ -1,14 +1,12 @@
 ﻿using NUnit.Framework;
 using Quizz.Common.Interfaces;
 using Quizz.Domain.Core.Dto;
-using System.Collections.Generic;
-using Quizz.Core.UnitTests.InMemory;
 using Quizz.Domain.Core.Interfaces;
 using Quizz.Domain.Core.UseCases;
-using System;
-using System.Threading.Tasks;
 using Quizz.Domain.Core.UseCases.Rules;
 using Quizz.Domain.Infrastructure.InMemory;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Quizz.Core.UnitTests
 {
@@ -46,7 +44,8 @@ namespace Quizz.Core.UnitTests
 
         [Test]
         public async Task CreateLevel_WhenCalled_ReturnNull_IfLevelExist()
-        {            
+        {
+
             LevelResponse result = await createLevel.Handle(level);
 
             Assert.That(result, Is.Null);
