@@ -5,7 +5,7 @@ namespace Quizz.Domain.Infrastructure.Data.Entities
 {
     public class EFCandidateResponse
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Content { get; set; }
         public bool Is_Skipped { get; set; }
         public string Open_Response_Text { get; set; }

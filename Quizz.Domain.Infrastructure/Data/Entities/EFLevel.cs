@@ -15,8 +15,6 @@ namespace Quizz.Domain.Infrastructure.Data.Entities
 
         public int AdminId { get; set; }
         public EFUser Admin { get; set; }
-
         public ICollection<EFQuestion> Questions { get; set; }
-        public ICollection<EFQuiz> Quizzes { get; set; }
     }
 }

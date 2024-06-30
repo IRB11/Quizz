@@ -9,7 +9,7 @@ namespace Quizz.Domain.Core.Dto
 {
     public class CandidateResponse_Response
     {
-        public string Id { get; set; }
+        public long Id { get; set; }
         public string Content { get; set; }
         public bool Is_Skipped { get; set; }
         public string? Open_Response_Text { get; set; }

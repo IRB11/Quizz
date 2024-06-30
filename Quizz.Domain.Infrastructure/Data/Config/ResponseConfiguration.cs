@@ -1,11 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Quizz.Domain.Infrastructure.Data.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Quizz.Domain.Infrastructure.Data.Config
 {
@@ -18,6 +13,15 @@ namespace Quizz.Domain.Infrastructure.Data.Config
                 HasOne(x => x.Question).
                 WithMany(c => c.Responses)
                 .HasPrincipalKey(k => k.Id);
+
+            builder.HasKey(e => e.Id);
+
+            builder.Property(e => e.Content)
+                  .IsRequired()
+                  .HasMaxLength(150);
+
+            builder.Property(e => e.IsCorrect)
+                  .IsRequired();
 
         }
     }

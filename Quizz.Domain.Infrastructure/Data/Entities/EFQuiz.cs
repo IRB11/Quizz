@@ -34,7 +34,6 @@ namespace Quizz.Domain.Infrastructure.Data.Entities
         public int TechnologyId { get; set; }
         public EFTechnology Technology { get; set; }
 
-        public ICollection<EFQuestion> Questions { get; set; }
         public ICollection<EFQuiz_Question> Quiz_Questions { get; set; }
     }
 }

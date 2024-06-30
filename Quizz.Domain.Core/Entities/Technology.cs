@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Quizz.Domain.Core.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,8 @@ namespace Quizz.Domain.Core.Entities
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public int AdminId { get; set; }
+        public User Admin { get; set; }
         public ICollection<Quiz> Quizzes { get; set; }
         public ICollection<Question> Questions { get; set; }
     }

@@ -1,11 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Quizz.Domain.Infrastructure.Data.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Quizz.Domain.Infrastructure.Data.Config
 {
@@ -17,7 +12,14 @@ namespace Quizz.Domain.Infrastructure.Data.Config
                 .HasOne(l => l.Admin)
                 .WithMany(a => a.Levels)
                 .HasForeignKey(l => l.AdminId);
+
+            builder.HasKey(e => e.Id);
+
+            builder.Property(e => e.Content)
+                .IsRequired()
+                .HasMaxLength(50);                   
+
+            builder.Property(e => e.IsActive);
         }
     }
-    
 }

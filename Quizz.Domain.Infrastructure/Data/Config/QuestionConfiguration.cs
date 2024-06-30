@@ -1,12 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Quizz.Domain.Core.Entities;
 using Quizz.Domain.Infrastructure.Data.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Quizz.Domain.Infrastructure.Data.Config
 {
@@ -22,8 +16,8 @@ namespace Quizz.Domain.Infrastructure.Data.Config
 
             builder
                 .HasOne(q => q.Level)
-                .WithMany(l => l.Questions)
-                .HasForeignKey(q => q.LevelId)
+                .WithMany(t => t.Questions)
+                .HasForeignKey(q => q.TechnologyId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder
@@ -31,6 +25,16 @@ namespace Quizz.Domain.Infrastructure.Data.Config
                 .WithMany(t => t.Questions)
                 .HasForeignKey(q => q.TechnologyId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasKey(e => e.Id);
+
+            builder.Property(e => e.Content)
+                .IsRequired()
+                .HasMaxLength(250);
+
+            builder.Property(e => e.Type)
+                .IsRequired()
+                .HasMaxLength(20);
         }
     }
 }

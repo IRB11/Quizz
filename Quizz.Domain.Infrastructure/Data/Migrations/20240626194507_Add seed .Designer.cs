@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Quizz.Domain.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using Quizz.Domain.Infrastructure.Data;
 namespace Quizz.Domain.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20240626194507_Add seed ")]
+    partial class Addseed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,25 +37,16 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("EmailAddress")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)")
-                        .HasAnnotation("EmailAddress", true);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)")
-                        .HasAnnotation("Phone", true);
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -90,24 +84,19 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Comment")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Content")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Explanation")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Is_Skipped")
                         .HasColumnType("bit");
 
                     b.Property<string>("Open_Response_Text")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("QuestionId")
                         .HasColumnType("int");
@@ -134,9 +123,7 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Content")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -183,9 +170,7 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Content")
-                        .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsValid")
                         .HasColumnType("bit");
@@ -197,9 +182,7 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Type")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -270,8 +253,7 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Comment")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Completion")
                         .HasPrecision(18, 2)
@@ -287,8 +269,7 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("QuizzNumber")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Result")
                         .HasPrecision(18, 2)
@@ -301,8 +282,7 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("URL")
-                        .HasMaxLength(2048)
-                        .HasColumnType("nvarchar(2048)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -327,7 +307,7 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
                             CandidateId = 1,
                             Comment = "Sample comment 1",
                             Completion = 0.5m,
-                            CompletionTime = new DateTime(2024, 6, 30, 21, 40, 51, 632, DateTimeKind.Utc).AddTicks(1547),
+                            CompletionTime = new DateTime(2024, 6, 26, 19, 45, 6, 915, DateTimeKind.Utc).AddTicks(5206),
                             IsValid = true,
                             NumberOfQuestion = 10,
                             QuizzNumber = "1",
@@ -344,7 +324,7 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
                             CandidateId = 2,
                             Comment = "Sample comment 2",
                             Completion = 0.5m,
-                            CompletionTime = new DateTime(2024, 6, 30, 21, 40, 51, 632, DateTimeKind.Utc).AddTicks(1552),
+                            CompletionTime = new DateTime(2024, 6, 26, 19, 45, 6, 915, DateTimeKind.Utc).AddTicks(5211),
                             IsValid = false,
                             NumberOfQuestion = 15,
                             QuizzNumber = "2",
@@ -437,15 +417,13 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Content")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<bool>("IsCorrect")
-                        .HasColumnType("bit");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("QuestionId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("isCorrect")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -458,113 +436,113 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
                         {
                             Id = 1,
                             Content = " Q1 Sample response content 1",
-                            IsCorrect = true,
-                            QuestionId = 1
+                            QuestionId = 1,
+                            isCorrect = true
                         },
                         new
                         {
                             Id = 2,
                             Content = " Q1 Sample response content 2",
-                            IsCorrect = false,
-                            QuestionId = 1
+                            QuestionId = 1,
+                            isCorrect = false
                         },
                         new
                         {
                             Id = 3,
                             Content = " Q1 Sample response content 3",
-                            IsCorrect = true,
-                            QuestionId = 1
+                            QuestionId = 1,
+                            isCorrect = true
                         },
                         new
                         {
                             Id = 4,
                             Content = "Q1 Sample response content 4",
-                            IsCorrect = false,
-                            QuestionId = 1
+                            QuestionId = 1,
+                            isCorrect = false
                         },
                         new
                         {
                             Id = 5,
                             Content = " Q2 Sample response content 1",
-                            IsCorrect = true,
-                            QuestionId = 2
+                            QuestionId = 2,
+                            isCorrect = true
                         },
                         new
                         {
                             Id = 6,
                             Content = " Q2 Sample response content 2",
-                            IsCorrect = false,
-                            QuestionId = 2
+                            QuestionId = 2,
+                            isCorrect = false
                         },
                         new
                         {
                             Id = 7,
                             Content = " Q2 Sample response content 3",
-                            IsCorrect = true,
-                            QuestionId = 2
+                            QuestionId = 2,
+                            isCorrect = true
                         },
                         new
                         {
                             Id = 8,
                             Content = "Q2 Sample response content 4",
-                            IsCorrect = false,
-                            QuestionId = 2
+                            QuestionId = 2,
+                            isCorrect = false
                         },
                         new
                         {
                             Id = 9,
                             Content = " Q3 Sample response content 1",
-                            IsCorrect = true,
-                            QuestionId = 3
+                            QuestionId = 3,
+                            isCorrect = true
                         },
                         new
                         {
                             Id = 10,
                             Content = " Q3 Sample response content 2",
-                            IsCorrect = false,
-                            QuestionId = 3
+                            QuestionId = 3,
+                            isCorrect = false
                         },
                         new
                         {
                             Id = 11,
                             Content = " Q3 Sample response content 3",
-                            IsCorrect = true,
-                            QuestionId = 3
+                            QuestionId = 3,
+                            isCorrect = true
                         },
                         new
                         {
                             Id = 12,
                             Content = "Q3 Sample response content 4",
-                            IsCorrect = false,
-                            QuestionId = 3
+                            QuestionId = 3,
+                            isCorrect = false
                         },
                         new
                         {
                             Id = 13,
                             Content = "Q4 Sample response content 4",
-                            IsCorrect = false,
-                            QuestionId = 4
+                            QuestionId = 4,
+                            isCorrect = false
                         },
                         new
                         {
                             Id = 14,
                             Content = " Q4 Sample response content 1",
-                            IsCorrect = true,
-                            QuestionId = 4
+                            QuestionId = 4,
+                            isCorrect = true
                         },
                         new
                         {
                             Id = 15,
                             Content = " Q4 Sample response content 2",
-                            IsCorrect = false,
-                            QuestionId = 4
+                            QuestionId = 4,
+                            isCorrect = false
                         },
                         new
                         {
                             Id = 16,
                             Content = " Q4 Sample response content 3",
-                            IsCorrect = true,
-                            QuestionId = 4
+                            QuestionId = 4,
+                            isCorrect = true
                         });
                 });
 
@@ -577,9 +555,7 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -607,9 +583,7 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Status")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -645,7 +619,6 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

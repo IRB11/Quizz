@@ -8,7 +8,7 @@ namespace Quizz.Domain.Core.Entities
 {
     public class Response
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Content { get; set; }
         public string Explanation { get; set; }
         public bool isCorrect { get; set; }
