@@ -1,14 +1,7 @@
-﻿using NPOI.SS.Formula.Functions;
-using Quizz.Common.Interfaces;
-using Quizz.Domain.Core.Dto;
+﻿using Quizz.Domain.Core.Dto;
 using Quizz.Domain.Core.Entities;
 using Quizz.Domain.Core.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Quizz.Domain.Infrastructure.InMemory
 {
@@ -20,7 +13,7 @@ namespace Quizz.Domain.Infrastructure.InMemory
         private List<CandidateRequest> candidateRequests;
         private List<QuizRequest> quizRequests;
         private List<QuestionRequest> questionRequests;
-        public InMemoryUserRepository() 
+        public InMemoryUserRepository()
         {
             users = GetUsers();
             levelRequests = GetLevelRequest();
@@ -99,21 +92,21 @@ namespace Quizz.Domain.Infrastructure.InMemory
 
         public async Task<List<UserResponse>> getAll()
         {
-                var usersResponse = users.Select(user => new UserResponse
+            var usersResponse = users.Select(user => new UserResponse
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                PhoneNumber = user.PhoneNumber,
+                EmailAddress = user.EmailAddress,
+                IsActive = user.IsActive,
+                Token = user.Token,
+                Role = new()
                 {
-                    Id = user.Id,
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
-                    PhoneNumber = user.PhoneNumber,
-                    EmailAddress = user.EmailAddress,
-                    IsActive = user.IsActive,
-                    Token = user.Token,
-                    Role = new()
-                    {
-                        Id = (int)user.Role.Id,
-                        Name = user.Role.Name,
-                    }
-                }).ToList();
+                    Id = (int)user.Role.Id,
+                    Name = user.Role.Name,
+                }
+            }).ToList();
 
             return await Task.FromResult(usersResponse);
 
@@ -219,8 +212,8 @@ namespace Quizz.Domain.Infrastructure.InMemory
         public Task<bool> UserIsUsed(UserRequest userRequest)
         {
             return Task.Run(
-                () => questionRequests.Any(f => f.Admin.Id == userRequest.Id 
-                || levelRequests.Any(l =>l.AdminId == userRequest.Id)
+                () => questionRequests.Any(f => f.Admin.Id == userRequest.Id
+                || levelRequests.Any(l => l.AdminId == userRequest.Id)
                 || technologiesRequests.Any(t => t.AdminId == userRequest.Id)
                 || quizRequests.Any(q => q.AdminId == userRequest.Id)
                 || quizRequests.Any(q => q.AgentId == userRequest.Id)
@@ -371,10 +364,10 @@ namespace Quizz.Domain.Infrastructure.InMemory
             {
                 new QuestionRequest
                 {
-                    
+
                     Admin = new User()
                     {
-                        Id=1,                        
+                        Id=1,
                     }
                 },
                 new QuestionRequest
@@ -389,7 +382,7 @@ namespace Quizz.Domain.Infrastructure.InMemory
                     Admin = new User()
                     {
                         Id=1,
-                        
+
                     },
                 }
             };
@@ -479,7 +472,7 @@ namespace Quizz.Domain.Infrastructure.InMemory
                     {
                         Id=4,
                     },
-                    
+
                 }
             };
         }
