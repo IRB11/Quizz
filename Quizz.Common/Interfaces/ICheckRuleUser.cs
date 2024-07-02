@@ -6,5 +6,6 @@ namespace Quizz.Common.Interfaces
     {
         string GetErrorMessage();
         Task<bool> CheckRule(TUseCaseRequest UserRequest);
+        Task<bool> CheckRule(int id);
     }
 }

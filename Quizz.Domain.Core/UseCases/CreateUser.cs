@@ -1,31 +1,31 @@
 ﻿using AutoMapper;
-using Microsoft.IdentityModel.Tokens;
+using Quizz.Common.Interfaces;
 using Quizz.Domain.Core.Dto;
 using Quizz.Domain.Core.Interfaces;
 using Quizz.Domain.Core.Services;
-using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Quizz.Domain.Core.UseCases
 {
     public class CreateUser : ICreateUser
     {
         private readonly IUserRepository userRepository;
+        private readonly IEnumerable<ICheckRuleUser<UserRequest>> rules;
         private readonly IMapper mapper;
         private readonly JWTService jwtService;
 
-        public CreateUser(IUserRepository userRepository, JWTService jWTService)
+
+        public CreateUser(IUserRepository userRepository, JWTService jWTService, IEnumerable<ICheckRuleUser<UserRequest>> rules)
         {
+            this.rules = rules;
             this.userRepository = userRepository;
-            this.jwtService = jWTService;   
+            this.jwtService = jWTService;
         }
 
         public async Task<UserResponse> Handle(UserRequest createUserRequest)
         {
-            var response = await userRepository.CreateUser(createUserRequest);
+            if (CheckIfRulesAreNotOK()) return null;
+
+            var response = await userRepository.Add(createUserRequest);
 
             if (response == null)
             {
@@ -35,6 +35,33 @@ namespace Quizz.Domain.Core.UseCases
             response.Token = jwtService.GetToken(response);
 
             return response;
+
+            #region Rules
+            bool CheckIfRulesAreNotOK()
+            {
+                if (CheckIfRuleNotRespected(createUserRequest))
+                {
+                    List<string> errorList = new List<string>();
+                    rules.ToList().ForEach(r =>
+                    {
+                        string currentErrorMessage = r.GetErrorMessage();
+                        if (!string.IsNullOrWhiteSpace(currentErrorMessage))
+                        {
+                            errorList.Add(currentErrorMessage);
+                        }
+                    });
+
+                    return true;
+                }
+
+                return false;
+            }
+
+            bool CheckIfRuleNotRespected(UserRequest userRequest)
+            {
+                return rules.Any(r => (r.CheckRule(userRequest)).ConfigureAwait(false).GetAwaiter().GetResult() == true);
+            }
+            #endregion
         }
     }
 }
