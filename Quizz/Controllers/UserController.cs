@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Quizz.Domain.Core.Dto;
 using Quizz.Domain.Core.Interfaces;
-using Quizz.Domain.Core.UseCases;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 
 namespace Quizz.Controllers
@@ -13,21 +10,29 @@ namespace Quizz.Controllers
     public class UserController : ControllerBase
     {
         private readonly ICreateUser createUser;
+        private readonly IUpdateUser updateUser;
+        private readonly IGetAllUsers getAllUsers;
+        private readonly IGetUserById getUserById;
+        private readonly IDeleteUser deleteUser;
 
-        public UserController(ICreateUser user)
+        public UserController(ICreateUser user, IUpdateUser updateUser, IGetAllUsers getAllUsers, IGetUserById getUserById, IDeleteUser deleteUser)
         {
             this.createUser = user;
+            this.updateUser = updateUser;
+            this.getAllUsers = getAllUsers;
+            this.getUserById = getUserById;
+            this.deleteUser = deleteUser;
         }
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IActionResult> Get()
         {
-            return new string[] { "value1", "value2" };
+            return Ok(await getAllUsers.Handle());
         }
 
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            return "value";
+            return Ok(await getUserById.Handle(id));
         }
 
         [HttpPost]
@@ -37,13 +42,15 @@ namespace Quizz.Controllers
         }
 
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Put(int id, [FromBody] UserRequest userRequest)
         {
+            return Ok(updateUser.Handle(userRequest));
         }
 
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(UserRequest userRequest)
         {
+            return Ok(await deleteUser.Handle(userRequest));
         }
     }
 }
