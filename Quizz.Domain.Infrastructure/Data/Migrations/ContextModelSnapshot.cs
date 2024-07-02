@@ -58,7 +58,7 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
 
                     b.HasIndex("AgentId");
 
-                    b.ToTable("Candidates");
+                    b.ToTable("Candidates", (string)null);
 
                     b.HasData(
                         new
@@ -119,7 +119,7 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
 
                     b.HasIndex("QuizId", "QuestionId");
 
-                    b.ToTable("CandidateResponses");
+                    b.ToTable("CandidateResponses", (string)null);
                 });
 
             modelBuilder.Entity("Quizz.Domain.Infrastructure.Data.Entities.EFLevel", b =>
@@ -145,7 +145,7 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
 
                     b.HasIndex("AdminId");
 
-                    b.ToTable("Levels");
+                    b.ToTable("Levels", (string)null);
 
                     b.HasData(
                         new
@@ -207,7 +207,7 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
 
                     b.HasIndex("TechnologyId");
 
-                    b.ToTable("Questions");
+                    b.ToTable("Questions", (string)null);
 
                     b.HasData(
                         new
@@ -316,7 +316,7 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
 
                     b.HasIndex("TechnologyId");
 
-                    b.ToTable("Quizzes");
+                    b.ToTable("Quizzes", (string)null);
 
                     b.HasData(
                         new
@@ -383,7 +383,7 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
 
                     b.HasIndex("QuestionId");
 
-                    b.ToTable("QuizQuestions");
+                    b.ToTable("QuizQuestions", (string)null);
 
                     b.HasData(
                         new
@@ -451,7 +451,7 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
 
                     b.HasIndex("QuestionId");
 
-                    b.ToTable("Responses");
+                    b.ToTable("Responses", (string)null);
 
                     b.HasData(
                         new
@@ -583,7 +583,7 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Roles");
+                    b.ToTable("Roles", (string)null);
 
                     b.HasData(
                         new
@@ -613,7 +613,7 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Statuses");
+                    b.ToTable("Statuses", (string)null);
 
                     b.HasData(
                         new
@@ -652,7 +652,7 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
 
                     b.HasIndex("AdminId");
 
-                    b.ToTable("Technologies");
+                    b.ToTable("Technologies", (string)null);
 
                     b.HasData(
                         new
@@ -711,7 +711,7 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
 
                     b.HasData(
                         new

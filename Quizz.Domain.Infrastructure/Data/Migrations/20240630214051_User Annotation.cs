@@ -58,7 +58,7 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
             migrationBuilder.AlterColumn<string>(
                 name: "Password",
                 table: "Users",
-                type: "nvarchar(50)",
+                type: "nvarchar(250)",
                 maxLength: 50,
                 nullable: false,
                 defaultValue: "",
@@ -69,7 +69,7 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
             migrationBuilder.AlterColumn<string>(
                 name: "ConfirmPassword",
                 table: "Users",
-                type: "nvarchar(50)",
+                type: "nvarchar(250)",
                 maxLength: 50,
                 nullable: false,
                 defaultValue: "",
@@ -192,7 +192,7 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
                 type: "nvarchar(max)",
                 nullable: true,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(50)",
+                oldType: "nvarchar(250)",
                 oldMaxLength: 50);
 
             migrationBuilder.AlterColumn<string>(
@@ -201,7 +201,7 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
                 type: "nvarchar(max)",
                 nullable: true,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(50)",
+                oldType: "nvarchar(250)",
                 oldMaxLength: 50);
 
         }
