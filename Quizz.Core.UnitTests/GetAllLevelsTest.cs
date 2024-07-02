@@ -14,7 +14,6 @@ namespace Quizz.Core.UnitTests
     {
         private ILevelRepository levelRepository;
         private IGetAllLevels getAllLevels;
-
         private LevelRequest level;
         List<ICheckRuleLevel<LevelRequest>> rules;
 
@@ -25,6 +24,7 @@ namespace Quizz.Core.UnitTests
             InitRules();
             getAllLevels = new GetAllLevels(levelRepository, rules);
         }
+
         #region Init
         private void InitRules()
         {
@@ -33,7 +33,6 @@ namespace Quizz.Core.UnitTests
         }
 
         #endregion
-
         [Test]
         public async Task Should_Return_All_Levels()
         {
@@ -49,10 +48,5 @@ namespace Quizz.Core.UnitTests
             Assert.That(result[2].Id.Equals(2));
             Assert.That(result[2].Content.Equals("To Delete"));
         }
-
     }
-
-
-
-
 }
