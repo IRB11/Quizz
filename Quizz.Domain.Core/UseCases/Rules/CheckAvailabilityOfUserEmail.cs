@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Quizz.Domain.Core.UseCases.Rules
 {
-    public class CheckAvailabilityOfUserEmail : ICheckRule<UserRequest>
+    public class CheckAvailabilityOfUserEmail : ICheckRuleUser<UserRequest>
     {
         private readonly IUserRepository userRepository;
         private string errorMessage = string.Empty;
@@ -26,12 +26,30 @@ namespace Quizz.Domain.Core.UseCases.Rules
         }
         public async Task<bool> CheckRule(UserRequest userRequest)
         {
-            bool IsNotAvailable = await userRepository.EmailIsNotAvailable(userRequest.EmailAddress);
+            var OldUserInfo = await userRepository.GetById((int)userRequest.Id);
 
-            if(IsNotAvailable)
+            if (OldUserInfo!= null && OldUserInfo.EmailAddress != userRequest.EmailAddress )
             {
-                errorMessage += $"Email {userRequest.EmailAddress} is not available";
+                if (userRequest == null) { }
+                bool EmailAlreadyExist = await userRepository.EmailAlreadyExist(userRequest.EmailAddress);
+
+                if (EmailAlreadyExist)
+                {
+                    errorMessage += $"Email {userRequest.EmailAddress} is not available";
+                }
+                return isError;
             }
+            return false;
+        }
+
+        public async Task<bool> CheckRule(int id)
+        {
+            bool IdExist = await userRepository.IdIsNotAvailable(id);
+            if (!IdExist)
+            {
+                errorMessage += $"Id {id} is not available";
+            }
+
             return isError;
         }
     }

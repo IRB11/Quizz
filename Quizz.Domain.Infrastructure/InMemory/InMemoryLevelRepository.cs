@@ -32,7 +32,16 @@ namespace Quizz.Domain.Infrastructure.InMemory
 
         public Task<bool> DeleteLevel(LevelRequest levelRequest)
         {
-            return Task.Run(() => levels.Remove(levelRequest));
+            return Task.Run(() =>
+            {
+                var itemToRemove = levels.SingleOrDefault(r => r.Id == levelRequest.Id);
+                if (itemToRemove != null)
+                {
+                    levels.Remove(itemToRemove);
+                    return true;
+                }
+                return false;
+            });
         }
 
         public async Task<List<LevelResponse>> getAllLevels()

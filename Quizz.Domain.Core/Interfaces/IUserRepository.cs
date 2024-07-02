@@ -1,13 +1,13 @@
 ﻿using Quizz.Domain.Core.Dto;
-using System.Threading.Tasks;
 
 namespace Quizz.Domain.Core.Interfaces
 {
-    public interface IUserRepository
+    public interface IUserRepository : ICRUDRepository<UserRequest, UserResponse>
     {
-        Task<bool> EmailIsNotAvailable(string? email);
-        Task<UserResponse> CreateUser(UserRequest createUserRequest);
+        Task<bool> EmailAlreadyExist(string? email);
         Task<UserResponse> GetByEmailAndPassword(LoginRequest authenticateRequest);
+        Task<bool> IdIsNotAvailable(int id);
         void UpdateToken(int? id, string token);
+        Task<bool> UserIsUsed(UserRequest userRequest);
     }
 }

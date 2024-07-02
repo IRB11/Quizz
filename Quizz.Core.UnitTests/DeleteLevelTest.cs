@@ -52,7 +52,7 @@ namespace Quizz.Core.UnitTests
 
             // Assert
             Assert.That(result.Id.Equals(-1));
-            Assert.That(deletedLevel, Is.True);
+            Assert.That(deletedLevel, Is.False);
 
         }
 

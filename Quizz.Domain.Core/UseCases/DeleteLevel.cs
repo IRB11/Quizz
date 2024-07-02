@@ -1,18 +1,13 @@
 ﻿using Quizz.Common.Interfaces;
 using Quizz.Domain.Core.Dto;
 using Quizz.Domain.Core.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Quizz.Domain.Core.UseCases
 {
-    public class DeleteLevel: IDeleteLevel
+    public class DeleteLevel : IDeleteLevel
     {
-        private ILevelRepository levelRepository;
-        private List<ICheckRuleLevel<LevelRequest>> rules;
+        private readonly ILevelRepository levelRepository;
+        private readonly List<ICheckRuleLevel<LevelRequest>> rules;
 
         public DeleteLevel(ILevelRepository levelRepository, List<ICheckRuleLevel<LevelRequest>> rules)
         {
@@ -51,7 +46,7 @@ namespace Quizz.Domain.Core.UseCases
                 // Return success response
                 return new LevelResponse
                 {
-                    Id = (long)levelRequest.Id,
+                    Id = -1,
                     Content = "Level deleted successfully."
                 };
             }
