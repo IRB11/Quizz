@@ -1,11 +1,4 @@
-﻿using Quizz.Domain.Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Quizz.Domain.Core.Dto
+﻿namespace Quizz.Domain.Core.Dto
 {
     public class UserResponse
     {
@@ -16,6 +9,6 @@ namespace Quizz.Domain.Core.Dto
         public string PhoneNumber { get; set; }
         public bool IsActive { get; set; }
         public string Token { get; set; }
-        public Role Role { get; set; }
+        public RoleResponse Role { get; set; }
     }
 }
