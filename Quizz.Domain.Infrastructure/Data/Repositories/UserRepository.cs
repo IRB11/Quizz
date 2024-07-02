@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using Quizz.Domain.Core.Dto;
+using Quizz.Domain.Core.Entities;
 using Quizz.Domain.Core.Interfaces;
 using Quizz.Domain.Infrastructure.Data.Entities;
 using System.Data.SqlTypes;
@@ -22,6 +23,7 @@ namespace Quizz.Domain.Infrastructure.Data.Repositories
             this.mapper = mapper;
             this.hashingPassword = hashingPassword; 
         }
+
         public async Task<UserResponse> GetByEmailAndPassword(LoginRequest LoginRequest)
         {
             if (LoginRequest == null)
@@ -46,61 +48,6 @@ namespace Quizz.Domain.Infrastructure.Data.Repositories
 
         }
 
-        public Task<bool> ContentIsNotAvailable(string Content)
-        {
-            return Task.Run(() => context.Levels.Any(f => f.Content.ToLower().Equals(Content.ToLower())));
-        }
-
-        public async Task<UserResponse> CreateUser(UserRequest createUserRequest)
-        {
-            if (await EmailIsNotAvailable(createUserRequest.EmailAddress))
-            {
-                return null;
-            }
-
-            var role = await context.Roles.FirstOrDefaultAsync(r => r.Id == createUserRequest.Role.Id);
-            if (role == null)
-            {
-                return null;
-            }
-            string password = createUserRequest.ConfirmPassword;
-
-            byte[] saltBytes = hashingPassword.GenerateSalt();
-            string hashedPassword = hashingPassword.HashPassword(password, saltBytes);
-            string base64Salt = Convert.ToBase64String(saltBytes);
-
-            byte[] retrievedSaltBytes = Convert.FromBase64String(base64Salt);
-
-            var user = new EFUser
-            {
-                FirstName = createUserRequest.FirstName,
-                LastName = createUserRequest.LastName,
-                EmailAddress = createUserRequest.EmailAddress,
-                PhoneNumber = createUserRequest.PhoneNumber,
-                IsActive = createUserRequest.IsActive,
-                Password = base64Salt,
-                ConfirmPassword = hashedPassword,    
-                Salt = retrievedSaltBytes,
-                Role = role
-            };
-
-            context.Users.Add(user);
-            await context.SaveChangesAsync();
-
-            var userResponse = mapper.Map<UserResponse>(user);
-            return userResponse;
-        }
-
-        public UserResponse GetUserById(int id)
-        { 
-            var user = context.Users.FirstOrDefault(r => r.Id == id);
-            if (user == null)
-            {
-                return null;
-            }
-            return mapper.Map<UserResponse>(user); 
-        }
-
         public void UpdateToken(int? id, string token)
         {
             var user = context.Users.FirstOrDefault(r => r.Id == id);
@@ -121,9 +68,134 @@ namespace Quizz.Domain.Infrastructure.Data.Repositories
             }
         }
        
-        public async Task<bool> EmailIsNotAvailable(string email)
+        public async Task<bool> EmailAlreadyExist(string email)
         {
             return await context.Users.AnyAsync(e => e.EmailAddress == email);
+        }
+
+        public async Task<UserResponse> Add(UserRequest request)
+        {
+            if (await EmailAlreadyExist(request.EmailAddress))
+            {
+                return null;
+            }
+
+            var role = await context.Roles.FirstOrDefaultAsync(r => r.Id == request.Role.Id);
+            if (role == null)
+            {
+                return null;
+            }
+            string password = request.ConfirmPassword;
+
+            byte[] saltBytes = hashingPassword.GenerateSalt();
+            string hashedPassword = hashingPassword.HashPassword(password, saltBytes);
+            string base64Salt = Convert.ToBase64String(saltBytes);
+
+            byte[] retrievedSaltBytes = Convert.FromBase64String(base64Salt);
+
+            var user = new EFUser
+            {
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                EmailAddress = request.EmailAddress,
+                PhoneNumber = request.PhoneNumber,
+                IsActive = request.IsActive,
+                Password = base64Salt,
+                ConfirmPassword = hashedPassword,
+                Salt = retrievedSaltBytes,
+                Role = role
+            };
+
+            context.Users.Add(user);
+            await context.SaveChangesAsync();
+
+            var userResponse = mapper.Map<UserResponse>(user);
+            return userResponse;
+        }
+
+        public async Task<bool> Delete(UserRequest request)
+        {
+            if (context.Users.Any(u => u.Id == request.Id))
+            {
+                EFUser eFUser = mapper.Map<EFUser>(request);
+                context.Users.Remove(eFUser);
+                context.SaveChanges();
+                return true;
+            }
+            else return false;
+        }
+
+        public async Task<List<UserResponse>> getAll()
+        {
+            var efUsers = context.Users.Include(r => r.Role).ToList();
+            var users = mapper.Map<List<UserResponse>>(efUsers);
+            return users;
+        }
+
+        public async Task<UserResponse> GetById(int id)
+        {
+            var user = context.Users.FirstOrDefault(r => r.Id == id);
+            if (user == null)
+            {
+                return null;
+            }
+            return mapper.Map<UserResponse>(user);
+        }
+
+        public async Task<UserResponse> Update(UserRequest request)
+        {
+            EFUser eFUser = mapper.Map<EFUser>(request);
+            UserResponse userResponse = new UserResponse();
+
+            try
+            {
+                // Récupérez l'entité existante avec la propriété de navigation incluse
+                EFUser existingUser =  context.Users.Include(r => r.Role).SingleOrDefault(u => u.Id == request.Id);
+
+                if (existingUser == null)
+                {
+                    userResponse.Id = -1;
+                    userResponse.FirstName = "User not found.";
+                    return userResponse;
+                }
+
+                // Appliquez les modifications nécessaires
+                existingUser.FirstName = request.FirstName;
+                existingUser.LastName = request.LastName;
+                existingUser.EmailAddress = request.EmailAddress;
+                existingUser.PhoneNumber = request.PhoneNumber;
+                existingUser.IsActive = request.IsActive;
+                existingUser.Role.Id = (int)request.Role.Id;
+                existingUser.Role.Name = request.Role.Name;
+                context.SaveChanges();
+
+                userResponse = mapper.Map<UserResponse>(eFUser);
+            }
+            catch (Exception ex)
+            {
+                // Gestion des exceptions et initialisation de la réponse
+                userResponse.Id = -1;
+                userResponse.FirstName = $"An error occurred: {ex.Message}";
+            }
+
+            return userResponse;
+        }
+
+        public Task<bool> UserIsUsed(UserRequest userRequest)
+        {
+            return Task.Run(() => 
+            context.Questions.Any(q => q.AdminId == userRequest.Id)
+            || context.Levels.Any(l => l.AdminId == userRequest.Id)
+            || context.Technologies.Any(t => t.AdminId == userRequest.Id)
+            || context.Quizzes.Any(qz => qz.AdminId == userRequest.Id)
+            || context.Quizzes.Any(qz => qz.AgentId == userRequest.Id)
+            || context.Candidates.Any(c => c.AgentId == userRequest.Id)
+            );
+        }
+
+        public Task<bool> IdIsNotAvailable(int id)
+        {
+            return Task.Run(() => context.Users.Any(f => f.Id == id));
         }
     }
 }
