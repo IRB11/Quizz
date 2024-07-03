@@ -212,7 +212,7 @@ namespace Quizz.Domain.Infrastructure.InMemory
         public Task<bool> UserIsUsed(UserRequest userRequest)
         {
             return Task.Run(
-                () => questionRequests.Any(f => f.Admin.Id == userRequest.Id
+                () => questionRequests.Any(f => f.AdminId == userRequest.Id
                 || levelRequests.Any(l => l.AdminId == userRequest.Id)
                 || technologiesRequests.Any(t => t.AdminId == userRequest.Id)
                 || quizRequests.Any(q => q.AdminId == userRequest.Id)
@@ -364,26 +364,16 @@ namespace Quizz.Domain.Infrastructure.InMemory
             {
                 new QuestionRequest
                 {
-
-                    Admin = new User()
-                    {
-                        Id=1,
-                    }
+                    AdminId=2,        
                 },
                 new QuestionRequest
                 {
-                    Admin = new User()
-                    {
-                        Id=2,
-                    }
+                    AdminId=2,
+                    
                 },
                 new QuestionRequest
                 {
-                    Admin = new User()
-                    {
-                        Id=1,
-
-                    },
+                    AdminId=2,
                 }
             };
         }
@@ -394,7 +384,7 @@ namespace Quizz.Domain.Infrastructure.InMemory
             {
                 new TechnologiesRequest
                 {
-                    AdminId = 4,
+                     AdminId= 4,
                 },
                 new TechnologiesRequest
                 {
