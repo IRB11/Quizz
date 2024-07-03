@@ -10,7 +10,6 @@ namespace Quizz.Domain.Core.UseCases
     {
         private readonly IUserRepository userRepository;
         private readonly IEnumerable<ICheckRuleUser<UserRequest>> rules;
-        private readonly IMapper mapper;
         private readonly JWTService jwtService;
 
 

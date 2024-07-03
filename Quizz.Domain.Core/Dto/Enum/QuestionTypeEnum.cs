@@ -8,7 +8,8 @@ namespace Quizz.Domain.Core.Dto.Enum
 {
     public enum QuestionTypeEnum
     {
-        QCM = 1,
-        QCO = 2,
+        MultipleChoice,
+        SingleChoice,
+        OpenQuestion,
     }
 }
