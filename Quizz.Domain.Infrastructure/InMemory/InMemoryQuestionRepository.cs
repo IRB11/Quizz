@@ -1,6 +1,7 @@
 ﻿using Quizz.Domain.Core.Dto;
 using Quizz.Domain.Core.Entities;
 using Quizz.Domain.Core.Interfaces.Questions;
+using Quizz.Domain.Infrastructure.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,18 +30,18 @@ namespace Quizz.Domain.Infrastructure.InMemory
                 IsValid = request.IsValid,
                 Level = null,
                 Order = request.Order,
-                Response = request.Response != null
-               ? request.Response.Select(r => ConvertToResponse(r)).ToList()
-               : new List<Response>(),
-                Technology = null,
+                Response = (List<Response_Response>)(request.Response != null
+               ? request.Response.Select(ConvertToResponse).ToList()
+               : new List<Response_Response>()),
+                Technology = new TechnologiesResponse { Id = request.TechnologyId },
                 Type = request.Type,
 
             };
         }
 
-        public Response ConvertToResponse(Response_Request request)
+        public Response_Response ConvertToResponse(Response_Request request)
         {
-            return new Response
+            return new Response_Response
             {
 
                 Id = (int)request.Id,
@@ -60,9 +61,32 @@ namespace Quizz.Domain.Infrastructure.InMemory
             throw new NotImplementedException();
         }
 
-        public Task<QuestionResponse> GetById(int id)
+        public async Task<QuestionResponse> GetById(int id)
         {
-            throw new NotImplementedException();
+            var question = _questions.FirstOrDefault(q => q.Id == id);
+
+            if (question == null)
+            {
+                return null;
+            }
+
+            return await Task.FromResult(new QuestionResponse
+            {
+                Id = (long)question.Id,
+                Content = question.Content,
+                Type = question.Type,
+                IsValid = question.IsValid,
+                Order = question.Order,
+                Response = (List<Response_Response>)question.Response.Select(r => new Response_Response
+                {
+                    Id = (int)r.Id,
+                    Content = r.Content,
+                    Explanation = r.Explanation,
+                    isCorrect = r.isCorrect
+                }).ToList(),
+                Level = new LevelResponse { Id = question.LevelId },
+                Technology = new TechnologiesResponse { Id = question.TechnologyId }
+            });
         }
 
         public Task<bool> QuestionExists(string content)
