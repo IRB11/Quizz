@@ -34,6 +34,7 @@ namespace Quizz.Domain.Core
             builder.RegisterType<DeleteUser>().As<IDeleteUser>().InstancePerLifetimeScope();
 
             builder.RegisterType<CreateQuestion>().As<ICreateQuestion>().InstancePerLifetimeScope();
+            builder.RegisterType<GetQuestionById>().As<IGetQuestionById>().InstancePerLifetimeScope();
 
 
             builder.RegisterInstance(new JWTService(_jwtSecret)).AsSelf().SingleInstance();
