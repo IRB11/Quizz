@@ -1,12 +1,5 @@
 ﻿using Quizz.Domain.Core.Dto;
-using Quizz.Domain.Core.Entities;
 using Quizz.Domain.Core.Interfaces.Questions;
-using Quizz.Domain.Infrastructure.Data.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Quizz.Domain.Infrastructure.InMemory
 {
@@ -28,7 +21,7 @@ namespace Quizz.Domain.Infrastructure.InMemory
                 Id = (long)request.Id,
                 Content = request.Content,
                 IsValid = request.IsValid,
-                Level = null,
+                Level = new LevelResponse() { Id = request.LevelId },
                 Order = request.Order,
                 Response = (List<Response_Response>)(request.Response != null
                ? request.Response.Select(ConvertToResponse).ToList()
@@ -39,6 +32,11 @@ namespace Quizz.Domain.Infrastructure.InMemory
             };
         }
 
+        public void ClearQuestions()
+        {
+            _questions.Clear();
+        }
+
         public Response_Response ConvertToResponse(Response_Request request)
         {
             return new Response_Response
@@ -47,7 +45,7 @@ namespace Quizz.Domain.Infrastructure.InMemory
                 Id = (int)request.Id,
                 Content = request.Content,
                 isCorrect = request.isCorrect,
-                Explanation = request.Explanation                
+                Explanation = request.Explanation
             };
         }
 
@@ -56,9 +54,27 @@ namespace Quizz.Domain.Infrastructure.InMemory
             throw new NotImplementedException();
         }
 
-        public Task<List<QuestionResponse>> getAll()
+        public async Task<List<QuestionResponse>> getAll()
         {
-            throw new NotImplementedException();
+            var questionResponses = _questions.Select(question => new QuestionResponse
+            {
+                Id = (long)question.Id,
+                Content = question.Content,
+                IsValid = question.IsValid,
+                Level = new LevelResponse { Id = question.LevelId },
+                Order = question.Order,
+                Response = (List<Response_Response>)question.Response.Select(r => new Response_Response
+                {
+                    Id = (int)r.Id,
+                    Content = r.Content,
+                    Explanation = r.Explanation,
+                    isCorrect = r.isCorrect
+                }).ToList(),
+                Technology = new() { Id = question.TechnologyId },
+                Type = question.Type,
+            }).ToList();
+
+            return await Task.FromResult(questionResponses);
         }
 
         public async Task<QuestionResponse> GetById(int id)

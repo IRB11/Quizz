@@ -37,9 +37,11 @@ namespace Quizz.Domain.Infrastructure.Data.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<List<QuestionResponse>> getAll()
+        public async Task<List<QuestionResponse>> getAll()
         {
-            throw new NotImplementedException();
+            var efQuestions = context.Questions.Include(q => q.Technology).Include(q => q.Level).Include(q => q.Responses).ToList();
+            var questions = mapper.Map<List<QuestionResponse>>(efQuestions);
+            return questions;
         }
 
         public async Task<QuestionResponse> GetById(int id)
