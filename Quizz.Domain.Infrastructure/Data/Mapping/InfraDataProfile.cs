@@ -13,6 +13,7 @@ namespace Quizz.Domain.Infrastructure.Data.Mapping
             ShouldMapProperty = propertyInfo => true;
 
             CreateMap<EFLevel, LevelRequest>().ReverseMap();
+            CreateMap<EFLevel, LevelResponse>().ReverseMap();
 
             CreateMap<LoginRequest, EFUser>()
                 .ForMember(dest => dest.EmailAddress, opt => opt.MapFrom(src => src.EmailAddress))
@@ -36,6 +37,9 @@ namespace Quizz.Domain.Infrastructure.Data.Mapping
 
             // Configuration pour EFQuestion vers QuestionResponse et vice versa
             CreateMap<EFQuestion, QuestionResponse>()
+                .ForMember(dest => dest.Level, opt => opt.MapFrom(src => src.Level)) // Map EFLevel to LevelDto
+                .ForMember(dest => dest.Technology, opt => opt.MapFrom(src => src.Technology)) // Map EFTechnology to TechnologyDto
+                .ForMember(dest => dest.Response, opt => opt.MapFrom(src => src.Responses))
                 .ReverseMap()
                 .ForMember(dest => dest.Id, opt => opt.Ignore()); // Ignore l'ID lors du mappage inverse
 
