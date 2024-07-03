@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace Quizz.Core.UnitTests.QuestionResponseTests
 {
     [TestFixture]
-    public class QuestionServiceTests
+    public class CreateQuestionResponseTests
     {
         private ICreateQuestion _CreateQuestion;
         private IQuestionRepository _questionRepository;
