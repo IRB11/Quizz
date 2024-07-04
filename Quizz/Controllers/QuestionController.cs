@@ -12,12 +12,14 @@ namespace Quizz.Controllers
         private readonly ICreateQuestion createQuestion;
         private readonly IGetQuestionById getQuestionById;
         private readonly IGetAllQuestion getAllQuestion;
+        private readonly IUpdateQuestion updateQuestion;
 
-        public QuestionController(ICreateQuestion createQuestion, IGetQuestionById getQuestionById, IGetAllQuestion getAllQuestion)
+        public QuestionController(ICreateQuestion createQuestion, IGetQuestionById getQuestionById, IGetAllQuestion getAllQuestion, IUpdateQuestion updateQuestion)
         {
             this.createQuestion = createQuestion;
             this.getQuestionById = getQuestionById;
             this.getAllQuestion = getAllQuestion;
+            this.updateQuestion = updateQuestion;   
         }
 
         [HttpGet]
@@ -42,7 +44,7 @@ namespace Quizz.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] QuestionRequest questionRequest)
         {
-            return Ok();
+            return Ok(await updateQuestion.Handle(questionRequest));
         }
 
         [HttpDelete("{id}")]
