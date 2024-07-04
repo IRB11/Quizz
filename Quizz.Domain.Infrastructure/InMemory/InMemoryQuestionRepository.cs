@@ -1,4 +1,5 @@
 ﻿using Quizz.Domain.Core.Dto;
+using Quizz.Domain.Core.Entities;
 using Quizz.Domain.Core.Interfaces.Questions;
 
 namespace Quizz.Domain.Infrastructure.InMemory
@@ -105,14 +106,61 @@ namespace Quizz.Domain.Infrastructure.InMemory
             });
         }
 
-        public Task<bool> QuestionExists(string content)
+        public Task<bool> QuestionExists(string content, int? id = null)
         {
             return Task.Run(() => _questions.Any(q => q.Content.Trim().ToLower() == content.Trim().ToLower()));
         }
 
-        public Task<QuestionResponse> Update(QuestionRequest request)
+        public async Task<QuestionResponse> Update(QuestionRequest request)
         {
-            throw new NotImplementedException();
+            var response = new QuestionResponse();
+
+            try
+            {
+                await Task.Run(() =>
+                {
+                    lock (_questions)
+                    {
+                        int index = _questions.FindIndex(q => q.Id == request.Id);
+
+                        if (index >= 0)
+                        {
+                            _questions.RemoveAt(index);
+                            var updatedQuestion = new QuestionRequest
+                            {
+                                Id = request.Id,
+                                Content = request.Content,
+                                Type = request.Type,
+                                IsValid = request.IsValid,
+                                Order = request.Order,
+                                AdminId = request.AdminId,
+                                Response = request.Response?.Select(r => new Response_Request
+                                {
+                                    Id = (long)r.Id,
+                                    Content = r.Content,
+                                    isCorrect = r.isCorrect
+                                }).ToList(),
+                                LevelId = request.LevelId,
+                                TechnologyId = request.TechnologyId
+                            };
+                            _questions.Add(updatedQuestion);
+                            response = MapToResponse(updatedQuestion);
+                        }
+                        else
+                        {
+                            response.Id = -1;
+                            response.Content = "Question not found.";
+                        }
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                response.Id = -1;
+                response.Content = $"An error occurred: {ex.Message}";
+            }
+
+            return response;
         }
 
         private List<QuestionRequest> GetInitialQuestions()
@@ -167,6 +215,30 @@ namespace Quizz.Domain.Infrastructure.InMemory
                 }
             };
         }
+        private QuestionResponse MapToResponse(QuestionRequest question)
+        {
+            return new QuestionResponse
+            {
+                Id = (long)question.Id,
+                Content = question.Content,
+                Type = question.Type,
+                IsValid = question.IsValid,
+                Order = question.Order,
+                Response = MapToResponseResponseList((List<Response_Request>)question.Response),
+                Level = new() { Id = question.LevelId},
+                Technology = new() { Id = question.TechnologyId },
+            };
+        }
+        private List<Response_Response> MapToResponseResponseList(List<Response_Request> responseRequests)
+        {
+            return responseRequests?.Select(r => new Response_Response
+            {
+                Id = (long)r.Id,
+                Content = r.Content,
+                isCorrect = r.isCorrect
+            }).ToList();
+        }
+
     }
 }
 

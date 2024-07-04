@@ -51,14 +51,65 @@ namespace Quizz.Domain.Infrastructure.Data.Repositories
             return questionResponse;
         }
 
-        public async Task<bool> QuestionExists(string content)
+        public async Task<bool> QuestionExists(string content, int? excludedQuestionId)
         {
-            return await context.Questions.AnyAsync(e => e.Content.Trim().ToLower() == content.Trim().ToLower());
+            if (excludedQuestionId.HasValue)
+            {
+                return await context.Questions
+                    .AnyAsync(e => e.Content.Trim().ToLower() == content.Trim().ToLower() && e.Id != excludedQuestionId.Value);
+            }
+
+            return await context.Questions
+                .AnyAsync(e => e.Content.Trim().ToLower() == content.Trim().ToLower());
         }
 
-        public Task<QuestionResponse> Update(QuestionRequest request)
+        public async Task<QuestionResponse> Update(QuestionRequest request)
         {
-            throw new NotImplementedException();
+            var existingQuestion = await context.Questions
+                    .Include(q => q.Responses)  // Include responses to update them as well
+                    .SingleOrDefaultAsync(q => q.Id == request.Id);
+
+            if (existingQuestion == null)
+            {
+                return null;
+            }
+
+            // Check if the new content is already taken by another question (excluding the current question itself)
+            bool contentExists = await QuestionExists(request.Content, (int?)request.Id);
+            if (contentExists)
+            {
+                return null;
+            }
+
+            // Update the question's properties
+            existingQuestion.Content = request.Content;
+            existingQuestion.Type = request.Type;
+            existingQuestion.IsValid = request.IsValid;
+
+            // Clear existing responses and add new ones
+            existingQuestion.Responses.Clear();
+            if (request.Response != null)
+            {
+                foreach (var response in request.Response)
+                {
+                    var efResponse = new EFResponse
+                    {
+                        Id = (int)response.Id,
+                        Content = response.Content,
+                        IsCorrect = response.isCorrect
+                    };
+                    existingQuestion.Responses.Add(efResponse);
+                }
+            }
+
+            existingQuestion.LevelId = request.LevelId;
+            existingQuestion.TechnologyId = request.TechnologyId;
+
+            await context.SaveChangesAsync();
+
+            // Map to QuestionResponse
+            var updatedQuestionResponse = mapper.Map<QuestionResponse>(existingQuestion);
+            return updatedQuestionResponse;
         }
     }
 }
