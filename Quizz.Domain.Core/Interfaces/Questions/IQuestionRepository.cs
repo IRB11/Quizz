@@ -9,6 +9,6 @@ namespace Quizz.Domain.Core.Interfaces.Questions
 {
     public interface IQuestionRepository : ICRUDRepository<QuestionRequest, QuestionResponse>
     {
-        Task<bool> QuestionExists(string content);
+        Task<bool> QuestionExists(string content, int? excludedQuestionId = null);
     }
 }

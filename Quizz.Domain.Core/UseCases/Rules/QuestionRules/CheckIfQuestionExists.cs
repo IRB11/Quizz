@@ -28,7 +28,7 @@ namespace Quizz.Domain.Core.UseCases.Rules.QuestionRules
 
         public async Task<bool> CheckRule(QuestionRequest questionRequest)
         {
-            bool questionExists = await _questionRepository.QuestionExists(questionRequest.Content);
+            bool questionExists = await _questionRepository.QuestionExists(questionRequest.Content, (int)questionRequest.Id);
 
             if (questionExists)
             {
