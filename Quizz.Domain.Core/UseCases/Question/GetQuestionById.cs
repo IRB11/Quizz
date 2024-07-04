@@ -16,8 +16,6 @@ namespace Quizz.Domain.Core.UseCases.Question
             _questionRepository = questionRepository;
         }
 
-
-
         public async Task<QuestionResponse> Handle(int id)
         {
             return await _questionRepository.GetById(id);

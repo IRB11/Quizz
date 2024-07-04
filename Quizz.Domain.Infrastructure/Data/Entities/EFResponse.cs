@@ -8,7 +8,6 @@ namespace Quizz.Domain.Infrastructure.Data.Entities
         public int Id { get; set; }
         public string Content { get; set; }
         public bool IsCorrect { get; set; }
-
         public int QuestionId { get; set; }
         public EFQuestion Question { get; set; }
     }
