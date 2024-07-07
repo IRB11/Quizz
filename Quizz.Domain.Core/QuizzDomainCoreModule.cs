@@ -37,6 +37,7 @@ namespace Quizz.Domain.Core
             builder.RegisterType<GetQuestionById>().As<IGetQuestionById>().InstancePerLifetimeScope();
             builder.RegisterType<GetAllQuestion>().As<IGetAllQuestion>().InstancePerLifetimeScope();
             builder.RegisterType<UpdateQuestion>().As<IUpdateQuestion>().InstancePerLifetimeScope();
+            builder.RegisterType<DeleteQuestion>().As<IDeleteQuestion>().InstancePerLifetimeScope();
 
 
             builder.RegisterInstance(new JWTService(_jwtSecret)).AsSelf().SingleInstance();
@@ -57,6 +58,7 @@ namespace Quizz.Domain.Core
             builder.RegisterType<CheckIfQuestionExists>().As<ICheckQuestionRule<QuestionRequest>>().InstancePerLifetimeScope();
             builder.RegisterType<CheckIfQuestionIsActive>().As<ICheckQuestionRule<QuestionRequest>>().InstancePerLifetimeScope();
             builder.RegisterType<ValidQuestionTypeRule>().As<ICheckQuestionRule<QuestionRequest>>().InstancePerLifetimeScope();
+
             // Enregistrer toutes les implémentations de ICheckQuestionRule<QuestionRequest>
             builder.Register(ctx =>
             {
