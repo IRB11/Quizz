@@ -13,13 +13,21 @@ namespace Quizz.Controllers
         private readonly IGetQuestionById getQuestionById;
         private readonly IGetAllQuestion getAllQuestion;
         private readonly IUpdateQuestion updateQuestion;
+        private readonly IDeleteQuestion deleteQuestion;
 
-        public QuestionController(ICreateQuestion createQuestion, IGetQuestionById getQuestionById, IGetAllQuestion getAllQuestion, IUpdateQuestion updateQuestion)
+        public QuestionController(
+            ICreateQuestion createQuestion, 
+            IGetQuestionById getQuestionById, 
+            IGetAllQuestion getAllQuestion, 
+            IUpdateQuestion updateQuestion, 
+            IDeleteQuestion deleteQuestion
+        )
         {
             this.createQuestion = createQuestion;
             this.getQuestionById = getQuestionById;
             this.getAllQuestion = getAllQuestion;
-            this.updateQuestion = updateQuestion;   
+            this.updateQuestion = updateQuestion;
+            this.deleteQuestion = deleteQuestion;
         }
 
         [HttpGet]
@@ -48,9 +56,9 @@ namespace Quizz.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete([FromBody] QuestionRequest questionRequest)
+        public async Task<IActionResult> Delete(QuestionRequest questionRequest)
         {
-            return Ok();
+            return Ok(await deleteQuestion.Handle(questionRequest));
         }
     }
 }
