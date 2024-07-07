@@ -78,10 +78,10 @@ namespace Quizz.Core.UnitTests.QuestionResponseTests
 
             // Assert
             Assert.That(result, Is.Not.Null);
-            Assert.That(result, Has.Exactly(3).Items);  // Ensure there are exactly 2 questions
-            Assert.That(result.All(q => q.Response != null), Is.True);  // All questions should have responses
-            Assert.That(result.All(q => q.Level != null), Is.True);  // All questions should have a level
-            Assert.That(result.All(q => q.Technology != null), Is.True);  // All questions should have a technology
+            Assert.That(result, Has.Exactly(3).Items);  
+            Assert.That(result.All(q => q.Response != null), Is.True); 
+            Assert.That(result.All(q => q.Level != null), Is.True);  
+            Assert.That(result.All(q => q.Technology != null), Is.True); 
         }
 
         [Test]

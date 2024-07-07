@@ -1,17 +1,7 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.DataProtection.KeyManagement;
-using Microsoft.IdentityModel.Tokens;
-using Quizz.Common.Interfaces;
+﻿using Quizz.Common.Interfaces;
 using Quizz.Domain.Core.Dto;
 using Quizz.Domain.Core.Interfaces;
 using Quizz.Domain.Core.Services;
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Quizz.Domain.Core.UseCases
 {
@@ -20,7 +10,6 @@ namespace Quizz.Domain.Core.UseCases
         private readonly IEnumerable<ICheckRule<UserRequest>> rules;
         private readonly IUserRepository userRepository;
         private readonly JWTService jWTService;
-
 
         public LoginUser(IUserRepository userRepository, JWTService jWTService)
         {
@@ -38,7 +27,7 @@ namespace Quizz.Domain.Core.UseCases
             user.Token = jWTService.GetToken(user);
             try
             {
-                userRepository.UpdateToken(user.Id,user.Token);
+                userRepository.UpdateToken(user.Id, user.Token);
             }
             catch (Exception e)
             {

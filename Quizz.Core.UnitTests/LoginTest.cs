@@ -1,25 +1,21 @@
 ﻿using AutoMapper;
 using NUnit.Framework;
 using Quizz.Common.Interfaces;
-using Quizz.Controllers;
 using Quizz.Domain.Core.Dto;
 using Quizz.Domain.Core.Interfaces;
 using Quizz.Domain.Core.Services;
 using Quizz.Domain.Core.UseCases;
-using Quizz.Domain.Core.UseCases.Rules;
-using Quizz.Domain.Infrastructure.Data.Repositories;
 using Quizz.Domain.Infrastructure.InMemory;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Quizz.Core.UnitTests
 {
-    public class LoginTest 
+    public class LoginTest
     {
         private ILoginUser loginUser;
         private IUserRepository UserRepository;
         private JWTService JWTService;
-        IMapper mapper;
         private LoginRequest user;
         List<ICheckRule<UserRequest>> rules;
 
@@ -30,7 +26,7 @@ namespace Quizz.Core.UnitTests
             UserRepository = new InMemoryUserRepository();
 
             InitRules();
-            loginUser = new LoginUser(UserRepository,JWTService);
+            loginUser = new LoginUser(UserRepository, JWTService);
             user = GetLoginRequest();
         }
         private void InitRules()
@@ -52,8 +48,8 @@ namespace Quizz.Core.UnitTests
         {
             return new LoginRequest()
             {
-                EmailAddress ="email@test.test",
-                Password ="monpassP"
+                EmailAddress = "email@test.test",
+                Password = "monpassP"
             };
         }
     }

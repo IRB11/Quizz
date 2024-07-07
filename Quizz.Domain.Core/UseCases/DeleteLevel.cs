@@ -68,7 +68,6 @@ namespace Quizz.Domain.Core.UseCases
                     Content = $"An error occurred: {ex.Message}"
                 };
             }
-            return null;
 
             #region local methods
 

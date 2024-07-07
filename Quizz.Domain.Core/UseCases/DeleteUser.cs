@@ -65,8 +65,7 @@ namespace Quizz.Domain.Core.UseCases
                     FirstName = $"An error occurred: {ex.Message}"
                 };
             }
-            return null;
-
+          
             #region local methods
 
             bool CheckIfUserIsUsed(UserRequest userRequest)
