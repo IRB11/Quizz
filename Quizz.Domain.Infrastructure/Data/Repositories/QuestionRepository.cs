@@ -32,9 +32,21 @@ namespace Quizz.Domain.Infrastructure.Data.Repositories
             return questionResponse;
         }
 
-        public Task<bool> Delete(QuestionRequest request)
+        public Task<bool> CheckIfQuestionIsUsedInQuizz(int id)
         {
-            throw new NotImplementedException();
+            return context.QuizQuestions.AnyAsync(q => q.QuestionId == id);
+        }
+
+        public async Task<bool> Delete(QuestionRequest request)
+        {
+            if (context.Questions.Any(u => u.Id == request.Id))
+            {
+                EFQuestion eFQuestion = mapper.Map<EFQuestion>(request);
+                context.Questions.Remove(eFQuestion);
+                context.SaveChanges();
+                return true;
+            }
+            else return false;
         }
 
         public async Task<List<QuestionResponse>> getAll()
@@ -61,6 +73,11 @@ namespace Quizz.Domain.Infrastructure.Data.Repositories
 
             return await context.Questions
                 .AnyAsync(e => e.Content.Trim().ToLower() == content.Trim().ToLower());
+        }
+
+        public Task<bool> QuestionExists(long? id)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<QuestionResponse> Update(QuestionRequest request)

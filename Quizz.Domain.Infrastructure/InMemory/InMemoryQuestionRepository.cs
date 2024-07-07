@@ -7,10 +7,60 @@ namespace Quizz.Domain.Infrastructure.InMemory
     public class InMemoryQuestionRepository : IQuestionRepository
     {
         private readonly List<QuestionRequest> _questions;
+        private readonly List<Quizz_QuestionRequest> _quizz_questions;
 
         public InMemoryQuestionRepository()
         {
             _questions = GetInitialQuestions();
+            _quizz_questions = GetInitialQuizzQuestions();
+        }
+
+        private List<Quizz_QuestionRequest> GetInitialQuizzQuestions()
+        {
+            return new List<Quizz_QuestionRequest>()
+            { 
+                new Quizz_QuestionRequest()
+                {
+                    QuizId = 1,
+                    QuestionId = 1,
+                   
+                },
+                new Quizz_QuestionRequest()
+                {
+                    QuizId = 1,
+                    QuestionId = 2,
+                },
+                new Quizz_QuestionRequest()
+                {
+                    QuizId = 1,
+                    QuestionId = 3,
+                },
+                new Quizz_QuestionRequest()
+                {
+                    QuizId = 1,
+                    QuestionId = 5,
+                },
+                new Quizz_QuestionRequest()
+                {
+                    QuizId = 2,
+                    QuestionId = 1,
+                },
+                new Quizz_QuestionRequest()
+                {
+                    QuizId = 2,
+                    QuestionId = 2,
+                },
+                new Quizz_QuestionRequest()
+                {
+                    QuizId = 2,
+                    QuestionId = 3,
+                },
+                new Quizz_QuestionRequest()
+                {
+                    QuizId = 2,
+                    QuestionId = 4,
+                }
+            };
         }
 
         public async Task<QuestionResponse> Add(QuestionRequest request)
@@ -52,7 +102,14 @@ namespace Quizz.Domain.Infrastructure.InMemory
 
         public Task<bool> Delete(QuestionRequest request)
         {
-            throw new NotImplementedException();
+            return Task.Run(() =>
+            {               
+                if (_questions.Any(q => q.Id == request.Id))
+                {
+                    _questions.Remove(request);
+                }
+                return true;
+            });
         }
 
         public async Task<List<QuestionResponse>> getAll()
@@ -109,6 +166,11 @@ namespace Quizz.Domain.Infrastructure.InMemory
         public Task<bool> QuestionExists(string content, int? id = null)
         {
             return Task.Run(() => _questions.Any(q => q.Content.Trim().ToLower() == content.Trim().ToLower()));
+        }
+
+        public Task<bool> CheckIfQuestionIsUsedInQuizz(int id)
+        {
+            return Task.Run(() => _quizz_questions.Any(q => q.QuestionId == id));
         }
 
         public async Task<QuestionResponse> Update(QuestionRequest request)
@@ -215,6 +277,7 @@ namespace Quizz.Domain.Infrastructure.InMemory
                 }
             };
         }
+
         private QuestionResponse MapToResponse(QuestionRequest question)
         {
             return new QuestionResponse
@@ -229,6 +292,7 @@ namespace Quizz.Domain.Infrastructure.InMemory
                 Technology = new() { Id = question.TechnologyId },
             };
         }
+
         private List<Response_Response> MapToResponseResponseList(List<Response_Request> responseRequests)
         {
             return responseRequests?.Select(r => new Response_Response
@@ -238,7 +302,6 @@ namespace Quizz.Domain.Infrastructure.InMemory
                 isCorrect = r.isCorrect
             }).ToList();
         }
-
     }
 }
 
