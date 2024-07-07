@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Quizz.Domain.Core.Dto
 {
-    public class QuizzRequest
+    public class Quizz_QuestionResponse
     {
         public int QuizId { get; set; }
         public int QuestionId { get; set; }
