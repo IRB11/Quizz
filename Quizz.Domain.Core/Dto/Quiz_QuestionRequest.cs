@@ -12,8 +12,8 @@ namespace Quizz.Domain.Core.Dto
         public int QuizId { get; set; }
         public int QuestionId { get; set; }
 
-        public virtual Quiz Quiz { get; set; }
-        public virtual Question Question { get; set; }
+        public virtual QuizRequest Quiz { get; set; }
+        public virtual QuestionRequest Question { get; set; }
 
     }
 }
