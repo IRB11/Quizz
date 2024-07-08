@@ -13,27 +13,33 @@ namespace Quizz.Controllers
     {
         private readonly ICreateTechno _createTechno;
         private readonly IGetAllTechnos _getAllTechnos;
-        private readonly ITechnoRepository _technoRepository;
         private readonly IGetTechnoById _getTechnoById;
         private readonly IDeleteTechno _deleteTechno;
+        private readonly IUpdateTechno _updateTechno;
+        private readonly ITechnoRepository _technoRepository;
 
 
-        public TechnoController(ICreateTechno createTechno,IGetAllTechnos getAllTechnos,
-            ITechnoRepository technoRepository, IGetTechnoById getTechnoById,
-            IDeleteTechno deleteTechno)
+
+        public TechnoController(
+            ICreateTechno createTechno,
+            IGetAllTechnos getAllTechnos,
+            IGetTechnoById getTechnoById,
+            IDeleteTechno deleteTechno,
+            IUpdateTechno updateTechno,
+            ITechnoRepository technoRepository)
         {
             _createTechno = createTechno;
             _getAllTechnos = getAllTechnos;
-            _technoRepository = technoRepository;
+            _updateTechno = updateTechno;
             _getTechnoById = getTechnoById;
             _deleteTechno = deleteTechno;
+            _technoRepository = technoRepository;
         }
 
         // GET: api/techno
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            //var technos = await _technoRepository.GetAll();
             return Ok(await _getAllTechnos.Handle());
         }
 
@@ -41,12 +47,7 @@ namespace Quizz.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var techno = await _technoRepository.GetTechnoById(id);
-            if (techno == null)
-            {
-                return NotFound();
-            }
-            return Ok(techno);
+            return Ok(_getTechnoById.Handle(id));
         }
 
         // POST: api/techno
@@ -63,7 +64,7 @@ namespace Quizz.Controllers
         public async Task<IActionResult> Put(int id, [FromBody] TechnologiesRequest request)
         {
             // Implement the update logic here
-            return NoContent();
+            return Ok(await _updateTechno.Handle(request));
         }
 
         // DELETE: api/techno/{id}
