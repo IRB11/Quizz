@@ -18,4 +18,10 @@
     <ProjectReference Include="..\Quizz.Common\Quizz.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="UseCases\Techno\GetAllTechnos.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+
 </Project>

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Quizz.Domain.Core.Dto;
+using Quizz.Domain.Core.Entities;
 using Quizz.Domain.Infrastructure.Data.Entities;
 
 
@@ -55,6 +56,9 @@ namespace Quizz.Domain.Infrastructure.Data.Mapping
             CreateMap<EFResponse, Response_Request>().ReverseMap()
                 .ForMember(dest => dest.Id, opt => opt.Ignore()); // Ignore l'ID lors du mappage inverse
 
+            CreateMap<EFRole, Role>();
+            //CreateMap<EFTechnology, TechnologiesResponse>().ReverseMap();
+            //CreateMap<EFTechnology, TechnologiesRequest>().ReverseMap();
             // Configuration pour EFResponse vers Response_Response et vice versa
             CreateMap<EFResponse, Response_Response>().ReverseMap()
                 .ForMember(dest => dest.Id, opt => opt.Ignore());

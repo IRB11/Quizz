@@ -7,6 +7,7 @@ using Quizz.Domain.Core.Services;
 using Quizz.Domain.Core.UseCases;
 using Quizz.Domain.Core.UseCases.Question;
 using Quizz.Domain.Core.UseCases.Rules;
+using Quizz.Domain.Core.UseCases.Techno;
 using Quizz.Domain.Core.UseCases.Rules.QuestionRules;
 
 namespace Quizz.Domain.Core
@@ -26,7 +27,6 @@ namespace Quizz.Domain.Core
             builder.RegisterType<GetAllLevels>().As<IGetAllLevels>().InstancePerLifetimeScope();
             builder.RegisterType<UpdateLevel>().As<IUpdateLevel>().InstancePerLifetimeScope();
             builder.RegisterType<DeleteLevel>().As<IDeleteLevel>().InstancePerLifetimeScope();
-
             builder.RegisterType<CreateUser>().As<ICreateUser>().InstancePerLifetimeScope();
             builder.RegisterType<GetUserById>().As<IGetUserById>().InstancePerLifetimeScope();
             builder.RegisterType<GetAllUsers>().As<IGetAllUsers>().InstancePerLifetimeScope();
@@ -38,8 +38,18 @@ namespace Quizz.Domain.Core
             builder.RegisterType<GetAllQuestion>().As<IGetAllQuestion>().InstancePerLifetimeScope();
             builder.RegisterType<UpdateQuestion>().As<IUpdateQuestion>().InstancePerLifetimeScope();
             builder.RegisterType<DeleteQuestion>().As<IDeleteQuestion>().InstancePerLifetimeScope();
+            builder.RegisterType<CreateTechno>().As<ICreateTechno>().InstancePerLifetimeScope();
+            builder.RegisterType<GetAllTechnos>().As<IGetAllTechnos>().InstancePerLifetimeScope();
+            builder.RegisterType<GetTechnoById>().As<IGetTechnoById>().InstancePerLifetimeScope();
+            builder.RegisterType<DeleteTechno>().As<IDeleteTechno>().InstancePerLifetimeScope();
+            builder.RegisterType<UpdateTechno>().As<IUpdateTechno>().InstancePerLifetimeScope();
 
 
+            builder.RegisterType<CreateUser>().As<ICreateUser>().InstancePerLifetimeScope();
+            builder.RegisterType<GetUserById>().As<IGetUserById>().InstancePerLifetimeScope();
+            builder.RegisterType<GetAllUsers>().As<IGetAllUsers>().InstancePerLifetimeScope();
+            builder.RegisterType<UpdateUser>().As<IUpdateUser>().InstancePerLifetimeScope();
+            builder.RegisterType<DeleteUser>().As<IDeleteUser>().InstancePerLifetimeScope();
             builder.RegisterInstance(new JWTService(_jwtSecret)).AsSelf().SingleInstance();
 
             builder.Register(c => new LoginUser(

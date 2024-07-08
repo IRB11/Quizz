@@ -1,0 +1,105 @@
+﻿using AutoMapper;
+using Quizz.Domain.Core.Dto;
+using Quizz.Domain.Core.Entities;
+using Quizz.Domain.Core.Interfaces;
+using Quizz.Domain.Core.UseCases.Techno;
+using Quizz.Domain.Infrastructure.Data.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Quizz.Domain.Infrastructure.Data.Repositories
+{
+    public class TechnoRepository : ITechnoRepository
+    {
+        private readonly Context _context;
+        private readonly IMapper _mapper;
+
+        public TechnoRepository(Context context, IMapper mapper)
+        {
+            _context = context;
+            _mapper = mapper;
+        }
+        public async Task<TechnologiesResponse> Add(TechnologiesRequest request)
+        {
+            // Si Techno est null envoie une exception
+            if (request == null) throw new ArgumentNullException(nameof(request));
+
+            //mapping en EfTechno
+            var EfTechno = _mapper.Map<EFTechnology>(request);
+
+            // sauvegarde en base de donnée
+            _context.Add(EfTechno);
+            _context.SaveChanges();
+
+            //mapping inverse pour renvoie au front
+            TechnologiesResponse technoResponse = _mapper.Map<TechnologiesResponse>(EfTechno);
+            return technoResponse;
+        }
+
+        public async Task<bool> Delete(TechnologiesRequest techno)
+        {
+            if (_context.Technologies.Any(t => t.Id == techno.Id))
+            {
+                EFTechnology eFTechnology = _mapper.Map<EFTechnology>(techno);
+                _context.Remove(eFTechnology);
+                _context.SaveChanges();
+                return true;
+            }
+            else return false;
+        }
+
+        public Task<TechnologiesResponse> DeleteAsync(TechnologiesRequest techno)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<List<TechnologiesResponse>> GetAll()
+        {
+            var efTechnos = _context.Technologies.ToList();
+            var technos = _mapper.Map<List<TechnologiesResponse>>(efTechnos);
+            return technos;
+        }
+
+        public async Task<TechnologiesResponse> GetTechnoById(int id)
+        {
+            var efTechno = _context.Technologies.FirstOrDefault(t => t.Id == id);
+            var techno = _mapper.Map<TechnologiesResponse>(efTechno);
+            return techno;
+        }
+
+        public Task<bool> TechnoAlreadyExist(TechnologiesRequest technologiesRequest)
+        {
+            return Task.Run(() => _context.Technologies.Any(q => q.Name.Trim().ToLower() == technologiesRequest.Name.Trim().ToLower()));
+        }
+
+        public Task<bool> TechnoIsUsed(int technoId)
+        {
+            return Task.Run( () => _context.Questions.Any(q => q .TechnologyId == technoId) || _context.Quizzes.Any(qz => qz.TechnologyId == technoId));
+        }
+
+        public async Task<TechnologiesResponse> Update(TechnologiesRequest technoRequest)
+        {
+            EFTechnology eFTechnology = _mapper.Map<EFTechnology>(technoRequest);
+            TechnologiesResponse technologiesResponse = null;
+            try
+            {
+                await Task.Run(() =>
+                {
+                    _context.Technologies.Update(eFTechnology);
+                    _context.SaveChangesAsync();
+                });
+            }
+            catch (Exception ex)
+            {
+                technologiesResponse.Id = -1;
+                technologiesResponse.Name = $"An error occurred: {ex.Message}";
+            }
+            technologiesResponse = _mapper.Map<TechnologiesResponse>(eFTechnology);
+
+            return technologiesResponse;
+        }
+    }
+}
