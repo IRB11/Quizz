@@ -1,18 +1,11 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" href="../../src/styles.css" title="style.css">
-</head>
-<body>
-    <div class="container">
-        <h1>RecruteCode</h1>
-        <p>L'incontournable pour évaluer les compétences techniques des candidats et trouver les meilleurs talents pour vos projets IT </p>
-    </div>
+<body class="grow-[1]">
+
     <router-outlet></router-outlet>
-    
+    <!-- Utilisation de la classe container pour envelopper le composant ShortcutsComponent -->
+<div class="container mx-auto px-4">
+    <app-shortcuts></app-shortcuts>
+  </div>
+  
 </body>
 <app-footer></app-footer>
-</html>
+
