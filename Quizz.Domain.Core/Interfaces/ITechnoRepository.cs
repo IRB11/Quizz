@@ -13,9 +13,9 @@ namespace Quizz.Domain.Core.Interfaces
         Task<List<TechnologiesResponse>> GetAll();
         Task<TechnologiesResponse> Add(TechnologiesRequest request);
         Task<TechnologiesResponse> GetTechnoById(int id);
-        Task<TechnologiesResponse> GetByIdAsync(int id);
-        Task<TechnologiesResponse> DeleteAsync(TechnologiesRequest techno);
+        Task<TechnologiesResponse> Delete(TechnologiesRequest techno);
         Task<bool> TechnoIsUsed(int technoId);
         Task<TechnologiesResponse> Update(TechnologiesRequest technoRequest);
+        Task<bool> TechnoAlreadyExist(TechnologiesRequest technoRequest);
     }
 }
