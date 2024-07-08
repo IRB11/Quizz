@@ -39,12 +39,7 @@ namespace Quizz.Domain.Infrastructure.Data.Repositories
             return technoResponse;
         }
 
-        public Task DeleteAsync(object techno)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<TechnologiesResponse> DeleteAsync(TechnologiesRequest techno)
+        public Task<TechnologiesResponse> Delete(TechnologiesRequest techno)
         {
             throw new NotImplementedException();
         }
@@ -56,14 +51,16 @@ namespace Quizz.Domain.Infrastructure.Data.Repositories
             return technos;
         }
 
-        public Task<TechnologiesResponse> GetByIdAsync(int id)
+        public async Task<TechnologiesResponse> GetTechnoById(int id)
         {
-            throw new NotImplementedException();
+            var efTechno = _context.Technologies.FirstOrDefault(t => t.Id == id);
+            var techno = _mapper.Map<TechnologiesResponse>(efTechno);
+            return techno;
         }
 
-        public Task<TechnologiesResponse> GetTechnoById(int id)
+        public Task<bool> TechnoAlreadyExist(TechnologiesRequest technologiesRequest)
         {
-            throw new NotImplementedException();
+            return Task.Run(() => _context.Technologies.Any(q => q.Name.Trim().ToLower() == technologiesRequest.Name.Trim().ToLower()));
         }
 
         public Task<bool> TechnoIsUsed(int technoId)

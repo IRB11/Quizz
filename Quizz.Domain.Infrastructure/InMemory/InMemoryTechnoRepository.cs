@@ -53,22 +53,22 @@ namespace Quizz.Domain.Infrastructure.InMemory
             };
         }
 
-        public Task DeleteAsync(object techno)
+        public Task<TechnologiesResponse> Delete(TechnologiesRequest techno)
         {
             throw new NotImplementedException();
         }
 
-        public Task<TechnologiesResponse> DeleteAsync(TechnologiesRequest techno)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<TechnologiesResponse> GetByIdAsync(int id)
+        public Task<List<TechnologiesResponse>> GetAll()
         {
             throw new NotImplementedException();
         }
 
         public Task<TechnologiesResponse> GetTechnoById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> TechnoAlreadyExist(TechnologiesRequest technoRequest)
         {
             throw new NotImplementedException();
         }
@@ -79,16 +79,6 @@ namespace Quizz.Domain.Infrastructure.InMemory
         }
 
         public Task<TechnologiesResponse> Update(TechnologiesRequest technoRequest)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<List<TechnologiesResponse>> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<List<TechnologiesResponse>> ITechnoRepository.GetAll()
         {
             throw new NotImplementedException();
         }
