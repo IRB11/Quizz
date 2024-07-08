@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+import { NavbarComponent } from '../navbar/navbar.component';
+import { ShortcutsComponent } from '../shortcuts/shortcuts.component';  
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [NavbarComponent, ShortcutsComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
