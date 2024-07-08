@@ -37,12 +37,7 @@ namespace Quizz.Domain.Core.UseCases.Techno
             }
 
             await _technoRepository.Delete(technoRequest);
-
-            return new TechnologiesResponse
-            {
-                Id = -1,
-                Name = "Techno is currently in use and cannot be deleted."
-            };
+            return null;
         }
 
         private async Task<bool> CheckIfTechnoIsUsedAsync(int technoId)

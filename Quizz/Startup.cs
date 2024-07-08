@@ -141,27 +141,28 @@ namespace Quizz
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-            //if (env.IsDevelopment())
-            //{
+                //if (env.IsDevelopment())
+                //{
                 app.UseSwaggerUI(c =>
                 {
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Quizz API V1");
                     c.RoutePrefix = string.Empty;
                 });
                 app.UseDeveloperExceptionPage();
-            //}
+                //}
 
             app.UseRouting();
             app.UseCors("CorsPolicy");
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers(
-                
-                    );
-            });
+                app.UseEndpoints(endpoints =>
+                {
+                    endpoints.MapControllers(
+
+                        );
+                });
+            }
         }
     }
 }

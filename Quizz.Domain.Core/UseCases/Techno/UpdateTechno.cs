@@ -19,13 +19,13 @@ namespace Quizz.Domain.Core.UseCases.Techno
 
         public async Task<TechnologiesResponse> Handle(TechnologiesRequest technoRequest)
         {
-            if (CheckIfRulesAreNotOK()) return null;
+            if (await CheckIfRulesAreNotOKAsync()) return null;
 
             return await _technoRepository.Update(technoRequest);
 
-            bool CheckIfRulesAreNotOK()
+            async Task<bool> CheckIfRulesAreNotOKAsync()
             {
-                _technoRepository.TechnoAlreadyExist(technoRequest);
+                await _technoRepository.TechnoAlreadyExist(technoRequest);
                 return false;
             }
 

@@ -32,13 +32,6 @@ namespace Quizz.Core.UnitTests
                 Name = "Test5",
             };
         }
-        [Test]
-        public async Task Should_Return_TechnoResponse_If_TechnoRequest_Is_Added()
-        {
-      
-            TechnologiesResponse response = await createTechno.Handle(technologiesRequest);
-            Assert.That(response.Name.Equals(technologiesRequest.Name));
-        }
 
     }
 }

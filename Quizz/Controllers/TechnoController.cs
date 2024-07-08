@@ -17,9 +17,6 @@ namespace Quizz.Controllers
         private readonly IGetTechnoById _getTechnoById;
         private readonly IDeleteTechno _deleteTechno;
         private readonly IUpdateTechno _updateTechno;
-        private readonly ITechnoRepository _technoRepository;
-
-
 
         public TechnoController(
             ICreateTechno createTechno,
@@ -65,7 +62,7 @@ namespace Quizz.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] TechnologiesRequest request)
         {
-            // Implement the update logic here
+            return Ok(await _updateTechno.Handle(request));
         }
 
         // DELETE: api/techno/{id}

@@ -53,7 +53,7 @@ namespace Quizz.Domain.Infrastructure.InMemory
             };
         }
 
-        public Task<TechnologiesResponse> Delete(TechnologiesRequest techno)
+        public Task<bool> Delete(TechnologiesRequest techno)
         {
             throw new NotImplementedException();
         }
@@ -79,16 +79,6 @@ namespace Quizz.Domain.Infrastructure.InMemory
         }
 
         public Task<TechnologiesResponse> Update(TechnologiesRequest technoRequest)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<List<TechnologiesResponse>> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<List<TechnologiesResponse>> ITechnoRepository.GetAll()
         {
             throw new NotImplementedException();
         }

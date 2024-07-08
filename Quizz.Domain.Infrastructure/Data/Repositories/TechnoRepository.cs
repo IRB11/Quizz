@@ -39,9 +39,16 @@ namespace Quizz.Domain.Infrastructure.Data.Repositories
             return technoResponse;
         }
 
-        public Task<TechnologiesResponse> Delete(TechnologiesRequest techno)
+        public async Task<bool> Delete(TechnologiesRequest techno)
         {
-            throw new NotImplementedException();
+            if (_context.Technologies.Any(t => t.Id == techno.Id))
+            {
+                EFTechnology eFTechnology = _mapper.Map<EFTechnology>(techno);
+                _context.Remove(eFTechnology);
+                _context.SaveChanges();
+                return true;
+            }
+            else return false;
         }
 
         public Task<TechnologiesResponse> DeleteAsync(TechnologiesRequest techno)
@@ -73,9 +80,26 @@ namespace Quizz.Domain.Infrastructure.Data.Repositories
             return Task.Run( () => _context.Questions.Any(q => q .TechnologyId == technoId) || _context.Quizzes.Any(qz => qz.TechnologyId == technoId));
         }
 
-        public Task<TechnologiesResponse> Update(TechnologiesRequest technoRequest)
+        public async Task<TechnologiesResponse> Update(TechnologiesRequest technoRequest)
         {
-            throw new NotImplementedException();
+            EFTechnology eFTechnology = _mapper.Map<EFTechnology>(technoRequest);
+            TechnologiesResponse technologiesResponse = null;
+            try
+            {
+                await Task.Run(() =>
+                {
+                    _context.Technologies.Update(eFTechnology);
+                    _context.SaveChangesAsync();
+                });
+            }
+            catch (Exception ex)
+            {
+                technologiesResponse.Id = -1;
+                technologiesResponse.Name = $"An error occurred: {ex.Message}";
+            }
+            technologiesResponse = _mapper.Map<TechnologiesResponse>(eFTechnology);
+
+            return technologiesResponse;
         }
     }
 }
