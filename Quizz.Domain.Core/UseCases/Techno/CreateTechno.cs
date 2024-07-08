@@ -17,10 +17,14 @@ namespace Quizz.Domain.Core.UseCases.Techno
         }
         public async Task<TechnologiesResponse> Handle(TechnologiesRequest technologiesRequest)
         {
+            bool TechnoExist = await technoRepository.TechnoAlreadyExist(technologiesRequest);
 
-            TechnologiesResponse response = await technoRepository.Add(technologiesRequest);
-
-            return response;
+            if (!TechnoExist)
+            {
+                TechnologiesResponse response = await technoRepository.Add(technologiesRequest);
+                return response;
+            }
+            else return null;
         }
     }
 }
