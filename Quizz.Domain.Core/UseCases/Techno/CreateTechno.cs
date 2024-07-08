@@ -21,9 +21,10 @@ namespace Quizz.Domain.Core.UseCases.Techno
 
             if (!TechnoExist)
             {
-                TechnologiesResponse response = await technoRepository.Add(technologiesRequest);
-                return response;
-            }
+            TechnologiesResponse response = await technoRepository.Add(technologiesRequest);
+
+            return response;
+        }
             else return null;
         }
     }

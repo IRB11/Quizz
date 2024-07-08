@@ -14,6 +14,7 @@ namespace Quizz.Domain.Core.UseCases.Techno
         public UpdateTechno(ITechnoRepository technoRepository)
         {
             _technoRepository = technoRepository;
+          //  _rules = rules;
         }
 
         public async Task<TechnologiesResponse> Handle(TechnologiesRequest technoRequest)
@@ -27,6 +28,11 @@ namespace Quizz.Domain.Core.UseCases.Techno
                 _technoRepository.TechnoAlreadyExist(technoRequest);
                 return false;
             }
+
+            //bool CheckIfRuleNotRespected(TechnologiesRequest technoRequest)
+            //{
+            //   // return _rules.Any(r => r.CheckRule(technoRequest).ConfigureAwait(false).GetAwaiter().GetResult());
+            //}
         }
     }
 }

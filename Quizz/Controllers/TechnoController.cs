@@ -13,6 +13,7 @@ namespace Quizz.Controllers
     {
         private readonly ICreateTechno _createTechno;
         private readonly IGetAllTechnos _getAllTechnos;
+        private readonly ITechnoRepository _technoRepository;
         private readonly IGetTechnoById _getTechnoById;
         private readonly IDeleteTechno _deleteTechno;
         private readonly IUpdateTechno _updateTechno;
@@ -40,6 +41,7 @@ namespace Quizz.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
+            //var technos = await _technoRepository.GetAll();
             return Ok(await _getAllTechnos.Handle());
         }
 
@@ -64,7 +66,6 @@ namespace Quizz.Controllers
         public async Task<IActionResult> Put(int id, [FromBody] TechnologiesRequest request)
         {
             // Implement the update logic here
-            return Ok(await _updateTechno.Handle(request));
         }
 
         // DELETE: api/techno/{id}

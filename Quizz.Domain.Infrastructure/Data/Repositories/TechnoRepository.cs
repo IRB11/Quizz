@@ -44,6 +44,11 @@ namespace Quizz.Domain.Infrastructure.Data.Repositories
             throw new NotImplementedException();
         }
 
+        public Task<TechnologiesResponse> DeleteAsync(TechnologiesRequest techno)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<List<TechnologiesResponse>> GetAll()
         {
             var efTechnos = _context.Technologies.ToList();

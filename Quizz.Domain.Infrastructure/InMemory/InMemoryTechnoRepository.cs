@@ -82,5 +82,15 @@ namespace Quizz.Domain.Infrastructure.InMemory
         {
             throw new NotImplementedException();
         }
+
+        Task<List<TechnologiesResponse>> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<List<TechnologiesResponse>> ITechnoRepository.GetAll()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
