@@ -5,7 +5,7 @@
 body {
     margin: 0;
     /*display: flex;
-    justify-content: center;
+    justify-content: center;    
     align-items: center;*/
     background: linear-gradient(45deg, rgb(35, 44, 212), rgb(203, 200, 231));
     background-size: 400% 400%;

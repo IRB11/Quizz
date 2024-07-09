@@ -25,10 +25,10 @@ interface Shortcut {
 })
 export class ShortcutsComponent {
   shortcuts: Shortcut[] = [
-    { name: 'Gestion Agents', link: '/Agent', iconUrl: '../../assets/img/iconagentmanager.png', description: 'Gérer les agents'},
+    { name: 'Gestion Agents', link: '/Agent', iconUrl: '../../assets/img/iconresults.png', description: 'Gérer les agents'},
     { name: 'Gestion Candidats', link: '/Candidats', iconUrl: '../../assets/img/iconcandidats.png', description: 'Gérer les candidats'},
-    { name: 'Quizz Bank', link: '/quizz', iconUrl: '../../assets/img/iconquizzbank.png', description: 'Gérer question/réponses' },
-    { name: 'Gestion Quizz', link: '/quizz', iconUrl: '../../assets/img/icongenererquizz.png', description: 'Gérer quizz' },
+    { name: 'Quizz Bank', link: '/quizzBank', iconUrl: '../../assets/img/iconquizzbank.png', description: 'Gérer question/réponses' },
+    { name: 'Gestion Quizz', link: '/quizz', iconUrl: '../../assets/img/icongenererquizz.png', description: 'Générer quizz' },
     { name: 'Resultats', link: '/results', iconUrl: '../../assets/img/iconresults.png', description: 'Générer résultats' },
     { name: 'Planning', link: '/planning', iconUrl: '../../assets/img/iconplanning.png', description: 'Agenda' }
   ];
