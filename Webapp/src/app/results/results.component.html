@@ -1,0 +1,22 @@
+<div class="px-4 py-12 mx-auto max-w-7xl sm:px-6 md:px-12 lg:px-24 lg:py-24">
+    <div class="justify-center mx-auto text-left align-bottom transition-all transform rounded-lg sm:align-middle sm:max-w-2xl sm:w-full">
+      
+      <div class="grid flex-wrap items-center justify-center grid-cols-1 mx-auto shadow-xl lg:grid-cols-1 rounded-xl">
+        <div class="w-full px-6 py-3">
+          <p class="text-2xl font-bold text-white mb-2">Générer les résultats</p>
+  
+          <div class="mb-4">
+            <label for="candidateNameOrUrl" class="block text-sm font-medium text-gray-300">Candidat ou URL du Quizz</label>
+            <input [(ngModel)]="candidateNameOrUrl" id="candidateNameOrUrl" type="text" placeholder="Entrez le nom ou l'URL du quizz"
+                   class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-700 text-gray-700" required>
+          </div>
+  
+          <div class="flex justify-center">
+            <button (click)="loadPDF()" class="px-4 py-2 bg-blue-500 text-white rounded-md animate-pulse hover:bg-blue-900 ml-2">Télécharger le PDF</button>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
