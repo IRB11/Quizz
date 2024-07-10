@@ -1,0 +1,25 @@
+<div class="container mx-auto p-6">      
+  <div class="lg:col-span-3 bg-white p-6 rounded-lg shadow-lg">
+    <h2 class="text-2xl font-bold mb-4">Utilisateurs</h2>
+
+    <li class="flex justify-between items-center p-4 bg-gray-100 rounded-lg">
+      @for (item of Users$ | async; track $index) {
+        <ul> {{ item.name }} / {{ item.mail }}</ul>
+      }
+    </li>
+
+    <div>
+      <label for="id"> Id </label> <br> 
+      <input type="number" id="id" [(ngModel)]="id"/> <br>
+      <label for="name"> Name </label> <br> 
+      <input type="text" id="name" [(ngModel)]="name"/> <br>
+      <label for="mail"> Mail </label> <br> 
+      <input type="mail" id="mail" [(ngModel)]="mail"/> <br>
+
+      <button style="background-color: greenyellow;" (click)="add()"> Ajouter </button>
+      <button style="background-color: salmon;" (click)="update()"> Update </button>
+      <button style="background-color: red;" (click)="delete()"> Delete </button>
+      <button style="background-color: aqua;" (click)="getById()"> GetById </button>
+    </div>
+  </div>
+</div>

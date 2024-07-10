@@ -1,0 +1,11 @@
+<ng-container *ngIf="type === 'read'">
+  <p>liste</p>
+</ng-container>
+<ng-container *ngIf="type === 'create'">
+    <div class="grid gap-4">
+      <input *ngFor="let field of fields" [name]="field">
+    </div>
+</ng-container>
+<ng-container *ngIf="type === 'update'">
+  <p>veuillez a mettre jour</p>
+</ng-container>
