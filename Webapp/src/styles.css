@@ -20,9 +20,9 @@ body {
 
 .container {
     text-align: left;
-    color: white;
+    color: rgb(114, 114, 114);
     font-family: Arial, sans-serif;
-    max-width: 60%;
+    max-width: 80%;
 }
 
 h1 {

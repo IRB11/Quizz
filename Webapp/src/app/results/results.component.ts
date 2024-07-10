@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import {jsPDF} from 'jspdf';
+// import {jsPDF} from 'jspdf';
 import 'jspdf-autotable';
 
 

@@ -1,6 +1,11 @@
 import { Routes, RouterModule } from '@angular/router';
 
+
 export const routes: Routes = [
+    { path: '', pathMatch: 'full', redirectTo: 'home' },
+    { path: 'admin', loadComponent: () => import('../app/admin/admin.component').then(m => m.AdminComponent)},
+    { path: 'agents', loadComponent: () => import('./agent-crud/agent-crud.component').then(m => m.AgentCrudComponent)},
+    { path: 'quiz', loadComponent: () => import('../app/quiz/quiz.component').then(m => m.QuizComponent)},
     { path: '', pathMatch: 'full', redirectTo: 'login' },
     { path: 'login', loadComponent: () => import('../app/login-page/login-page.component').then(m => m.LoginPageComponent) },
     { path: 'home', loadComponent : () => import('../app/home/home.component').then(m => m.HomeComponent) },

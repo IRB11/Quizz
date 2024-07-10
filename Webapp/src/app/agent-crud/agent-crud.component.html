@@ -1,0 +1,42 @@
+<div class="container mx-auto p-6">      
+  <div class="lg:col-span-3 bg-white p-6 rounded-lg shadow-lg">
+    <h2 class="text-2xl font-bold mb-4">Gestion des recruteurs</h2>
+    <div *ngIf="editingUser" class="my-1">
+      <h3>Modifier recruteur</h3>
+      <ul class="space-y-4">
+        <li class="flex justify-between items-center p-4 bg-gray-100 rounded-lg">
+          <input [(ngModel)]="editingUser.firstName" placeholder="First name" class="px-1">
+          <input [(ngModel)]="editingUser.lastName" placeholder="Last name" class="px-1">
+          <input [(ngModel)]="editingUser.email" placeholder="Email" class="px-1">
+          <div class="space-x-2">
+            <button (click)="cancelUserChanges()" class="text-orange-600">Annuler</button>
+          </div>
+        </li>
+      </ul>
+      <button (click)="saveUserChanges()" class="mt-4 w-full bg-blue-800 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Mettre à jour</button>
+    </div>
+  
+    <div *ngIf="!editingUser" class="my-1">
+      <h3>Ajouter recruteur</h3>
+      <ul class="space-y-4">
+        <li class="flex justify-between items-center p-4 bg-gray-100 rounded-lg">
+          <input [(ngModel)]="newUser.firstName" placeholder="First name" class="px-1">
+          <input [(ngModel)]="newUser.lastName" placeholder="Last name" class="px-1">
+          <input [(ngModel)]="newUser.email" placeholder="Email" class="px-1">
+        </li>
+      </ul>
+      <button (click)="addUser()" [disabled]="!newUser.firstName || !newUser.lastName || !newUser.email"
+       class="mt-4 w-full bg-blue-800 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Ajouter recruteur</button>
+    </div>
+
+    <ul class="space-y-4">
+      <li *ngFor="let user of users" class="flex justify-between items-center p-4 bg-gray-100 rounded-lg">
+        <span>{{ user.firstName }} {{ user.lastName }} ({{ user.email }})</span>
+        <div class="space-x-2">
+          <button (click)="updateUser(user)" class="text-blue-800">Modifier</button>
+          <button (click)="deleteUser(user.id)" class="text-orange-600">Supprimer</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
