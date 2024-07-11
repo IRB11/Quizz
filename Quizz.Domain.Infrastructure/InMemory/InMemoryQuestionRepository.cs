@@ -7,11 +7,13 @@ namespace Quizz.Domain.Infrastructure.InMemory
     public class InMemoryQuestionRepository : IQuestionRepository
     {
         private readonly List<QuestionRequest> _questions;
+        private List<QuestionResponse> _questionsQuizz;
         private readonly List<Quizz_QuestionRequest> _quizz_questions;
 
         public InMemoryQuestionRepository()
         {
             _questions = GetInitialQuestions();
+            _questionsQuizz = MockData.Questions.ToList();
             _quizz_questions = GetInitialQuizzQuestions();
         }
 
@@ -301,6 +303,37 @@ namespace Quizz.Domain.Infrastructure.InMemory
                 Content = r.Content,
                 isCorrect = r.isCorrect
             }).ToList();
+        }
+
+        public Task<List<QuestionResponse>> GetQuestionsByLevelAndTechnology(int levelId, int technologyId, int count)
+        {
+            var questions = _questionsQuizz
+            .Where(q => q.Level.Id == levelId && q.Technology.Id == technologyId)
+            .OrderBy(q => Guid.NewGuid())
+            .Take(count)
+            .ToList();
+
+            return Task.FromResult(questions);
+        }
+
+        public async Task<List<QuestionResponse>> GetByListIds(List<Quizz_QuestionResponse> quizzQuestionsIdsByQuizzId)
+        {
+            List<QuestionResponse> listquestions = new();
+            foreach (var item in quizzQuestionsIdsByQuizzId)
+            {               
+                listquestions.Add(MockData.Questions.Find(q => q.Id == item.QuestionId));
+            }
+            return listquestions;           
+        }
+
+        public Task<List<QuestionResponse>> GetListQuestionsByQuizzId(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> SaveCandidateResponseToQuizz(CandidateResponse_Request candidateResponse_Request)
+        {
+            throw new NotImplementedException();
         }
     }
 }

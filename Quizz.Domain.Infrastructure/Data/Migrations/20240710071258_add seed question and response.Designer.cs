@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Quizz.Domain.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using Quizz.Domain.Infrastructure.Data;
 namespace Quizz.Domain.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20240710071258_add seed question and response")]
+    partial class addseedquestionandresponse
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -113,9 +116,6 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("QuizId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ResponseId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -1690,7 +1690,7 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
                             CandidateId = 1,
                             Comment = "Sample comment 1",
                             Completion = 0.5m,
-                            CompletionTime = new DateTime(2024, 7, 11, 8, 7, 33, 491, DateTimeKind.Utc).AddTicks(7386),
+                            CompletionTime = new DateTime(2024, 7, 10, 7, 12, 58, 148, DateTimeKind.Utc).AddTicks(4719),
                             IsValid = true,
                             NumberOfQuestion = 10,
                             QuizzNumber = "1",
@@ -1707,7 +1707,7 @@ namespace Quizz.Domain.Infrastructure.Data.Migrations
                             CandidateId = 2,
                             Comment = "Sample comment 2",
                             Completion = 0.5m,
-                            CompletionTime = new DateTime(2024, 7, 11, 8, 7, 33, 491, DateTimeKind.Utc).AddTicks(7390),
+                            CompletionTime = new DateTime(2024, 7, 10, 7, 12, 58, 148, DateTimeKind.Utc).AddTicks(4723),
                             IsValid = false,
                             NumberOfQuestion = 15,
                             QuizzNumber = "2",

@@ -18,7 +18,7 @@ namespace Quizz.Domain.Infrastructure.Data.Config
 
             builder.Property(e => e.Content)
                   .IsRequired()
-                  .HasMaxLength(150);
+                  .HasMaxLength(250);
 
             builder.Property(e => e.IsCorrect)
                   .IsRequired();
