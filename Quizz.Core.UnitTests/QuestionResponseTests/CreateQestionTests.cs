@@ -32,7 +32,7 @@ namespace Quizz.Core.UnitTests.QuestionResponseTests
         {
             _rules = new List<ICheckQuestionRule<QuestionRequest>>();
             _rules.Add(new CheckIfQuestionExists(_questionRepository));
-            _rules.Add(new CheckIfQuestionIsActive());
+
             _rules.Add(new CheckIfAtLeastOneResponseIsCorrect());
             _rules.Add(new CheckIfOpenQuestionHasNoResponse());
             _rules.Add(new CheckIfMultipleOrSingleChoiceQuestionHasTwoOrFourResponses());
