@@ -31,6 +31,20 @@ namespace Quizz.Domain.Infrastructure.Data.Mapping
 
             CreateMap<EFLevel, LevelResponse>().ReverseMap();
 
+            CreateMap<EFQuiz, QuizRequest>().ReverseMap();
+            CreateMap<EFQuiz, QuizResponse>().ReverseMap();
+
+
+            CreateMap<Quizz_QuestionResponse, EFQuiz_Question>()
+                .ForMember(dest => dest.QuizId, opt => opt.MapFrom(src => src.QuizId))
+                .ForMember(dest => dest.QuestionId, opt => opt.MapFrom(src => src.QuestionId)).ReverseMap();
+
+            CreateMap<Quizz_QuestionRequest, EFQuiz_Question>()
+                .ForMember(dest => dest.QuizId, opt => opt.MapFrom(src => src.QuizId))
+                .ForMember(dest => dest.QuestionId, opt => opt.MapFrom(src => src.QuestionId)).ReverseMap();
+
+
+
             CreateMap<EFQuestion, QuestionRequest>()
                 .ForMember(dest => dest.Response, opt => opt.MapFrom(src => src.Responses))
                 .ReverseMap()
@@ -43,6 +57,7 @@ namespace Quizz.Domain.Infrastructure.Data.Mapping
                 .ForMember(dest => dest.Response, opt => opt.MapFrom(src => src.Responses))
                 .ReverseMap()
                 .ForMember(dest => dest.Id, opt => opt.Ignore()); // Ignore l'ID lors du mappage inverse
+            CreateMap<EFCandidateResponse, CandidateResponse_Request>().ReverseMap();
 
             // Configuration pour EFTechnology vers TechnologiesRequest et vice versa
             CreateMap<EFTechnology, TechnologiesRequest>().ReverseMap()
@@ -62,9 +77,6 @@ namespace Quizz.Domain.Infrastructure.Data.Mapping
             // Configuration pour EFResponse vers Response_Response et vice versa
             CreateMap<EFResponse, Response_Response>().ReverseMap()
                 .ForMember(dest => dest.Id, opt => opt.Ignore());
-
-
-
         }
     }
 }
