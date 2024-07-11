@@ -8,8 +8,6 @@ namespace Quizz.Domain.Core.Entities
 {
     public class Quiz_Question
     {
-        public int Id { get; set; }
-
         public int QuizId { get; set; }
         public Quiz Quiz { get; set; }
         public int QuestionId { get; set; }
