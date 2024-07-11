@@ -2,6 +2,7 @@
 using global::Quizz.Domain.Core.Dto;
 using global::Quizz.Domain.Core.Interfaces.Questions;
 using Microsoft.AspNetCore.Mvc;
+using Quizz.Domain.Infrastructure.Data.Repositories;
 
 namespace Quizz.Controllers
 {
@@ -14,13 +15,17 @@ namespace Quizz.Controllers
         private readonly IGetAllQuestion getAllQuestion;
         private readonly IUpdateQuestion updateQuestion;
         private readonly IDeleteQuestion deleteQuestion;
+        private readonly IGetListQuestionByQuizzId getListQuestionByQuizzId;
+        private readonly ISaveCandidateResponse saveCandidateResponse;
 
         public QuestionController(
             ICreateQuestion createQuestion, 
             IGetQuestionById getQuestionById, 
             IGetAllQuestion getAllQuestion, 
             IUpdateQuestion updateQuestion, 
-            IDeleteQuestion deleteQuestion
+            IDeleteQuestion deleteQuestion,
+            IGetListQuestionByQuizzId getListQuestionByQuizzId,
+            ISaveCandidateResponse saveCandidateResponse 
         )
         {
             this.createQuestion = createQuestion;
@@ -28,6 +33,8 @@ namespace Quizz.Controllers
             this.getAllQuestion = getAllQuestion;
             this.updateQuestion = updateQuestion;
             this.deleteQuestion = deleteQuestion;
+            this.getListQuestionByQuizzId = getListQuestionByQuizzId;
+            this.saveCandidateResponse = saveCandidateResponse;
         }
 
         [HttpGet]
@@ -42,11 +49,22 @@ namespace Quizz.Controllers
             return Ok(await getQuestionById.Handle(id));
         }
 
+        [HttpGet("questions/{id}")]
+        public async Task<IActionResult> GetByListIds(int id)
+        {
+            return Ok(await getListQuestionByQuizzId.Handle(id));
+        }
 
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] QuestionRequest questionRequest)
         {
             return Ok(await createQuestion.Handle(questionRequest));
+        }
+
+        [HttpPost("/Save")]
+        public async Task<IActionResult> Post([FromBody] CandidateResponse_Request candidateResponse_Request)
+        {
+            return Ok(await saveCandidateResponse.Handle(candidateResponse_Request));
         }
 
         [HttpPut("{id}")]
