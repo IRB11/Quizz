@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Quizz.Domain.Core.Dto;
 using Quizz.Domain.Core.Interfaces.Questions;
 using Quizz.Domain.Infrastructure.Data.Entities;
+using Quizz.Domain.Infrastructure.InMemory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -63,6 +64,46 @@ namespace Quizz.Domain.Infrastructure.Data.Repositories
             return questionResponse;
         }
 
+        public async Task<List<QuestionResponse>> GetByListIds(List<Quizz_QuestionResponse> quizzQuestionsIdsByQuizzId)
+        {
+            List<QuestionResponse> listquestions = new();
+            foreach (var item in quizzQuestionsIdsByQuizzId)
+            {
+                var efQuestion = context.Questions.FirstOrDefault(q => q.Id == item.QuestionId);
+                var question = mapper.Map<QuestionResponse>(efQuestion);
+                listquestions.Add(question);
+            }
+            return listquestions;
+        }
+
+        public async Task<List<QuestionResponse>> GetListQuestionsByQuizzId(int quizzId)
+        {
+            using (context)
+            {
+                var questions = await context.Quizzes
+                    .Where(q => q.Id == quizzId)
+                    .SelectMany(q => q.Quiz_Questions)
+                    .Select(qq => qq.Question)
+                    .ToListAsync();
+                return mapper.Map < List<QuestionResponse>> (questions); ;
+            }
+        }
+
+        public Task<List<QuestionResponse>> GetQuestionsByLevelAndTechnology(int levelId, int technologyId, int count)
+        {
+            var efQuestions = context.Questions
+                            .Where(q => q.LevelId == levelId && q.TechnologyId == technologyId)
+            .OrderBy(q => Guid.NewGuid())
+            .Take(count)
+            .ToList();
+            return Task.FromResult(mapper.Map<List<QuestionResponse>>(efQuestions));
+        }
+
+        public Task<List<QuestionResponse>> GetRandomQuestions(int levelId, int technologyId, int numberOfQuestions)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<bool> QuestionExists(string content, int? excludedQuestionId)
         {
             if (excludedQuestionId.HasValue)
@@ -75,9 +116,22 @@ namespace Quizz.Domain.Infrastructure.Data.Repositories
                 .AnyAsync(e => e.Content.Trim().ToLower() == content.Trim().ToLower());
         }
 
-        public Task<bool> QuestionExists(long? id)
+        public Task<bool> SaveCandidateResponseToQuizz(CandidateResponse_Request candidateResponse_Request)
         {
-            throw new NotImplementedException();
+            var eFCandidateResponse = mapper.Map<EFCandidateResponse>(candidateResponse_Request);
+
+            try
+            {
+                context.CandidateResponses.Add(eFCandidateResponse);
+                context.SaveChanges();
+                return Task.FromResult(true);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
         }
 
         public async Task<QuestionResponse> Update(QuestionRequest request)
