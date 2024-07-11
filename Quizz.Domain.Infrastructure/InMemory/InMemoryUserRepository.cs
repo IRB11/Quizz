@@ -431,37 +431,18 @@ namespace Quizz.Domain.Infrastructure.InMemory
             {
                 new QuizRequest
                 {
-                     Agent = new User()
-                    {
-                        Id=1,
-                    },
-                    Admin = new User()
-                    {
-                        Id=6,
-                    },
+                   AgentId = 1,
+                   AdminId = 6
                 },
                 new QuizRequest
                 {
-                    Admin = new User()
-                    {
-                        Id=5,
-                    },
-                    Agent = new User()
-                    {
-                        Id=2,
-                    }
+                   AgentId = 5,
+                   AdminId = 2
                 },
                 new QuizRequest
                 {
-                    Agent = new User()
-                    {
-                        Id=1,
-
-                    },
-                    Admin = new User()
-                    {
-                        Id=4,
-                    },
+                   AgentId = 1,
+                   AdminId = 4
 
                 }
             };
