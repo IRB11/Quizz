@@ -14,8 +14,9 @@ namespace Quizz.Domain.Core.Dto
         public bool Is_Skipped { get; set; }
         public string Open_Response_Text { get; set; }
         public string Comment { get; set; }
-        public Candidate Candidate { get; set; }
-        public Response Response { get; set; }
-        public Quiz_Question Quiz_Question { get; set; }
+        public int ResponseId { get; set; }
+        public int QuizId { get; set; }
+        public int QuestionId { get; set; }
+
     }
 }

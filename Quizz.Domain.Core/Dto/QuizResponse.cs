@@ -18,9 +18,14 @@ namespace Quizz.Domain.Core.Dto
         public string QuizzNumber { get; set; }
         public decimal Result { get; set; }
         public string URL { get; set; }
-        public User Agent { get; set; }
-        public User Admin { get; set; }
-        public Candidate Candidate { get; set; }
+        
+        public UserResponse Agent { get; set; }
+        public UserResponse Admin { get; set; }
+        public CandidateResponse Candidate { get; set; }
+        public int StatusId { get; set; }
         public Status Status { get; set; }
+        public LevelResponse Level { get; set; }
+        public TechnologiesResponse Technologies { get; set; }
+
     }
 }
