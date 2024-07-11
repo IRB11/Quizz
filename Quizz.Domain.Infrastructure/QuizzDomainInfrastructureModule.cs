@@ -5,6 +5,7 @@ using Quizz.Domain.Infrastructure.Date;
 using Quizz.Domain.Infrastructure.Data.Repositories;
 using Quizz.Domain.Infrastructure.Utils;
 using Quizz.Domain.Core.Interfaces.Questions;
+using Quizz.Domain.Core.Interfaces.Quizz;
 
 namespace Quizz.Domain.Infrastructure
 {
@@ -15,6 +16,7 @@ namespace Quizz.Domain.Infrastructure
             builder.RegisterType<LevelRepository>().As<ILevelRepository>();
             builder.RegisterType<UserRepository>().As<IUserRepository>();
             builder.RegisterType<QuestionRepository>().As<IQuestionRepository>();
+            builder.RegisterType<QuizzRepository>().As<IQuizzRepository>();
             builder.RegisterType<HashingPassword>().As<IHashingPassword>();
             builder.RegisterType<TechnoRepository>().As<ITechnoRepository>();
             builder.RegisterType<DateTimeService>().As<IDateTimeService>();
