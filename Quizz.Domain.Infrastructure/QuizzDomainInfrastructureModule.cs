@@ -21,6 +21,7 @@ namespace Quizz.Domain.Infrastructure
             builder.RegisterType<TechnoRepository>().As<ITechnoRepository>();
             builder.RegisterType<DateTimeService>().As<IDateTimeService>();
             builder.RegisterType<CalendarService>().As<ICalendarService>();
+            builder.RegisterType<CandidateRepository>().As<ICandidateRepository>();
         }
     }
 }
