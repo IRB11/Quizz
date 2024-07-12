@@ -217,7 +217,7 @@ namespace Quizz.Domain.Infrastructure.InMemory
                 || technologiesRequests.Any(t => t.AdminId == userRequest.Id)
                 || quizRequests.Any(q => q.AdminId == userRequest.Id)
                 || quizRequests.Any(q => q.AgentId == userRequest.Id)
-                || candidateRequests.Any(c => c.Agent.Id == userRequest.Id)
+                || candidateRequests.Any(c => c.AgentId == userRequest.Id)
                 )
             );
         }
@@ -403,24 +403,16 @@ namespace Quizz.Domain.Infrastructure.InMemory
             {
                 new CandidateRequest
                 {
-                    Agent = new User()
-                    {
-                        Id=1,
-                    }
+                    
+                    AgentId = 1,
                 },
                 new CandidateRequest
                 {
-                    Agent = new User()
-                    {
-                        Id=2,
-                    }
+                    AgentId = 2,
                 },
                 new CandidateRequest
                 {
-                    Agent = new User()
-                    {
-                        Id=1,
-                    },
+                   AgentId = 3,
                 }
             };
         }
