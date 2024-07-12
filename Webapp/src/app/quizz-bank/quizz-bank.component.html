@@ -1,0 +1,56 @@
+<!-- quiz-bank.component.html -->
+<div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 md:px-12 lg:px-24 lg:py-8">
+  <div class="justify-center mx-auto text-left align-bottom transition-all transform rounded-lg sm:align-middle sm:max-w-2xl sm:w-full">
+      
+      <div class="grid flex-wrap items-center justify-center grid-cols-1 mx-auto shadow-xl lg:grid-cols-1 rounded-xl">
+      <div class="w-full px-6 py-3">
+    <h1 class="text-3xl text-white font-bold mb-6 text-center">Vos Contenus</h1>
+
+    <div class="grid grid-cols-1 gap-4 mb-6 sm:grid-cols-2">
+      <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded mr-2" (click)="getPastQuizzes()">Liste des Quizzes générés</button>
+      <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded" (click)="getQuestions()">Accéder à la base des Questions</button>
+    </div>
+
+    <div class="mb-6">
+      <ul class="shadow rounded-lg divide-y divide-gray-200">
+        <li *ngFor="let question of questions" class="p-4 flex justify-between items-center bg-gray-700 text-white">
+          <span>{{ question.text }}</span>
+          <div>
+            <button class="bg-yellow-500 hover:bg-yellow-600 text-white px-2 py-1 rounded mr-2" (click)="editQuestion(question)">Modifier</button>
+            <button class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded" (click)="deleteQuestion(question.id)">Supprimer</button>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <h2 class="text-xl font-semibold mb-4 text-white text-center">Actions Rapides</h2>
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 mb-6">
+      <button class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded mr-2" (click)="addQuestion()">Ajouter une Question</button>
+      <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded" (click)="editQuestionModalOpen = true">Ouvrir le Modale de Modification</button>
+    </div>
+
+    <!-- Modal for editing a question -->
+    <div class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50" *ngIf="editQuestionModalOpen">
+      <div class="bg-gray-700 rounded-lg p-6 max-w-md w-full">
+        <h3 class="text-lg font-semibold mb-4 text-white">Modifier la Question</h3>
+        <form (submit)="updateQuestion()">
+          <label class="block mb-2 text-white">
+            Texte de la Question:
+            <input type="text" class="w-full border-gray-300 rounded mt-1 p-2" [(ngModel)]="selectedQuestion.text" name="text" required>
+          </label>
+          <div *ngFor="let answer of selectedQuestion.answers; let i = index" class="flex items-center space-x-2 mb-2">
+            <input type="text" class="w-full border-gray-300 rounded p-2" [(ngModel)]="selectedQuestion.answers[i].text" name="answer-{{i}}" required>
+            <label class="flex items-center space-x-2 text-white">
+              <input type="checkbox" [(ngModel)]="selectedQuestion.answers[i].isCorrect" name="isCorrect-{{i}}">
+              <span>Correct</span>
+            </label>
+          </div>
+          <div class="flex justify-end mt-4">
+            <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">Sauvegarder</button>
+            <button type="button" class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded ml-2" (click)="editQuestionModalOpen = false">Annuler</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
