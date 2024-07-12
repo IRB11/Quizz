@@ -29,6 +29,11 @@ namespace Quizz.Domain.Infrastructure.Data.Mapping
             CreateMap<EFRole, RoleRequest>().ReverseMap();
             CreateMap<EFRole, RoleResponse>().ReverseMap();
 
+
+            CreateMap<EFCandidate, CandidateRequest>().ReverseMap();
+            CreateMap<EFCandidate, CandidateResponse>().ReverseMap();
+
+
             CreateMap<EFLevel, LevelResponse>().ReverseMap();
 
             CreateMap<EFQuiz, QuizRequest>().ReverseMap();
