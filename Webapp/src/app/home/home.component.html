@@ -1,27 +1,51 @@
-
-<section>
-    <div class="px-4 py-12 mx-auto max-w-7xl sm:px-6 md:px-12 lg:px-24 lg:py-24">
-      <div class="flex flex-wrap items-center mx-auto max-w-7xl">
-        <div class="w-full lg:max-w-lg lg:w-1/2 rounded-xl">
-          <div>
-            <div class="relative w-full max-w-lg">
-              <div class="absolute top-0 rounded-full bg-violet-300 -left-4 w-72 h-72 mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
-              <div class="absolute rounded-full bg-fuchsia-300 -bottom-24 right-20 w-72 h-72 mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
-              <div class="relative">
-                <img class="object-cover object-center mx-auto rounded-lg shadow-2xl w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 xl:w-56 xl:h-56" alt="hero" src="/assets/img/logo.png">
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="flex flex-col items-start mt-12 mb-10 text-left lg:flex-grow lg:w-1/2 lg:pl-6 xl:pl-24 md:mb-0 xl:mt-0">
-          <h1 class="mb-6 text-4xl font-bold leading-none text-white md:text-7xl lg:text-5xl">Bienvenue à ton Dashboard</h1>         
+<section class="px-4 py-8 mx-auto max-w-8xl sm:px-6 md:px-12 lg:px-16 lg:py-8">
+  <div class="flex flex-col lg:flex-row items-center mx-auto max-w-7xl">
+    <!-- Logo Section -->
+    <div class="w-full lg:max-w-lg mb-4 lg:mb-0 flex justify-center lg:justify-start">
+      <div class="relative w-full ">
+        <div class="absolute top-0 rounded-full bg-violet-300 -left-4 lg:-left-8 w-24 lg:w-40 h-24 lg:h-40 mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+        <div class="absolute rounded-full bg-fuchsia-300 -bottom-12 lg:-bottom-20 right-4 lg:right-16 w-24 lg:w-40 h-24 lg:h-40 mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+        <div class="relative">
+          <img class="object-cover object-center mx-auto rounded-lg shadow-2xl w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 xl:w-56 xl:h-56" alt="hero" src="/assets/img/logo.png">
         </div>
       </div>
     </div>
-  </section> 
-    <div class="flex justify-center items-center">
-        <app-shortcuts></app-shortcuts>
+    <!-- Text Section -->
+    <div class="flex flex-col items-start lg:flex-grow lg:w-2/3 lg:pl-6 xl:pl-12">
+      <h1 class="mb-2 text-3xl lg:text-5xl font-bold leading-tight text-white">Bienvenue à ton Dashboard</h1>
+      <div class="bg-white p-4 lg:p-6 rounded-lg shadow-md text-center w-full">
+        <h2 class="text-lg lg:text-xl font-semibold mb-2">Motiv du jour</h2>
+        <div class="typing-animation text-base lg:text-lg font-medium text-gray-700 leading-snug">
+          <span class="animated-text block w-full h-full">"Tu veux savoir la différence entre un maître et un apprenti?<br>Le maître a échoué plus de fois que le débutant n’a essayé"</span>
+        </div>
+      </div>
     </div>
-    
+  </div>
+</section>
 
+<div class="flex justify-center items-center">
+  <app-shortcuts></app-shortcuts>
+</div>
 
+<!-- Statistiques -->
+<section class="container mx-auto p-4">
+  <h1 class="text-2xl font-bold mb-6 text-white text-center">Statistiques</h1>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="bg-white p-6 rounded-lg shadow-md text-center transition transform hover:-translate-y-1 hover:scale-105 duration-300">
+      <h2 class="text-xl font-semibold mb-2">Nombre d'agents</h2>
+      <p class="text-3xl font-bold">26</p>
+    </div>
+    <div class="bg-white p-6 rounded-lg shadow-md text-center transition transform hover:-translate-y-1 hover:scale-105 duration-300">
+      <h2 class="text-xl font-semibold mb-2">Nombre de candidats</h2>
+      <p class="text-3xl font-bold">2500</p>
+    </div>
+    <div class="bg-white p-6 rounded-lg shadow-md text-center transition transform hover:-translate-y-1 hover:scale-105 duration-300">
+      <h2 class="text-xl font-semibold mb-2">Quizzes générés</h2>
+      <p class="text-3xl font-bold">1025</p>
+    </div>
+    <div class="bg-white p-6 rounded-lg shadow-md text-center transition transform hover:-translate-y-1 hover:scale-105 duration-300">
+      <h2 class="text-xl font-semibold mb-2">Taux de réussite</h2>
+      <p class="text-3xl font-bold">85%</p>
+    </div>
+  </div>
+</section>
