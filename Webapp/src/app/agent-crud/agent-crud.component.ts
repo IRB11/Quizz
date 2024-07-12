@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
   styles: ``
 })
 export class AgentCrudComponent implements OnInit {
+  
   users!: Agent[];
   newUser!: Agent;
   editingUser!: Agent | null;
