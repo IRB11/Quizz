@@ -1,42 +1,52 @@
-<div class="container mx-auto p-6">      
-  <div class="lg:col-span-3 bg-white p-6 rounded-lg shadow-lg">
-    <h2 class="text-2xl font-bold mb-4">Gestion des recruteurs</h2>
-    <div *ngIf="editingUser" class="my-1">
-      <h3>Modifier recruteur</h3>
-      <ul class="space-y-4">
-        <li class="flex justify-between items-center p-4 bg-gray-100 rounded-lg">
-          <input [(ngModel)]="editingUser.firstName" placeholder="First name" class="px-1">
-          <input [(ngModel)]="editingUser.lastName" placeholder="Last name" class="px-1">
-          <input [(ngModel)]="editingUser.email" placeholder="Email" class="px-1">
-          <div class="space-x-2">
-            <button (click)="cancelUserChanges()" class="text-orange-600">Annuler</button>
-          </div>
-        </li>
-      </ul>
-      <button (click)="saveUserChanges()" class="mt-4 w-full bg-blue-800 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Mettre à jour</button>
-    </div>
-  
-    <div *ngIf="!editingUser" class="my-1">
-      <h3>Ajouter recruteur</h3>
-      <ul class="space-y-4">
-        <li class="flex justify-between items-center p-4 bg-gray-100 rounded-lg">
-          <input [(ngModel)]="newUser.firstName" placeholder="First name" class="px-1">
-          <input [(ngModel)]="newUser.lastName" placeholder="Last name" class="px-1">
-          <input [(ngModel)]="newUser.email" placeholder="Email" class="px-1">
-        </li>
-      </ul>
-      <button (click)="addUser()" [disabled]="!newUser.firstName || !newUser.lastName || !newUser.email"
-       class="mt-4 w-full bg-blue-800 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Ajouter recruteur</button>
-    </div>
+<div class="flex flex-col items-center py-6">
+  <h2 class="text-4xl text-white font-bold mb-4">Gestion des recruteurs</h2>
 
-    <ul class="space-y-4">
-      <li *ngFor="let user of users" class="flex justify-between items-center p-4 bg-gray-100 rounded-lg">
-        <span>{{ user.firstName }} {{ user.lastName }} ({{ user.email }})</span>
-        <div class="space-x-2">
-          <button (click)="updateUser(user)" class="text-blue-800">Modifier</button>
-          <button (click)="deleteUser(user.id)" class="text-orange-600">Supprimer</button>
-        </div>
-      </li>
-    </ul>
+  <!-- Barre de recherche -->
+  <div class="mb-4 p-4 items-center shadow-xl lg:grid-cols-1 rounded-xl">
+    <input [(ngModel)]="searchTerm" placeholder="Entrer le nom ou l'email" class="px-4 py-2 border rounded w-full">
+    <button (click)="searchAgents()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2">
+      Charger la fiche du recruteur
+    </button>
   </div>
+
+  <!-- Formulaire de modification -->
+  <div *ngIf="editingAgent" class="mb-4 p-4 bg-gray-100 rounded">
+    <h3 class="text-2xl mb-2">Modifier recruteur</h3>
+    <input [(ngModel)]="editingAgent.firstName" placeholder="First name" class="px-4 py-2 border rounded w-full mb-2">
+    <input [(ngModel)]="editingAgent.lastName" placeholder="Last name" class="px-4 py-2 border rounded w-full mb-2">
+    <input [(ngModel)]="editingAgent.email" placeholder="Email" class="px-4 py-2 border rounded w-full mb-2">
+    <button (click)="saveAgentChanges()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+      Mettre à jour
+    </button>
+    <button (click)="cancelAgentChanges()" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded ml-2">
+      Annuler
+    </button>
+  </div>
+
+  <!-- Formulaire d'ajout -->
+  <div class="mb-4 p-4 items-center text-white rounded shadow-xl lg:grid-cols-1 rounded-xl">
+    <h3 class="text-2xl mb-2">Ajouter recruteur</h3>
+    <input [(ngModel)]="newAgent.firstName" placeholder="First name" class="px-4 py-2 border rounded w-full mb-2">
+    <input [(ngModel)]="newAgent.lastName" placeholder="Last name" class="px-4 py-2 border rounded w-full mb-2">
+    <input [(ngModel)]="newAgent.email" placeholder="Email" class="px-4 py-2 border rounded w-full mb-2">
+    <button (click)="addAgent()" [disabled]="!newAgent.firstName || !newAgent.lastName || !newAgent.email"
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
+      Ajouter recruteur
+    </button>
+  </div>
+
+  <!-- Liste des recruteurs -->
+  <ul class="space-y-4">
+    <li *ngFor="let agent of filteredAgents" class="flex justify-between items-center p-4 bg-gray-100 rounded-lg">
+      <span>{{ agent.firstName }} {{ agent.lastName }} ({{ agent.email }})</span>
+      <div class="space-x-2">
+        <button (click)="editAgent(agent)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          Modifier
+        </button>
+        <button (click)="deleteAgent(agent.id)" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+          Supprimer
+        </button>
+      </div>
+    </li>
+  </ul>
 </div>
