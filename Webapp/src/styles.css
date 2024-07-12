@@ -18,6 +18,22 @@ body {
     100% { background-position: 0% 50%; }
 }
 
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: black; }
+}
+
+.typing-animation {
+    border-right: .1em solid black;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: typing 4s steps(40, end), blink-caret .75s step-end infinite;
+}
 .container {
     text-align: left;
     color: rgb(114, 114, 114);
