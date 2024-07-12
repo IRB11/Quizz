@@ -11,6 +11,8 @@ using Quizz.Domain.Core.UseCases.Quizz;
 using Quizz.Domain.Core.UseCases.Rules;
 using Quizz.Domain.Core.UseCases.Techno;
 using Quizz.Domain.Core.UseCases.Rules.QuestionRules;
+using Quizz.Domain.Core.UseCases.Rules.CandidateRules;
+using Quizz.Domain.Core.UseCases.Candidate;
 using Quizz.Domain.Core.UseCases.Rules.QuizzRules;
 
 namespace Quizz.Domain.Core
@@ -51,6 +53,14 @@ namespace Quizz.Domain.Core
 
             builder.RegisterType<GenerateQuiz>().As<IGenerateQuiz>().InstancePerLifetimeScope();
 
+            
+            builder.RegisterType<CreateCandidate>().As<ICreateCandidate>().InstancePerLifetimeScope();
+            builder.RegisterType<GetAllCandidate>().As<IGetAllCandidates>().InstancePerLifetimeScope();
+            builder.RegisterType<GetCandidateById>().As<IGetCandidateById>().InstancePerLifetimeScope();
+            builder.RegisterType<UpdateCandidate>().As<IUpdateCandidate>().InstancePerLifetimeScope();
+            builder.RegisterType<DeleteCandidate>().As<IDeleteCandidate>().InstancePerLifetimeScope();
+
+
             builder.RegisterInstance(new JWTService(_jwtSecret)).AsSelf().SingleInstance();
 
             builder.Register(c => new LoginUser(
@@ -70,6 +80,14 @@ namespace Quizz.Domain.Core
             builder.RegisterType<CheckIfQuestionIsActive>().As<ICheckQuestionRule<QuestionRequest>>().InstancePerLifetimeScope();
             builder.RegisterType<ValidQuestionTypeRule>().As<ICheckQuestionRule<QuestionRequest>>().InstancePerLifetimeScope();
 
+            builder.RegisterType<CheckIfCandidateAlreadyExist>().As<ICheckRuleCandidate<CandidateRequest>>().InstancePerLifetimeScope();
+
+            builder.Register(ctx =>
+            {
+                var context = ctx.Resolve<IComponentContext>();
+                var rules = context.Resolve<IEnumerable<ICheckRuleCandidate<CandidateRequest>>>().ToList();
+                return rules;
+            }).As<List<ICheckRuleCandidate<CandidateRequest>>>();
             builder.RegisterType<CheckIfQuizzAsValidNumberOfQuestions>().As<ICheckQuizzRule<QuizRequest>>().InstancePerLifetimeScope();
 
             // Enregistrer toutes les implémentations de ICheckQuestionRule<QuestionRequest>
