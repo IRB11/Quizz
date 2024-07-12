@@ -10,6 +10,10 @@ import { HeaderComponent } from './header/header.component';
 import  ResultsComponent from './results/results.component';
 import { HttpClient } from '@angular/common/http';
 import { GenericService } from './generic.service';
+import { QuizzBankComponent } from './quizz-bank/quizz-bank.component';
+import { QuizzBankService } from './quizz-bank.service';  
+import { RandomquizzService } from './randomquizz.service';
+
 
 @Component({
   selector: 'app-root',
