@@ -4,7 +4,7 @@
 
     <li class="flex justify-between items-center p-4 bg-gray-100 rounded-lg">
       @for (item of Users$ | async; track $index) {
-        <ul> {{ item.name }} / {{ item.mail }}</ul>
+        <ul> {{ item.name }} / {{ item.mail }} / </ul>
       }
     </li>
 

@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { QuizzBankService } from '../quizz-bank.service';
 import { Question } from '../model/question';
 import { FormsModule } from '@angular/forms';
+import { NgFor, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-quizz-bank',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule,NgFor,NgIf],
   templateUrl: './quizz-bank.component.html',
   styleUrls: ['./quizz-bank.component.css']
 })
