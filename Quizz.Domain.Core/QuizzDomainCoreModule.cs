@@ -32,6 +32,7 @@ namespace Quizz.Domain.Core
             builder.RegisterType<GetAllLevels>().As<IGetAllLevels>().InstancePerLifetimeScope();
             builder.RegisterType<UpdateLevel>().As<IUpdateLevel>().InstancePerLifetimeScope();
             builder.RegisterType<DeleteLevel>().As<IDeleteLevel>().InstancePerLifetimeScope();
+
             builder.RegisterType<CreateUser>().As<ICreateUser>().InstancePerLifetimeScope();
             builder.RegisterType<GetUserById>().As<IGetUserById>().InstancePerLifetimeScope();
             builder.RegisterType<GetAllUsers>().As<IGetAllUsers>().InstancePerLifetimeScope();
@@ -45,6 +46,7 @@ namespace Quizz.Domain.Core
             builder.RegisterType<UpdateQuestion>().As<IUpdateQuestion>().InstancePerLifetimeScope();
             builder.RegisterType<DeleteQuestion>().As<IDeleteQuestion>().InstancePerLifetimeScope();
             builder.RegisterType<saveCandidateResponse>().As<ISaveCandidateResponse>().InstancePerLifetimeScope();
+
             builder.RegisterType<CreateTechno>().As<ICreateTechno>().InstancePerLifetimeScope();
             builder.RegisterType<GetAllTechnos>().As<IGetAllTechnos>().InstancePerLifetimeScope();
             builder.RegisterType<GetTechnoById>().As<IGetTechnoById>().InstancePerLifetimeScope();
@@ -53,7 +55,7 @@ namespace Quizz.Domain.Core
 
             builder.RegisterType<GenerateQuiz>().As<IGenerateQuiz>().InstancePerLifetimeScope();
             builder.RegisterType<GetQuizzById>().As<IGetQuizzById>().InstancePerLifetimeScope();
-
+            builder.RegisterType<UpdateQuizz>().As<IUpdateQuizz>().InstancePerLifetimeScope();
             
             builder.RegisterType<CreateCandidate>().As<ICreateCandidate>().InstancePerLifetimeScope();
             builder.RegisterType<GetAllCandidate>().As<IGetAllCandidates>().InstancePerLifetimeScope();
@@ -67,12 +69,9 @@ namespace Quizz.Domain.Core
             builder.Register(c => new LoginUser(
                 c.Resolve<IUserRepository>(),
                 c.Resolve<JWTService>())).As<ILoginUser>().InstancePerLifetimeScope();
-
-            //builder.RegisterType(c => new CreateUser().As<ICreateUser>().InstancePerLifetimeScope();
-
+                        
             builder.RegisterType<CheckAvailabilityOfLevelContent>().As<ICheckRuleLevel<LevelRequest>>().InstancePerLifetimeScope();
             builder.RegisterType<CheckAvailabilityOfLevelContent>().As<ICheckRuleLevel<LevelRequest>>().InstancePerLifetimeScope();
-
 
             builder.RegisterType<CheckIfAtLeastOneResponseIsCorrect>().As<ICheckQuestionRule<QuestionRequest>>().InstancePerLifetimeScope();
             builder.RegisterType<CheckIfMultipleOrSingleChoiceQuestionHasTwoOrFourResponses>().As<ICheckQuestionRule<QuestionRequest>>().InstancePerLifetimeScope();
