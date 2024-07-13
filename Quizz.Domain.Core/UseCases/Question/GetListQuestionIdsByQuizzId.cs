@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace Quizz.Domain.Core.UseCases.Question
 {
-    public class GetListQuestionsByQuizzId : IGetListQuestionByQuizzId
+    public class GetListQuestionIdsByQuizzId : IGetListQuestionIdsByQuizzId
     {
         private IQuestionRepository questionRepository;
 
-        public GetListQuestionsByQuizzId(IQuestionRepository questionRepository)
+        public GetListQuestionIdsByQuizzId(IQuestionRepository questionRepository)
         {
             this.questionRepository = questionRepository;
         }
-        public async Task<List<QuestionResponse>> Handle(int QuizzId)
+        public async Task<List<int>> Handle(int QuizzId)
         {
             var response = await questionRepository.GetListQuestionsByQuizzId(QuizzId);
             return response;

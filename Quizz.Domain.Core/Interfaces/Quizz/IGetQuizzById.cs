@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Quizz.Domain.Core.Interfaces.Questions
+namespace Quizz.Domain.Core.Interfaces.Quizz
 {
-    public interface ISaveCandidateResponse : IUseCaseRequestHandler<List<CandidateResponse_Request>, bool>
+    public interface IGetQuizzById : IUseCaseRequestHandler<int,QuizResponse>
     {
     }
 }

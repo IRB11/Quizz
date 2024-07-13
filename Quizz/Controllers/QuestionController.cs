@@ -15,7 +15,7 @@ namespace Quizz.Controllers
         private readonly IGetAllQuestion getAllQuestion;
         private readonly IUpdateQuestion updateQuestion;
         private readonly IDeleteQuestion deleteQuestion;
-        private readonly IGetListQuestionByQuizzId getListQuestionByQuizzId;
+        private readonly IGetListQuestionIdsByQuizzId getListQuestionIdsByQuizzId;
         private readonly ISaveCandidateResponse saveCandidateResponse;
 
         public QuestionController(
@@ -24,7 +24,7 @@ namespace Quizz.Controllers
             IGetAllQuestion getAllQuestion, 
             IUpdateQuestion updateQuestion, 
             IDeleteQuestion deleteQuestion,
-            IGetListQuestionByQuizzId getListQuestionByQuizzId,
+            IGetListQuestionIdsByQuizzId getListQuestionByQuizzId,
             ISaveCandidateResponse saveCandidateResponse 
         )
         {
@@ -33,7 +33,7 @@ namespace Quizz.Controllers
             this.getAllQuestion = getAllQuestion;
             this.updateQuestion = updateQuestion;
             this.deleteQuestion = deleteQuestion;
-            this.getListQuestionByQuizzId = getListQuestionByQuizzId;
+            this.getListQuestionIdsByQuizzId = getListQuestionByQuizzId;
             this.saveCandidateResponse = saveCandidateResponse;
         }
 
@@ -50,9 +50,9 @@ namespace Quizz.Controllers
         }
 
         [HttpGet("questions/{id}")]
-        public async Task<IActionResult> GetByListIds(int id)
+        public async Task<IActionResult> GetListIds(int id)
         {
-            return Ok(await getListQuestionByQuizzId.Handle(id));
+            return Ok(await getListQuestionIdsByQuizzId.Handle(id));
         }
 
         [HttpPost]
@@ -61,10 +61,10 @@ namespace Quizz.Controllers
             return Ok(await createQuestion.Handle(questionRequest));
         }
 
-        [HttpPost("/Save")]
-        public async Task<IActionResult> Post([FromBody] CandidateResponse_Request candidateResponse_Request)
+        [HttpPost("Save")]
+        public async Task<IActionResult> Post([FromBody] List<CandidateResponse_Request> candidateResponses_Request)
         {
-            return Ok(await saveCandidateResponse.Handle(candidateResponse_Request));
+            return Ok(await saveCandidateResponse.Handle(candidateResponses_Request));
         }
 
         [HttpPut("{id}")]

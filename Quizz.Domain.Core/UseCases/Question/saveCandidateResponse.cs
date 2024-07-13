@@ -17,7 +17,7 @@ namespace Quizz.Domain.Core.UseCases.Question
         {
             _questionRepository = questionRepository;
         }
-        public async Task<bool> Handle(CandidateResponse_Request request)
+        public async Task<bool> Handle(List<CandidateResponse_Request> request)
         {
            var SaveBool =  _questionRepository.SaveCandidateResponseToQuizz(request);
             if (SaveBool.IsCompleted)

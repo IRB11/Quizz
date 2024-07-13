@@ -13,8 +13,8 @@ namespace Quizz.Domain.Core.Interfaces.Questions
         Task<bool> CheckIfQuestionIsUsedInQuizz(int id);
         Task<List<QuestionResponse>> GetQuestionsByLevelAndTechnology( int levelId, int technologyId, int count);
         Task<List<QuestionResponse>> GetByListIds(List<Quizz_QuestionResponse> quizzQuestionsIdsByQuizzId);
-        Task<List<QuestionResponse>> GetListQuestionsByQuizzId(int id);
+        Task<List<int>> GetListQuestionsByQuizzId(int id);
 
-        Task<bool> SaveCandidateResponseToQuizz(CandidateResponse_Request candidateResponse_Request);
+        Task<bool> SaveCandidateResponseToQuizz(List<CandidateResponse_Request> candidateResponse_Request);
     }
 }
