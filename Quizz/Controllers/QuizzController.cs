@@ -10,12 +10,15 @@ namespace Quizz.Controllers
     public class QuizzController : ControllerBase
     {
         private readonly IGenerateQuiz  generateQuiz;
+        private readonly IGetQuizzById getQuizzById;
 
         public QuizzController(
-            IGenerateQuiz generateQuiz
+            IGenerateQuiz generateQuiz,
+            IGetQuizzById getQuizzById
         )
         {
             this.generateQuiz = generateQuiz;
+            this.getQuizzById = getQuizzById;
         }
 
         [HttpGet]
@@ -27,7 +30,7 @@ namespace Quizz.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            return Ok();
+            return Ok(await getQuizzById.Handle(id));
         }
 
 
