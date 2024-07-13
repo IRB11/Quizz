@@ -40,7 +40,7 @@ namespace Quizz.Domain.Core
 
             builder.RegisterType<CreateQuestion>().As<ICreateQuestion>().InstancePerLifetimeScope();
             builder.RegisterType<GetQuestionById>().As<IGetQuestionById>().InstancePerLifetimeScope();
-            builder.RegisterType<GetListQuestionsByQuizzId>().As<IGetListQuestionByQuizzId>().InstancePerLifetimeScope();
+            builder.RegisterType<GetListQuestionIdsByQuizzId>().As<IGetListQuestionIdsByQuizzId>().InstancePerLifetimeScope();
             builder.RegisterType<GetAllQuestion>().As<IGetAllQuestion>().InstancePerLifetimeScope();
             builder.RegisterType<UpdateQuestion>().As<IUpdateQuestion>().InstancePerLifetimeScope();
             builder.RegisterType<DeleteQuestion>().As<IDeleteQuestion>().InstancePerLifetimeScope();
@@ -52,6 +52,7 @@ namespace Quizz.Domain.Core
             builder.RegisterType<UpdateTechno>().As<IUpdateTechno>().InstancePerLifetimeScope();
 
             builder.RegisterType<GenerateQuiz>().As<IGenerateQuiz>().InstancePerLifetimeScope();
+            builder.RegisterType<GetQuizzById>().As<IGetQuizzById>().InstancePerLifetimeScope();
 
             
             builder.RegisterType<CreateCandidate>().As<ICreateCandidate>().InstancePerLifetimeScope();
