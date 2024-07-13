@@ -11,14 +11,17 @@ namespace Quizz.Controllers
     {
         private readonly IGenerateQuiz  generateQuiz;
         private readonly IGetQuizzById getQuizzById;
+        private readonly IUpdateQuizz updateQuizz;
 
         public QuizzController(
             IGenerateQuiz generateQuiz,
-            IGetQuizzById getQuizzById
+            IGetQuizzById getQuizzById,
+            IUpdateQuizz updateQuizz
         )
         {
             this.generateQuiz = generateQuiz;
             this.getQuizzById = getQuizzById;
+            this.updateQuizz = updateQuizz;
         }
 
         [HttpGet]
@@ -43,7 +46,7 @@ namespace Quizz.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] QuizRequest quizRequest)
         {
-            return Ok();
+            return Ok(await updateQuizz.Handle(quizRequest));
         }
 
         [HttpDelete("{id}")]
