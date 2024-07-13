@@ -41,9 +41,11 @@ namespace Quizz.Domain.Infrastructure.Data.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<QuizResponse> GetById(int id)
+        public async Task<QuizResponse> GetById(int id)
         {
-            throw new NotImplementedException();
+            var eFQuizz = await context.Quizzes.SingleOrDefaultAsync(q => q.Id == id);
+            QuizResponse quizResponse = mapper.Map<QuizResponse>(eFQuizz);
+            return quizResponse;
         }
 
         public  List<Quizz_QuestionResponse> GetQuestionsByQuizzId(int id)
