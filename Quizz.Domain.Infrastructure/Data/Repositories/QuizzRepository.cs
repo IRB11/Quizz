@@ -63,10 +63,13 @@ namespace Quizz.Domain.Infrastructure.Data.Repositories
             return quiz_Questions;
         }
 
-        public Task<QuizResponse> Update(QuizRequest request)
+        public async Task<QuizResponse> Update(QuizRequest request)
         {
-            throw new NotImplementedException();
+            var efQuizz = mapper.Map<EFQuiz>(request);
+            context.Quizzes.Update(efQuizz);
+            await context.SaveChangesAsync();
+            var quizz = mapper.Map<QuizResponse>(efQuizz);
+            return quizz;
         }
-
     }
 }
