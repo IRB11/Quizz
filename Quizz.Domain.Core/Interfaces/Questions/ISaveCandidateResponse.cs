@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Quizz.Domain.Core.Interfaces.Questions
 {
-    public interface ISaveCandidateResponse : IUseCaseRequestHandler<CandidateResponse_Request, bool>
+    public interface ISaveCandidateResponse : IUseCaseRequestHandler<List<CandidateResponse_Request>, bool>
     {
     }
 }
