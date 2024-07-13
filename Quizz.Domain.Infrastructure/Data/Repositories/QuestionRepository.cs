@@ -76,16 +76,17 @@ namespace Quizz.Domain.Infrastructure.Data.Repositories
             return listquestions;
         }
 
-        public async Task<List<QuestionResponse>> GetListQuestionsByQuizzId(int quizzId)
+        public async Task<List<int>> GetListQuestionsByQuizzId(int quizzId)
         {
             using (context)
             {
                 var questions = await context.Quizzes
                     .Where(q => q.Id == quizzId)
                     .SelectMany(q => q.Quiz_Questions)
-                    .Select(qq => qq.Question)
+                    .Select(qq => qq.Question.Id)
                     .ToListAsync();
-                return mapper.Map < List<QuestionResponse>> (questions); ;
+                Console.WriteLine(questions.Count);
+                return questions;
             }
         }
 
@@ -93,10 +94,10 @@ namespace Quizz.Domain.Infrastructure.Data.Repositories
         {
             var efQuestions = context.Questions
                             .Where(q => q.LevelId == levelId && q.TechnologyId == technologyId)
-            .OrderBy(q => Guid.NewGuid())
-            .Take(count)
-            .ToList();
-            return Task.FromResult(mapper.Map<List<QuestionResponse>>(efQuestions));
+                            .OrderBy(q => Guid.NewGuid())
+                            .Take(count)
+                            .ToList();
+                            return Task.FromResult(mapper.Map<List<QuestionResponse>>(efQuestions));
         }
 
         public Task<List<QuestionResponse>> GetRandomQuestions(int levelId, int technologyId, int numberOfQuestions)
@@ -116,14 +117,17 @@ namespace Quizz.Domain.Infrastructure.Data.Repositories
                 .AnyAsync(e => e.Content.Trim().ToLower() == content.Trim().ToLower());
         }
 
-        public Task<bool> SaveCandidateResponseToQuizz(CandidateResponse_Request candidateResponse_Request)
+        public Task<bool> SaveCandidateResponseToQuizz(List<CandidateResponse_Request> candidateResponses_Request)
         {
-            var eFCandidateResponse = mapper.Map<EFCandidateResponse>(candidateResponse_Request);
+            var eFCandidateResponse = mapper.Map<List<EFCandidateResponse>>(candidateResponses_Request);
 
             try
             {
-                context.CandidateResponses.Add(eFCandidateResponse);
-                context.SaveChanges();
+                foreach (var item in eFCandidateResponse)
+                {
+                    context.CandidateResponses.Add(item);
+                    context.SaveChanges();
+                }
                 return Task.FromResult(true);
             }
             catch (Exception)

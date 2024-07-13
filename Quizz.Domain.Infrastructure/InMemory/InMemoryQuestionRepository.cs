@@ -326,12 +326,12 @@ namespace Quizz.Domain.Infrastructure.InMemory
             return listquestions;           
         }
 
-        public Task<List<QuestionResponse>> GetListQuestionsByQuizzId(int id)
+        public Task<List<int>> GetListQuestionsByQuizzId(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> SaveCandidateResponseToQuizz(CandidateResponse_Request candidateResponse_Request)
+        public Task<bool> SaveCandidateResponseToQuizz(List<CandidateResponse_Request> candidateResponse_Request)
         {
             throw new NotImplementedException();
         }
