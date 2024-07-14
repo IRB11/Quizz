@@ -12,6 +12,77 @@ import { NgForm } from '@angular/forms';
   templateUrl: './candidat.component.html',
   styleUrl: './candidat.component.css'
 })
+
+export class CandidatComponent implements OnInit {
+  searchTerm: string = '';
+  editingCandidate: any = null;
+  newCandidate: any = {
+    firstName: '',
+    lastName: '',
+    email: ''
+  };
+  candidates: any[] = [
+    { id: 1, firstName: 'Alice', lastName: 'Johnson', email: 'alice.johnson@example.com', testResults: '85%' },
+    { id: 2, firstName: 'Bob', lastName: 'Smith', email: 'bob.smith@example.com', testResults: '90%' }
+    // Ajoutez vos candidats initiaux ici
+  ];
+  filteredCandidates: any[] = [];
+
+  constructor() { }
+
+  ngOnInit(): void {
+    // Initialisez filteredCandidates avec tous les candidats au début
+    this.filteredCandidates = [...this.candidates];
+  }
+
+  searchCandidates() {
+    // Filtrer les candidats en fonction de searchTerm
+    this.filteredCandidates = this.candidates.filter(candidate =>
+      candidate.firstName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      candidate.lastName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      candidate.email.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+  }
+
+  editCandidate(candidate: any) {
+    // Afficher le formulaire de modification avec les détails du candidat sélectionné
+    this.editingCandidate = { ...candidate };
+  }
+
+  cancelCandidateChanges() {
+    // Annuler les modifications en cours
+    this.editingCandidate = null;
+  }
+
+  saveCandidateChanges() {
+    // Sauvegarder les modifications apportées au candidat
+    // Implémentez la logique pour sauvegarder les changements dans votre service ou backend
+    console.log('Modifications sauvegardées pour : ', this.editingCandidate);
+    this.editingCandidate = null;
+  }
+
+  addCandidate() {
+    // Ajouter un nouveau candidat à la liste
+    // Implémentez la logique pour ajouter un nouveau candidat dans votre service ou backend
+    this.candidates.push({ ...this.newCandidate, id: this.candidates.length + 1 });
+    this.filteredCandidates = [...this.candidates]; // Mettre à jour la liste filtrée
+    this.newCandidate = { firstName: '', lastName: '', email: '' }; // Réinitialiser le formulaire
+  }
+
+  deleteCandidate(candidateId: number) {
+    // Supprimer un candidat de la liste
+    // Implémentez la logique pour supprimer un candidat de votre service ou backend
+    this.candidates = this.candidates.filter(candidate => candidate.id !== candidateId);
+    this.filteredCandidates = [...this.candidates]; // Mettre à jour la liste filtrée
+  }
+
+  contactCandidate(email: string) {
+    // Logique pour contacter le candidat
+    console.log('Contacter le candidat à : ', email);
+    // Vous pouvez ouvrir un client de messagerie ou utiliser une autre méthode pour contacter le candidat
+  }
+}
+
 /*
 export class CandidatComponent implements OnInit {
 
@@ -91,74 +162,4 @@ export class CandidatComponent implements OnInit {
    cancelUserChanges() {
     this.editingUser = null;
   }
-}
-
-*/
-
-
-
-export class CandidatComponent implements OnInit {
-
-  candidats: Candidat[] = [];
-  newCandidat: Candidat = {
-    id: 0,
-    firstName: '',
-    lastName: '',
-    email: ''
-  };
-
-  constructor(private candidatService: CandidatService) { }
-
-  ngOnInit(): void {
-    this.getCandidats();
-    // Ajouter un candidat fictif pour vérifier la liste
-    const candidatFictif: Candidat = {
-      id: 1,
-      firstName: 'Candide',
-      lastName: 'John',
-      email: 'john.candidat@example.com',
-    };
-    this.candidats.push(candidatFictif);
-  }
-
-  getCandidats(): void {
-    this.candidatService.getCandidats().subscribe((data: Candidat[]) => {
-      this.candidats = data;
-    });
-  }
-
-  addCandidat(newCandidat: Candidat): void {
-    this.candidatService.createCandidat(newCandidat).subscribe((candidat: Candidat) => {
-      this.candidats.push(candidat);
-      this.resetNewCandidat();
-    });
-  }
-
-  onSubmit(form: NgForm): void {
-    if (form.valid) {
-      this.addCandidat(this.newCandidat);
-    }
-  }
-
-  updateCandidat(candidat: Candidat): void {
-    this.candidatService.updateCandidat(candidat.id, candidat).subscribe(() => {
-      this.getCandidats(); // Recharger la liste après mise à jour
-    });
-  }
-
-  deleteCandidat(id: number): void {
-    this.candidatService.deleteCandidat(id).subscribe(() => {
-      this.candidats = this.candidats.filter(c => c.id !== id);
-    });
-  }
-
-  resetNewCandidat(): void {
-    this.newCandidat = {
-      id: 0,
-      firstName: '',
-      lastName: '',
-      email: '',
-    };
-  }
-}
-
+} */

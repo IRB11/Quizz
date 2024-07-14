@@ -44,42 +44,66 @@
 
 -->
 
-<div class="container mx-auto p-6">      
-    <div class="lg:col-span-3 bg-white p-6 rounded-lg shadow-lg">
-      <h2 class="text-2xl font-bold mb-4">Gestion des candidats</h2>
-
-      <div class="my-1">
-        <h3>Ajouter Candidat</h3>
-        <ul class="space-y-4">
-            <form (ngSubmit)="onSubmit(candidatForm)" #candidatForm="ngForm" >
-                
-                <input type="text" placeholder="Prénom" id="prenom" required [(ngModel)]="newCandidat.firstName" name="prenom" #prenom="ngModel" class ="shadow-md">
-                <div *ngIf="prenom.invalid && prenom.touched" class="error">
-                  Prénom est requis.
-                </div>
-            
-                <input type="text" placeholder="Nom" id="nom" required [(ngModel)]="newCandidat.lastName" name="nom" #nom="ngModel" class ="shadow-md">
-                <div *ngIf="nom.invalid && nom.touched" class="error">
-                  Nom est requis.
-                </div>
-            
-                <input type="email" placeholder="Email" id="email" required [(ngModel)]="newCandidat.email" name="email" #email="ngModel" class ="shadow-md">
-                <div *ngIf="email.invalid && email.touched" class="error">
-                  Email est requis.
-                </div>
-                <button type="submit" [disabled]="candidatForm.invalid" class="mt-4 w-full bg-blue-800 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Ajouter</button>
-            </form>
-        </ul>
-      </div>
-      <h3>Liste candidats</h3>
-      <ul class="space-y-4">
-        <li *ngFor="let candidat of candidats" class="flex justify-between items-center p-4 bg-gray-100 rounded-lg">
-          <span>{{ candidat.firstName }} {{ candidat.lastName }} ({{ candidat.email }})</span>
-          <div class="space-x-2">
-            <button (click)="updateCandidat(candidat)" class="text-blue-800">Modifier</button>
-            <button (click)="deleteCandidat(candidat.id)" class="text-orange-600">Supprimer</button>
-          </div>
-        </li>
-      </ul>
+<section>
+    <div class="flex justify-center py-6">
+      <h1 class="max-w-5xl text-2xl font-bold leading-none text-white md:text-5xl lg:text-6xl lg:max-w-7xl">
+        Gestion des candidats
+      </h1>
     </div>
+  </section> 
+  
+  <section>
+    <div class="flex flex-col items-center py-6">
+      <h2 class="text-4xl font-bold leading-none text-white">Acccédez à votre CVtèque</h2>
+      <p class="mt-5 text-white text-lg">Affichez la liste des candidat pour les contacter ou supprimer</p>
+    </div>
+  </section> 
+
+<div class="container flex flex-col items-center mx-auto p-4">      
+
+            <div class="mb-4 p-12 items-center shadow-xl lg:grid-cols-1 rounded-xl">
+              <h2 class="text-2xl text-center text-white mb-4">Accéder à la fiche du candidat</h2>
+              <input [(ngModel)]="searchTerm" placeholder="Entrer le nom ou l'email" class="px-4 py-2 border rounded w-full">
+              <button (click)="searchCandidates()" class=" flex flex-col bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-56 rounded mt-6">
+                Charger la fiche du candidat
+              </button>
+            </div>
+      
+        <div *ngIf="editingCandidate" class="my-1">
+          <h3 class="text-2xl font-bold text-center">Modifier candidat</h3>
+          <ul class="space-y-6">
+            <li class="flex justify-between items-center p-4 bg-gray-100 rounded-lg">
+              <input [(ngModel)]="editingCandidate.firstName" placeholder="First name" class="px-1">
+              <input [(ngModel)]="editingCandidate.lastName" placeholder="Last name" class="px-1">
+              <input [(ngModel)]="editingCandidate.email" placeholder="Email" class="px-1">
+              <div class="space-x-2">
+                <button (click)="saveCandidateChanges()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Mettre à jour</button>
+                <button (click)="cancelCandidateChanges()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Annuler</button>
+              </div>
+            </li>
+          </ul>
+        </div>
+      
+        <div class="mb-4 p-12 items-center rounded shadow-xl lg:grid-cols-1 rounded-xl">
+          <h3 class="text-2xl text-center text-white mb-4">Ajouter un candidat</h3>
+          <input [(ngModel)]="newCandidate.firstName" placeholder="Ajouter le prénom" class="px-4 py-2 border rounded w-full mb-2">
+          <input [(ngModel)]="newCandidate.lastName" placeholder="Ajouter le nom" class="px-4 py-2 border rounded w-full mb-2">
+          <input [(ngModel)]="newCandidate.email" placeholder="Email" class="px-4 py-2 text-gray-300 border rounded w-full mb-2">
+          <button (click)="addCandidate()" [disabled]="!newCandidate.firstName || !newCandidate.lastName || !newCandidate.email"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
+            Ajouter candidat
+          </button>
+        </div>
+      
+        <ul class=" mb-4 p-12 space-y-6">
+          <li *ngFor="let candidate of filteredCandidates" class="flex justify-between items-center p-4 bg-gray-100 rounded-lg">
+            <span>{{ candidate.firstName }} {{ candidate.lastName }} ({{ candidate.email }}) - Résultats des tests: {{ candidate.testResults }}</span>
+            <div class="space-x-2">
+              <button (click)="deleteCandidate(candidate.id)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Supprimer</button>
+              <button (click)="contactCandidate(candidate.email)" class="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded animate-pulse hover:bg-blue-900">Contacter</button>
+            </div>
+          </li>
+        </ul>
+      
+ 
 </div>
