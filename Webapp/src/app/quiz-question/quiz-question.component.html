@@ -1,0 +1,27 @@
+<div class="container mx-auto p-4" *ngIf="!quizFinished">
+    <h1 class="text-2xl font-bold mb-4">{{ questions.content }}</h1>
+    <ul>
+      <li *ngFor="let option of questions.response" class="mb-2">
+        <ng-container *ngIf="questions.type === 'Single Choice'; else buttonTemplate">
+          <input type="radio" [value]="option" name="options" (change)="selectOption(option)" [checked]="selectedOptions.includes(option)">
+          <label>{{ option.content }}</label>
+        </ng-container>
+        <ng-template #buttonTemplate>
+          <button (click)="selectOption(option)" [ngClass]="{'bg-blue-500': selectedOptions.includes(option), 'bg-gray-200': !selectedOptions.includes(option)}" class="px-4 py-2 text-black">
+            {{ option.content }}
+          </button>
+        </ng-template>
+      </li>
+    </ul>
+    <button class="mt-4 px-4 py-2 bg-green-500 text-white" (click)="submitAnswer()">Submit Answer</button>
+    
+    <div *ngIf="showResult" class="mt-4">
+      <p class="text-lg" [ngClass]="{'text-green-500': isCorrectAnswer, 'text-red-500': !isCorrectAnswer}">
+        {{ isCorrectAnswer ? 'Correct!' : 'Incorrect!' }}
+      </p>
+    </div>
+</div>
+
+<div class="container mx-auto p-4" *ngIf="quizFinished">
+    <h2>Quiz Finished!</h2>
+</div>

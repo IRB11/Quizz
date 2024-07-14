@@ -9,6 +9,6 @@ namespace Quizz.Domain.Core.Entities
     public class Status
     {
         public int Id { get; set; }
-        public string QuizStatus { get; set; }
+        public string Statut { get; set; }
     }
 }

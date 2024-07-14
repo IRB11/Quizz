@@ -37,8 +37,17 @@ namespace Quizz.Domain.Infrastructure.Data.Mapping
             CreateMap<EFLevel, LevelResponse>().ReverseMap();
 
             CreateMap<EFQuiz, QuizRequest>().ReverseMap();
-            CreateMap<EFQuiz, QuizResponse>().ReverseMap();
+            CreateMap<EFQuiz, QuizResponse>()
+                .ForMember(dest => dest.Candidate, opt => opt.MapFrom(src => src.Candidate))
+                .ForMember(dest => dest.Agent, opt => opt.MapFrom(src => src.Agent))
+                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status))
+                .ForMember(dest => dest.Technologies, opt => opt.MapFrom(src => src.Technology)).ReverseMap();
 
+            // Map EFCandidate to CandidateResponse
+            CreateMap<EFCandidate, CandidateResponse>()
+                .ForMember(dest => dest.Agent, opt => opt.MapFrom(src => src.Agent));
+
+            CreateMap<EFStatus, Status>();
 
             CreateMap<Quizz_QuestionResponse, EFQuiz_Question>()
                 .ForMember(dest => dest.QuizId, opt => opt.MapFrom(src => src.QuizId))

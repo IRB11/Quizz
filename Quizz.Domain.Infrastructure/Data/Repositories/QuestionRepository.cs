@@ -80,13 +80,24 @@ namespace Quizz.Domain.Infrastructure.Data.Repositories
         {
             using (context)
             {
-                var questions = await context.Quizzes
+                // Get all QuestionIds for the given QuizId
+                var questionIds = await context.Quizzes
                     .Where(q => q.Id == quizzId)
                     .SelectMany(q => q.Quiz_Questions)
-                    .Select(qq => qq.Question.Id)
+                    .Select(qq => qq.QuestionId)
                     .ToListAsync();
-                Console.WriteLine(questions.Count);
-                return questions;
+
+                // Get all QuestionIds that have candidate responses
+                var questionsWithCandidateResponses = await context.CandidateResponses
+                    .Select(cr => cr.QuestionId)
+                    .Distinct()
+                    .ToListAsync();
+
+                // Exclude QuestionIds that have candidate responses
+                var filteredQuestionIds = questionIds.Except(questionsWithCandidateResponses).ToList();
+
+                Console.WriteLine(filteredQuestionIds.Count);
+                return filteredQuestionIds;
             }
         }
 

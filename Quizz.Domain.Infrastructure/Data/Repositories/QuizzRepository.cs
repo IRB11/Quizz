@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Quizz.Domain.Core.Dto;
+using Quizz.Domain.Core.Entities;
 using Quizz.Domain.Core.Interfaces.Quizz;
 using Quizz.Domain.Infrastructure.Data.Entities;
 using System;
@@ -43,9 +44,21 @@ namespace Quizz.Domain.Infrastructure.Data.Repositories
 
         public async Task<QuizResponse> GetById(int id)
         {
-            var eFQuizz = await context.Quizzes.SingleOrDefaultAsync(q => q.Id == id);
-            QuizResponse quizResponse = mapper.Map<QuizResponse>(eFQuizz);
-            return quizResponse;
+            var eFQuizz = await context.Quizzes.Include(q => q.Admin)
+                .Include(q => q.Agent)
+                .Include(q => q.Candidate)
+                .Include(q => q.Status)
+                .Include(q => q.Technology)
+                .SingleOrDefaultAsync(q => q.Id == id);
+            if (eFQuizz != null)
+            {
+                QuizResponse quizResponse = mapper.Map<QuizResponse>(eFQuizz);
+                quizResponse.Admin.Token = "";
+                quizResponse.Agent.Token = "";
+                return quizResponse;
+            }
+            else return null;
+
         }
 
         public  List<Quizz_QuestionResponse> GetQuestionsByQuizzId(int id)
@@ -66,8 +79,20 @@ namespace Quizz.Domain.Infrastructure.Data.Repositories
         public async Task<QuizResponse> Update(QuizRequest request)
         {
             var efQuizz = mapper.Map<EFQuiz>(request);
-            context.Quizzes.Update(efQuizz);
-            await context.SaveChangesAsync();
+            try
+            {
+                await Task.Run(() =>
+                {
+                     context.Quizzes.Update(efQuizz);
+                     context.SaveChangesAsync();
+                });
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception();
+            }
+
             var quizz = mapper.Map<QuizResponse>(efQuizz);
             return quizz;
         }
