@@ -9,12 +9,16 @@ import { Question, QuestionId } from './entities/question.entity';
 })
 export class QuizzService {
 
+
   private quizSource = new BehaviorSubject<Quizz | null>(null);
   quiz$ = this.quizSource.asObservable();
   constructor(private httpApiService: HttpApiService) {}
 
+  createQuizz(quizz: Quizz): Observable<any>{
+    return this.httpApiService.post(`quizz`, quizz);
+  }
   getQuizzes(): Observable<any> {
-    return this.httpApiService.get(`quizz/0`); // Assuming 0 returns all quizzes
+    return this.httpApiService.get(`quizz`); // Assuming 0 returns all quizzes
   }
   getQuizz(id: number): Observable<Quizz> {
     return this.httpApiService.get(`quizz/${id}`);
@@ -37,12 +41,12 @@ export class QuizzService {
   updateQuizStatus(quizz: Quizz, arg1: number) {
     quizz.statusId = 2;
     quizz.adminId = quizz.admin.id;
-    quizz.technologyId = quizz.technologies.id;
+    quizz.technologyId = quizz.technology.id;
     quizz.agentId = quizz.agent.id;
     quizz.candidateId = quizz.candidate.id;
     quizz.agent = null;
     quizz.admin = null;
-    quizz.technologies = null;
+    quizz.technology = null;
     return this.httpApiService.put(`quizz/${quizz.id}`, quizz);
   }
 }
