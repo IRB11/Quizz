@@ -1,10 +1,19 @@
+<section>
+  <div class="flex justify-center py-6">
+    <h1 class="max-w-4xl text-2xl font-bold leading-none text-white md:text-5xl lg:text-6xl lg:max-w-7xl">
+      Gestion des Agents recruteurs
+    </h1>
+  </div>
+</section> 
+
 <div class="flex flex-col items-center py-6">
-  <h2 class="text-4xl text-white font-bold mb-4">Gestion des recruteurs</h2>
+  
 
   <!-- Barre de recherche -->
-  <div class="mb-4 p-4 items-center shadow-xl lg:grid-cols-1 rounded-xl">
+  <div class="mb-4 p-12 items-center shadow-xl lg:grid-cols-1 rounded-xl">
+    <h2 class="text-2xl text-white mb-4">Accéder à la fiche du recruteur pour Modifier ou Supprimer</h2>
     <input [(ngModel)]="searchTerm" placeholder="Entrer le nom ou l'email" class="px-4 py-2 border rounded w-full">
-    <button (click)="searchAgents()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2">
+    <button (click)="searchAgents()" class="flex flex-col bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-56 rounded mt-6">
       Charger la fiche du recruteur
     </button>
   </div>
@@ -24,10 +33,10 @@
   </div>
 
   <!-- Formulaire d'ajout -->
-  <div class="mb-4 p-4 items-center text-white rounded shadow-xl lg:grid-cols-1 rounded-xl">
-    <h3 class="text-2xl mb-2">Ajouter recruteur</h3>
-    <input [(ngModel)]="newAgent.firstName" placeholder="First name" class="px-4 py-2 border rounded w-full mb-2">
-    <input [(ngModel)]="newAgent.lastName" placeholder="Last name" class="px-4 py-2 border rounded w-full mb-2">
+  <div class="mb-4 p-24 items-center text-white rounded shadow-xl lg:grid-cols-1 rounded-xl">
+    <h3 class="text-2xl text-center mb-4">Ajouter un recruteur</h3>
+    <input [(ngModel)]="newAgent.firstName" placeholder="Ajouter le Prénom" class="px-4 py-2 border rounded w-full mb-2">
+    <input [(ngModel)]="newAgent.lastName" placeholder="Ajouter le nom" class="px-4 py-2 border rounded w-full mb-2">
     <input [(ngModel)]="newAgent.email" placeholder="Email" class="px-4 py-2 border rounded w-full mb-2">
     <button (click)="addAgent()" [disabled]="!newAgent.firstName || !newAgent.lastName || !newAgent.email"
       class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">

@@ -23,17 +23,5 @@ body, html {
     animation: typing 4s steps(40, end), blink-caret .75s step-end infinite;
 }
 
-.px-4 {
-    padding-left: 1rem; /* Réduit la marge à gauche */
-    padding-right: 1rem; /* Réduit la marge à droite */
-  }
-  
-  .py-8 {
-    padding-top: 2rem; /* Réduit l'espacement en haut */
-    padding-bottom: 2rem; /* Réduit l'espacement en bas */
-  }
-  
-  .mb-4 {
-    margin-bottom: 1rem; /* Réduit la marge en bas du titre */
-  }
+
   
