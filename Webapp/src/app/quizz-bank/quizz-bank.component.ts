@@ -27,11 +27,11 @@ export class QuizzBankComponent implements OnInit {
 
   getPastQuizzes(): void {
     // Implement this function to load past quizzes
-    this.quizzBankService.getPastQuizzes().subscribe({
-      next: (data: any) => console.log(data),
-      error: (err: any) => console.error('There was an error!', err)
-    });
+    // Implement navigation to quizz list
+    console.log('Navigating to quizz list');
+    window.location.href = '/quizz-list';
   }
+  
 
   getQuestions(): void {
     this.quizzBankService.getQuestions().subscribe({
