@@ -47,7 +47,7 @@ namespace Quizz.Domain.Infrastructure.Data.Mapping
             CreateMap<EFCandidate, CandidateResponse>()
                 .ForMember(dest => dest.Agent, opt => opt.MapFrom(src => src.Agent));
 
-            CreateMap<EFStatus, Status>();
+            CreateMap<EFStatus, StatusReponse>();
 
             CreateMap<Quizz_QuestionResponse, EFQuiz_Question>()
                 .ForMember(dest => dest.QuizId, opt => opt.MapFrom(src => src.QuizId))
