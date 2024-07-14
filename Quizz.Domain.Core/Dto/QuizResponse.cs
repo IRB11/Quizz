@@ -23,7 +23,7 @@ namespace Quizz.Domain.Core.Dto
         public UserResponse Admin { get; set; }
         public CandidateResponse Candidate { get; set; }
         public int StatusId { get; set; }
-        public Status Status { get; set; }
+        public StatusReponse Status { get; set; }
         public LevelResponse Level { get; set; }
         public TechnologiesResponse Technologies { get; set; }
 
