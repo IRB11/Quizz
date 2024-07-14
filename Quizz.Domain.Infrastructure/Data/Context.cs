@@ -4788,8 +4788,673 @@ namespace Quizz.Domain.Infrastructure.Data
                     Content = "It returns the first element in the array that satisfies the provided testing function.",
                     IsCorrect = false,
                     QuestionId = 140
-                }
+                },
+                 new EFResponse
+                 {
+                     Id = 481,
+                     Content = "A class is a blueprint for creating objects.",
+                     IsCorrect = true,
+                     QuestionId = 21
+                 },
+                 new EFResponse
+                 {
+                     Id = 482,
+                     Content = "An object is an instance of a class.",
+                     IsCorrect = true,
+                     QuestionId = 21
+                 },
+                 new EFResponse
+                 {
+                     Id = 483,
+                     Content = "Classes define properties and methods.",
+                     IsCorrect = true,
+                     QuestionId = 21
+                 },
+                 new EFResponse
+                 {
+                     Id = 484,
+                     Content = "Objects hold specific data and can perform actions.",
+                     IsCorrect = true,
+                     QuestionId = 21
+                 },
+                 new EFResponse
+                 {
+                     Id = 485,
+                     Content = "Abstraction is the concept of hiding the complex implementation details.",
+                     IsCorrect = true,
+                     QuestionId = 22
+                 },
+                 new EFResponse
+                 {
+                     Id = 486,
+                     Content = "It focuses on exposing only the necessary parts.",
+                     IsCorrect = true,
+                     QuestionId = 22
+                 },
+                 new EFResponse
+                 {
+                     Id = 487,
+                     Content = "Abstraction helps in reducing programming complexity.",
+                     IsCorrect = true,
+                     QuestionId = 22
+                 },
+                 new EFResponse
+                 {
+                     Id = 488,
+                     Content = "It is achieved using abstract classes and interfaces.",
+                     IsCorrect = true,
+                     QuestionId = 22
+                 },
+                 new EFResponse
+                 {
+                     Id = 489,
+                     Content = "The 'finally' block is used to execute important code such as closing resources.",
+                     IsCorrect = true,
+                     QuestionId = 23
+                 },
+                 new EFResponse
+                 {
+                     Id = 490,
+                     Content = "It always executes, regardless of whether an exception was thrown or not.",
+                     IsCorrect = true,
+                     QuestionId = 23
+                 },
+                 new EFResponse
+                 {
+                     Id = 491,
+                     Content = "It is used to perform cleanup operations.",
+                     IsCorrect = true,
+                     QuestionId = 23
+                 },
+                 new EFResponse
+                 {
+                     Id = 492,
+                     Content = "The 'finally' block can be used with try-catch blocks.",
+                     IsCorrect = true,
+                     QuestionId = 23
+                 },
+                 new EFResponse
+                 {
+                     Id = 493,
+                     Content = "A primary key uniquely identifies each record in a table.",
+                     IsCorrect = true,
+                     QuestionId = 24
+                 },
+                 new EFResponse
+                 {
+                     Id = 494,
+                     Content = "A foreign key is a field in one table that uniquely identifies a row of another table.",
+                     IsCorrect = true,
+                     QuestionId = 24
+                 },
+                 new EFResponse
+                 {
+                     Id = 495,
+                     Content = "Primary keys enforce entity integrity.",
+                     IsCorrect = true,
+                     QuestionId = 24
+                 },
+                 new EFResponse
+                 {
+                     Id = 496,
+                     Content = "Foreign keys enforce referential integrity.",
+                     IsCorrect = true,
+                     QuestionId = 24
+                 },
+                 new EFResponse
+                 {
+                     Id = 497,
+                     Content = "Normalization is the process of organizing data to reduce redundancy.",
+                     IsCorrect = true,
+                     QuestionId = 25
+                 },
+                 new EFResponse
+                 {
+                     Id = 498,
+                     Content = "It involves dividing a database into two or more tables and defining relationships between them.",
+                     IsCorrect = true,
+                     QuestionId = 25
+                 },
+                 new EFResponse
+                 {
+                     Id = 499,
+                     Content = "Normalization improves data integrity.",
+                     IsCorrect = true,
+                     QuestionId = 25
+                 },
+                 new EFResponse
+                 {
+                     Id = 500,
+                     Content = "It helps in efficient data retrieval.",
+                     IsCorrect = true,
+                     QuestionId = 25
+                 },
+                 new EFResponse
+                 {
+                     Id = 501,
+                     Content = "The 'static' keyword is used to indicate that a member belongs to the class, rather than instances of the class.",
+                     IsCorrect = true,
+                     QuestionId = 26
+                 },
+                 new EFResponse
+                 {
+                     Id = 502,
+                     Content = "Static members are shared among all instances of the class.",
+                     IsCorrect = true,
+                     QuestionId = 26
+                 },
+                 new EFResponse
+                 {
+                     Id = 503,
+                     Content = "Static methods can be called without creating an instance of the class.",
+                     IsCorrect = true,
+                     QuestionId = 26
+                 },
+                 new EFResponse
+                 {
+                     Id = 504,
+                     Content = "Static variables are initialized only once, at the start of the execution.",
+                     IsCorrect = true,
+                     QuestionId = 26
+                 },
+                 new EFResponse
+                 {
+                     Id = 505,
+                     Content = "Method overloading allows a class to have more than one method with the same name.",
+                     IsCorrect = true,
+                     QuestionId = 27
+                 },
+                 new EFResponse
+                 {
+                     Id = 506,
+                     Content = "Overloaded methods must have different parameter lists.",
+                     IsCorrect = true,
+                     QuestionId = 27
+                 },
+                 new EFResponse
+                 {
+                     Id = 507,
+                     Content = "It is a way to achieve polymorphism.",
+                     IsCorrect = true,
+                     QuestionId = 27
+                 },
+                 new EFResponse
+                 {
+                     Id = 508,
+                     Content = "Overloading improves code readability and reusability.",
+                     IsCorrect = true,
+                     QuestionId = 27
+                 },
+                 new EFResponse
+                 {
+                     Id = 509,
+                     Content = "GET requests are used to retrieve data from a server.",
+                     IsCorrect = true,
+                     QuestionId = 28
+                 },
+                 new EFResponse
+                 {
+                     Id = 510,
+                     Content = "POST requests are used to send data to a server to create/update a resource.",
+                     IsCorrect = true,
+                     QuestionId = 28
+                 },
+                 new EFResponse
+                 {
+                     Id = 511,
+                     Content = "GET requests can be cached and bookmarked.",
+                     IsCorrect = true,
+                     QuestionId = 28
+                 },
+                 new EFResponse
+                 {
+                     Id = 512,
+                     Content = "POST requests are not cached and cannot be bookmarked.",
+                     IsCorrect = true,
+                     QuestionId = 28
+                 },
+                 new EFResponse
+                 {
+                     Id = 513,
+                     Content = "The 'volatile' keyword is used to indicate that a variable's value may be changed by different threads.",
+                     IsCorrect = true,
+                     QuestionId = 29
+                 },
+                 new EFResponse
+                 {
+                     Id = 514,
+                     Content = "It ensures that the value of the variable is always read from the main memory.",
+                     IsCorrect = true,
+                     QuestionId = 29
+                 },
+                 new EFResponse
+                 {
+                     Id = 515,
+                     Content = "Volatile variables are not cached thread-locally.",
+                     IsCorrect = true,
+                     QuestionId = 29
+                 },
+                 new EFResponse
+                 {
+                     Id = 516,
+                     Content = "It is used to prevent memory consistency errors.",
+                     IsCorrect = true,
+                     QuestionId = 29
+                 },
+                 new EFResponse
+                 {
+                     Id = 517,
+                     Content = "A RESTful API is an API that conforms to the constraints of REST architecture.",
+                     IsCorrect = true,
+                     QuestionId = 30
+                 },
+                 new EFResponse
+                 {
+                     Id = 518,
+                     Content = "It uses standard HTTP methods like GET, POST, PUT, DELETE.",
+                     IsCorrect = true,
+                     QuestionId = 30
+                 },
+                 new EFResponse
+                 {
+                     Id = 519,
+                     Content = "RESTful APIs are stateless and cacheable.",
+                     IsCorrect = true,
+                     QuestionId = 30
+                 },
+                 new EFResponse
+                 {
+                     Id = 520,
+                     Content = "They use URIs to access resources.",
+                     IsCorrect = true,
+                     QuestionId = 30
+                 },
+                 new EFResponse
+                 {
+                     Id = 521,
+                     Content = "A process is an independent program in execution.",
+                     IsCorrect = true,
+                     QuestionId = 31
+                 },
+                 new EFResponse
+                 {
+                     Id = 522,
+                     Content = "A thread is a smaller unit of a process that can be executed independently.",
+                     IsCorrect = true,
+                     QuestionId = 31
+                 },
+                 new EFResponse
+                 {
+                     Id = 523,
+                     Content = "Processes have separate memory spaces.",
+                     IsCorrect = true,
+                     QuestionId = 31
+                 },
+                 new EFResponse
+                 {
+                     Id = 524,
+                     Content = "Threads share the same memory space within a process.",
+                     IsCorrect = true,
+                     QuestionId = 31
+                 },
+                 new EFResponse
+                 {
+                     Id = 525,
+                     Content = "A lambda expression is a concise way to represent an anonymous function.",
+                     IsCorrect = true,
+                     QuestionId = 32
+                 },
+                 new EFResponse
+                 {
+                     Id = 526,
+                     Content = "It provides a clear and concise way to implement a single method interface.",
+                     IsCorrect = true,
+                     QuestionId = 32
+                 },
+                 new EFResponse
+                 {
+                     Id = 527,
+                     Content = "Lambda expressions are used primarily to define the inline implementation of a functional interface.",
+                     IsCorrect = true,
+                     QuestionId = 32
+                 },
+                 new EFResponse
+                 {
+                     Id = 528,
+                     Content = "They help in writing more readable and maintainable code.",
+                     IsCorrect = true,
+                     QuestionId = 32
+                 },
+                 new EFResponse
+                 {
+                     Id = 529,
+                     Content = "The 'transient' keyword is used to indicate that a field should not be serialized.",
+                     IsCorrect = true,
+                     QuestionId = 33
+                 },
+                 new EFResponse
+                 {
+                     Id = 530,
+                     Content = "Transient fields are not included in the serialized form of an object.",
+                     IsCorrect = true,
+                     QuestionId = 33
+                 },
+                 new EFResponse
+                 {
+                     Id = 531,
+                     Content = "It is used to prevent sensitive data from being serialized.",
+                     IsCorrect = true,
+                     QuestionId = 33
+                 },
+                 new EFResponse
+                 {
+                     Id = 532,
+                     Content = "Transient fields are initialized with default values during deserialization.",
+                     IsCorrect = true,
+                     QuestionId = 33
+                 },
+                 new EFResponse
+                 {
+                     Id = 533,
+                     Content = "A constructor is a special method used to initialize objects.",
+                     IsCorrect = true,
+                     QuestionId = 34
+                 },
+                 new EFResponse
+                 {
+                     Id = 534,
+                     Content = "A method is a function defined in a class that performs a specific task.",
+                     IsCorrect = true,
+                     QuestionId = 34
+                 },
+                 new EFResponse
+                 {
+                     Id = 535,
+                     Content = "Constructors do not have a return type.",
+                     IsCorrect = true,
+                     QuestionId = 34
+                 },
+                 new EFResponse
+                 {
+                     Id = 536,
+                     Content = "Methods have a return type or void.",
+                     IsCorrect = true,
+                     QuestionId = 34
+                 },
+                 new EFResponse
+                 {
+                     Id = 537,
+                     Content = "A binary tree is a tree data structure in which each node has at most two children.",
+                     IsCorrect = true,
+                     QuestionId = 35
+                 },
+                 new EFResponse
+                 {
+                     Id = 538,
+                     Content = "The two children are referred to as the left child and the right child.",
+                     IsCorrect = true,
+                     QuestionId = 35
+                 },
+                 new EFResponse
+                 {
+                     Id = 539,
+                     Content = "Binary trees are used in various applications such as searching and sorting.",
+                     IsCorrect = true,
+                     QuestionId = 35
+                 },
+                 new EFResponse
+                 {
+                     Id = 540,
+                     Content = "They are the basis for binary search trees and binary heaps.",
+                     IsCorrect = true,
+                     QuestionId = 35
+                 },
+                 new EFResponse
+                 {
+                     Id = 541,
+                     Content = "The 'synchronized' keyword is used to control the access of multiple threads to a shared resource.",
+                     IsCorrect = true,
+                     QuestionId = 36
+                 },
+                 new EFResponse
+                 {
+                     Id = 542,
+                     Content = "It ensures that only one thread can access the resource at a time.",
+                     IsCorrect = true,
+                     QuestionId = 36
+                 },
+                 new EFResponse
+                 {
+                     Id = 543,
+                     Content = "Synchronized methods or blocks prevent thread interference and memory consistency errors.",
+                     IsCorrect = true,
+                     QuestionId = 36
+                 },
+                 new EFResponse
+                 {
+                     Id = 544,
+                     Content = "It is used to implement thread-safe operations.",
+                     IsCorrect = true,
+                     QuestionId = 36
+                 },
+                 new EFResponse
+                 {
+                     Id = 545,
+                     Content = "A hash table is a data structure that maps keys to values using a hash function.",
+                     IsCorrect = true,
+                     QuestionId = 37
+                 },
+                 new EFResponse
+                 {
+                     Id = 546,
+                     Content = "It provides efficient insertion, deletion, and lookup operations.",
+                     IsCorrect = true,
+                     QuestionId = 37
+                 },
+                 new EFResponse
+                 {
+                     Id = 547,
+                     Content = "Hash tables handle collisions using techniques like chaining or open addressing.",
+                     IsCorrect = true,
+                     QuestionId = 37
+                 },
+                 new EFResponse
+                 {
+                     Id = 548,
+                     Content = "They are widely used in applications requiring fast data retrieval.",
+                     IsCorrect = true,
+                     QuestionId = 37
+                 },
+                 new EFResponse
+                 {
+                     Id = 549,
+                     Content = "A stack is a linear data structure that follows the LIFO (Last In, First Out) principle.",
+                     IsCorrect = true,
+                     QuestionId = 38
+                 },
+                 new EFResponse
+                 {
+                     Id = 550,
+                     Content = "A heap is a specialized tree-based data structure that satisfies the heap property.",
+                     IsCorrect = true,
+                     QuestionId = 38
+                 },
+                 new EFResponse
+                 {
+                     Id = 551,
+                     Content = "Stacks are used for static memory allocation.",
+                     IsCorrect = true,
+                     QuestionId = 38
+                 },
+                 new EFResponse
+                 {
+                     Id = 552,
+                     Content = "Heaps are used for dynamic memory allocation.",
+                     IsCorrect = true,
+                     QuestionId = 38
+                 },
+                 new EFResponse
+                 {
+                     Id = 553,
+                     Content = "The 'finalize' method is called by the garbage collector before an object is destroyed.",
+                     IsCorrect = true,
+                     QuestionId = 39
+                 },
+                 new EFResponse
+                 {
+                     Id = 554,
+                     Content = "It is used to perform cleanup operations before the object is reclaimed.",
+                     IsCorrect = true,
+                     QuestionId = 39
+                 },
+                 new EFResponse
+                 {
+                     Id = 555,
+                     Content = "The 'finalize' method is not guaranteed to be called immediately after an object becomes unreachable.",
+                     IsCorrect = true,
+                     QuestionId = 39
+                 },
 
+                 new EFResponse
+                 {
+                     Id = 556,
+                     Content = "The 'map' function creates a new array populated with the results of calling a provided function on every element in the calling array.",
+                     IsCorrect = true,
+                     QuestionId = 117
+                 },
+                 new EFResponse
+                 {
+                     Id = 557,
+                     Content = "The 'map' function does not change the original array.",
+                     IsCorrect = false,
+                     QuestionId = 117
+                 },
+                 new EFResponse
+                 {
+                     Id = 558,
+                     Content = "The 'map' function is used to filter elements in an array.",
+                     IsCorrect = false,
+                     QuestionId = 117
+                 },
+                 new EFResponse
+                 {
+                     Id = 559,
+                     Content = "The 'map' function is used to reduce elements in an array.",
+                     IsCorrect = false,
+                     QuestionId = 117
+                 },
+                 new EFResponse
+                 {
+                     Id = 560,
+                     Content = "The 'filter' function creates a new array with all elements that pass the test implemented by the provided function.",
+                     IsCorrect = true,
+                     QuestionId = 118
+                 },
+                 new EFResponse
+                 {
+                     Id = 561,
+                     Content = "The 'filter' function changes the original array.",
+                     IsCorrect = false,
+                     QuestionId = 118
+                 },
+                 new EFResponse
+                 {
+                     Id = 562,
+                     Content = "The 'filter' function is used to map elements in an array.",
+                     IsCorrect = false,
+                     QuestionId = 118
+                 },
+                 new EFResponse
+                 {
+                     Id = 563,
+                     Content = "The 'filter' function is used to reduce elements in an array.",
+                     IsCorrect = false,
+                     QuestionId = 118
+                 },
+                 new EFResponse
+                 {
+                     Id = 564,
+                     Content = "The 'reduce' function executes a reducer function on each element of the array, resulting in a single output value.",
+                     IsCorrect = true,
+                     QuestionId = 119
+                 },
+                 new EFResponse
+                 {
+                     Id = 565,
+                     Content = "The 'reduce' function creates a new array.",
+                     IsCorrect = false,
+                     QuestionId = 119
+                 },
+                 new EFResponse
+                 {
+                     Id = 566,
+                     Content = "The 'reduce' function is used to filter elements in an array.",
+                     IsCorrect = false,
+                     QuestionId = 119
+                 },
+                 new EFResponse
+                 {
+                     Id = 567,
+                     Content = "The 'reduce' function is used to map elements in an array.",
+                     IsCorrect = false,
+                     QuestionId = 119
+                 },
+                 new EFResponse
+                 {
+                     Id = 568,
+                     Content = "The 'find' function returns the value of the first element in the array that satisfies the provided testing function.",
+                     IsCorrect = true,
+                     QuestionId = 120
+                 },
+                 new EFResponse
+                 {
+                     Id = 569,
+                     Content = "The 'find' function returns a new array.",
+                     IsCorrect = false,
+                     QuestionId = 120
+                 },
+                 new EFResponse
+                 {
+                     Id = 570,
+                     Content = "The 'find' function is used to filter elements in an array.",
+                     IsCorrect = false,
+                     QuestionId = 120
+                 },
+                 new EFResponse
+                 {
+                     Id = 571,
+                     Content = "The 'find' function is used to map elements in an array.",
+                     IsCorrect = false,
+                     QuestionId = 120
+                 },
+                 new EFResponse
+                 {
+                     Id = 572,
+                     Content = "The 'find' function returns the value of the first element in the array that satisfies the provided testing function.",
+                     IsCorrect = true,
+                     QuestionId = 120
+                 },
+                 new EFResponse
+                 {
+                     Id = 573,
+                     Content = "The 'find' function returns a new array.",
+                     IsCorrect = false,
+                     QuestionId = 120
+                 },
+                 new EFResponse
+                 {
+                     Id = 574,
+                     Content = "The 'find' function is used to filter elements in an array.",
+                     IsCorrect = false,
+                     QuestionId = 120
+                 },
+                 new EFResponse
+                 {
+                     Id = 575,
+                     Content = "The 'find' function is used to map elements in an array.",
+                     IsCorrect = false,
+                     QuestionId = 120
+                 }
             );
             builder.Entity<EFQuiz_Question>().HasData(
                 new EFQuiz_Question
