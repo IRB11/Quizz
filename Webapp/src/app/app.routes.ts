@@ -8,12 +8,13 @@ export const routes: Routes = [
     { path: 'candidats', loadComponent: () => import('./candidat/candidat.component').then(m => m.CandidatComponent)},
     { path: 'quiz', loadComponent: () => import('../app/quiz/quiz.component').then(m => m.QuizComponent)},
     { path: '', pathMatch: 'full', redirectTo: 'home' },
-
     { path: 'login', loadComponent: () => import('../app/login-page/login-page.component').then(m => m.LoginPageComponent) },
     { path: 'home', loadComponent : () => import('../app/home/home.component').then(m => m.HomeComponent) },
     { path: 'quizz', loadComponent: () => import('../app/gestionquizz/gestionquizz.component')},
     { path: 'results', loadComponent: () => import('../app/results/results.component')},
     { path: 'quizzBank', loadComponent: () => import('../app/quizz-bank/quizz-bank.component').then(m=> m.QuizzBankComponent)},
+    { path: 'quizz/:id', loadComponent: () => import('../app/quiz-detail/quiz-detail.component').then(m => m.QuizDetailComponent)},
+    { path: 'quizz/:id/question/:questionId', loadComponent: () => import('../app/quiz-question/quiz-question.component').then(m => m.QuizzQuestionComponent) },
     // Example de shortcut  pour les routes
     // { path: 'le nom de mon link ', loadComponent: () => import('../app/gestionquizz/gestionquizz.component')},
 ]

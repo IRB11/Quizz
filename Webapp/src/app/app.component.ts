@@ -13,15 +13,23 @@ import { CandidatComponent } from './candidat/candidat.component';
 import { QuizzBankComponent } from './quizz-bank/quizz-bank.component';
 import { QuizzBankService } from './quizz-bank.service';  
 import { RandomquizzService } from './randomquizz.service';
+import { NgIf } from '@angular/common';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-    imports: [RouterOutlet, FooterComponent, HeaderComponent, NavbarComponent, ShortcutsComponent, GestionquizzComponent, FormsModule, CandidatComponent],
+    imports: [RouterOutlet, FooterComponent, HeaderComponent, NavbarComponent, ShortcutsComponent, GestionquizzComponent, FormsModule, CandidatComponent, NgIf],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+isQuizDetailPage() {
+  const currentUrl = window.location.href;
+  const isQuizzPage = currentUrl.includes('/quizz/') && /\d/.test(currentUrl);
+  console.log(isQuizzPage);
+  return currentUrl.includes('/quizz/') && /\d/.test(currentUrl);
+
+}
   title = 'Webapp';
 }
