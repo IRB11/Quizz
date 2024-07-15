@@ -1,0 +1,711 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>webapp documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">webapp documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  QuizComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/quiz/quiz.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-quiz</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>RouterLink</code>
+                            <code>CommonModule</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./quiz.component.css</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./quiz.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#currentQuestionIndex" >currentQuestionIndex</a>
+                            </li>
+                            <li>
+                                <a href="#questions$" >questions$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#questionsSubject" >questionsSubject</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#nextQuestion" >nextQuestion</a>
+                            </li>
+                            <li>
+                                <a href="#previousQuestion" >previousQuestion</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#currentQuestion" >currentQuestion</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="nextQuestion"></a>
+                    <span class="name">
+                        <span ><b>nextQuestion</b></span>
+                        <a href="#nextQuestion"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>nextQuestion()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="64"
+                                    class="link-to-prism">src/app/quiz/quiz.component.ts:64</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="previousQuestion"></a>
+                    <span class="name">
+                        <span ><b>previousQuestion</b></span>
+                        <a href="#previousQuestion"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>previousQuestion()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="70"
+                                    class="link-to-prism">src/app/quiz/quiz.component.ts:70</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="currentQuestionIndex"></a>
+                    <span class="name">
+                        <span ><b>currentQuestionIndex</b></span>
+                        <a href="#currentQuestionIndex"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/quiz/quiz.component.ts:58</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="questions$"></a>
+                    <span class="name">
+                        <span ><b>questions$</b></span>
+                        <a href="#questions$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.questionsSubject.asObservable()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/quiz/quiz.component.ts:57</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="questionsSubject"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>questionsSubject</b></span>
+                        <a href="#questionsSubject"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new BehaviorSubject&lt;any[]&gt;([
+    {
+      question: &quot;Quelle est la capitale de la France ?&quot;,
+      options: [&quot;Paris&quot;, &quot;Londres&quot;, &quot;Berlin&quot;, &quot;Madrid&quot;],
+      answer: &quot;Paris&quot;,
+      difficulty: &quot;Facile&quot;,
+      technology: &quot;Géographie&quot;
+    },
+    {
+      question: &quot;Quelle est la valeur de PI ?&quot;,
+      options: [&quot;3.14&quot;, &quot;2.71&quot;, &quot;1.62&quot;, &quot;1.41&quot;],
+      answer: &quot;3.14&quot;,
+      difficulty: &quot;Facile&quot;,
+      technology: &quot;Mathématiques&quot;
+    },
+    {
+      question: &quot;Que veut dire API ?&quot;,
+      options: [&quot;Application Programming Interface&quot;, &quot;Acces Parallel Interface&quot;],
+      answer: &quot;Application Programming Interface&quot;,
+      difficulty: &quot;Intermédiaire&quot;,
+      technology: &quot;C#&quot;
+    }
+  ])</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/quiz/quiz.component.ts:33</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="currentQuestion"></a>
+                        <span class="name"><b>currentQuestion</b><a href="#currentQuestion"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>currentQuestion()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/quiz/quiz.component.ts:60</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+import { RouterLink } from &#x27;@angular/router&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { BehaviorSubject } from &#x27;rxjs&#x27;;
+import { HttpClient } from &#x27;@angular/common/http&#x27;;
+
+@Component({
+  selector: &#x27;app-quiz&#x27;,
+  standalone: true,
+  imports: [RouterLink, CommonModule],
+  templateUrl: &#x27;./quiz.component.html&#x27;,
+  styleUrls: [&#x27;./quiz.component.css&#x27;]
+})
+
+export class QuizComponent  {
+  /*
+  public questionsSubject &#x3D; new BehaviorSubject&lt;any[]&gt;([]);
+
+  constructor(private http: HttpClient) {
+    this.loadQuestions();
+  }
+
+  private loadQuestions() {
+    this.http.get&lt;any[]&gt;(&#x27;../../../assets/questions.json&#x27;).subscribe(
+      questions &#x3D;&gt; this.questionsSubject.next(questions),
+      error &#x3D;&gt; console.error(&#x27;Error loading questions:&#x27;, error)
+    );
+  }
+
+  question$ &#x3D; this.questionsSubject.asObservable();
+  currentQuestionIndex &#x3D; 0;
+  */
+  public questionsSubject &#x3D; new BehaviorSubject&lt;any[]&gt;([
+    {
+      question: &quot;Quelle est la capitale de la France ?&quot;,
+      options: [&quot;Paris&quot;, &quot;Londres&quot;, &quot;Berlin&quot;, &quot;Madrid&quot;],
+      answer: &quot;Paris&quot;,
+      difficulty: &quot;Facile&quot;,
+      technology: &quot;Géographie&quot;
+    },
+    {
+      question: &quot;Quelle est la valeur de PI ?&quot;,
+      options: [&quot;3.14&quot;, &quot;2.71&quot;, &quot;1.62&quot;, &quot;1.41&quot;],
+      answer: &quot;3.14&quot;,
+      difficulty: &quot;Facile&quot;,
+      technology: &quot;Mathématiques&quot;
+    },
+    {
+      question: &quot;Que veut dire API ?&quot;,
+      options: [&quot;Application Programming Interface&quot;, &quot;Acces Parallel Interface&quot;],
+      answer: &quot;Application Programming Interface&quot;,
+      difficulty: &quot;Intermédiaire&quot;,
+      technology: &quot;C#&quot;
+    }
+  ]);
+
+  questions$ &#x3D; this.questionsSubject.asObservable();
+  currentQuestionIndex &#x3D; 0;
+
+  get currentQuestion() {
+    return this.questionsSubject.value[this.currentQuestionIndex];
+  }
+
+  nextQuestion() {
+    if (this.currentQuestionIndex &lt; this.questionsSubject.value.length - 1) {
+      this.currentQuestionIndex++;
+    }
+  }
+
+  previousQuestion() {
+    if (this.currentQuestionIndex &gt; 0) {
+      this.currentQuestionIndex--;
+    }
+  }
+
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;flex justify-center items-center min-h-screen bg-gray-100&quot;&gt;
+  &lt;div class&#x3D;&quot;bg-white shadow-md rounded-lg p-6 w-full max-w-lg&quot; *ngIf&#x3D;&quot;currentQuestion&quot;&gt;
+    &lt;h2 class&#x3D;&quot;text-2xl font-bold mb-4 text-center&quot;&gt;{{ currentQuestion.question }}&lt;/h2&gt;
+    &lt;div class&#x3D;&quot;mb-6 text-center&quot;&gt;
+      &lt;span class&#x3D;&quot;text-sm text-gray-600&quot;&gt;Difficulté : {{ currentQuestion.difficulty }}&lt;/span&gt;
+      &lt;span class&#x3D;&quot;text-sm text-gray-600 ml-4&quot;&gt;Technologie : {{ currentQuestion.technology }}&lt;/span&gt;
+      &lt;span class&#x3D;&quot;text-sm text-gray-600 ml-4&quot;&gt;Question : {{ currentQuestion }}&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div *ngFor&#x3D;&quot;let option of currentQuestion.options&quot; class&#x3D;&quot;mb-4&quot;&gt;
+      &lt;label class&#x3D;&quot;block&quot;&gt;
+        &lt;input type&#x3D;&quot;radio&quot; name&#x3D;&quot;option&quot; class&#x3D;&quot;mr-2&quot;&gt;
+        {{ option }}
+      &lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;mt-6 flex justify-between&quot;&gt; 
+      &lt;!-- &lt;button (click)&#x3D;&quot;previousQuestion()&quot; [disabled]&#x3D;&quot;currentQuestionIndex &#x3D;&#x3D;&#x3D; 0&quot; class&#x3D;&quot;bg-blue-500 text-white px-4 py-2 rounded disabled:opacity-50&quot;&gt;Précédent&lt;/button&gt; --&gt;
+      &lt;button (click)&#x3D;&quot;nextQuestion()&quot; class&#x3D;&quot;bg-blue-500 text-white px-4 py-2 rounded disabled:opacity-50&quot;&gt;Valider&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- [disabled]&#x3D;&quot;currentQuestionIndex &#x3D;&#x3D;&#x3D; questionsSubject.value.length - 1&quot; --&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./quiz.component.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss"></code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="flex justify-center items-center min-h-screen bg-gray-100">  <div class="bg-white shadow-md rounded-lg p-6 w-full max-w-lg" *ngIf="currentQuestion">    <h2 class="text-2xl font-bold mb-4 text-center">{{ currentQuestion.question }}</h2>    <div class="mb-6 text-center">      <span class="text-sm text-gray-600">Difficulté : {{ currentQuestion.difficulty }}</span>      <span class="text-sm text-gray-600 ml-4">Technologie : {{ currentQuestion.technology }}</span>      <span class="text-sm text-gray-600 ml-4">Question : {{ currentQuestion }}</span>    </div>    <div *ngFor="let option of currentQuestion.options" class="mb-4">      <label class="block">        <input type="radio" name="option" class="mr-2">        {{ option }}      </label>    </div>    <div class="mt-6 flex justify-between">       <!-- <button (click)="previousQuestion()" [disabled]="currentQuestionIndex === 0" class="bg-blue-500 text-white px-4 py-2 rounded disabled:opacity-50">Précédent</button> -->      <button (click)="nextQuestion()" class="bg-blue-500 text-white px-4 py-2 rounded disabled:opacity-50">Valider</button>    </div>  </div></div><!-- [disabled]="currentQuestionIndex === questionsSubject.value.length - 1" --></div>'
+    var COMPONENTS = [{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AgentCrudComponent', 'selector': 'app-user-crud'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CandidatComponent', 'selector': 'app-candidat'},{'name': 'CrudComponent', 'selector': 'app-crud'},{'name': 'CustomQuizzesComponent', 'selector': 'app-custom-quizzes'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'GeneratequizzComponent', 'selector': 'app-generatequizz'},{'name': 'GestionCrudComponent', 'selector': 'app-gestion-crud'},{'name': 'GestionquizzComponent', 'selector': 'app-gestionquizz'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LevelComponent', 'selector': 'app-level'},{'name': 'LoginPageComponent', 'selector': 'app-login-page'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'QuizComponent', 'selector': 'app-quiz'},{'name': 'QuizzBankComponent', 'selector': 'app-quizz-bank'},{'name': 'ResultsComponent', 'selector': 'app-results'},{'name': 'ShortcutsComponent', 'selector': 'app-shortcuts'},{'name': 'UserComponent', 'selector': 'app-user'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'QuizComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'QuizComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
