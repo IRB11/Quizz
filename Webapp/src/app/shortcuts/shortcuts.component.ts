@@ -26,7 +26,7 @@ interface Shortcut {
 export class ShortcutsComponent {
   shortcuts: Shortcut[] = [
     { name: 'Gestion Agents', link: '/agents', iconUrl: '../../assets/img/iconresults.png', description: 'Gérer les agents'},
-    { name: 'Gestion Candidats', link: '/Candidats', iconUrl: '../../assets/img/iconcandidats.png', description: 'Gérer les candidats'},
+    { name: 'Gestion Candidats', link: '/candidats', iconUrl: '../../assets/img/iconcandidats.png', description: 'Gérer les candidats'},
     { name: 'Quizz Bank', link: '/quizzBank', iconUrl: '../../assets/img/iconquizzbank.png', description: 'Quizz Bank' },
     { name: 'Gestion Quizz', link: '/quizz', iconUrl: '../../assets/img/icongenererquizz.png', description: 'Générer quizz' },
     { name: 'Resultats', link: '/results', iconUrl: '../../assets/img/iconresults.png', description: 'Générer résultats' },
