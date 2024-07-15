@@ -21,7 +21,7 @@ export interface Quizz {
     status: any;
     levelId: number;
     level: any;
-    technology: any;
+    technologies: any;
 }
 
 export interface Responses {

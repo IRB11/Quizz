@@ -24,12 +24,10 @@ import { NgIf } from '@angular/common';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-isQuizDetailPage() {
-  const currentUrl = window.location.href;
-  const isQuizzPage = currentUrl.includes('/quizz/') && /\d/.test(currentUrl);
-  console.log(isQuizzPage);
-  return currentUrl.includes('/quizz/') && /\d/.test(currentUrl);
-
-}
-  title = 'Webapp';
+  isQuizDetailPage() {
+    const currentUrl = window.location.href;
+    const isQuizzPage = currentUrl.includes('/quizz/') && /\d/.test(currentUrl);
+    return currentUrl.includes('/quizz/') && /\d/.test(currentUrl);
+  }
+    title = 'Webapp';
 }

@@ -99,7 +99,7 @@ export default class GeneratequizzComponent {
       candidateId: this.selectedCandidate ?? 0,
       agent: null,
       agentId: this.selectedAgent,
-      technology: null,
+      technologies: null,
       technologyId: this.technologies.find(tech => tech.name === this.selectedTechnology)?.id ?? 0,
       level: this.levels.find(level => level.content === this.selectedLevel) ?? { id: 0, content: '' },
       admin: null,

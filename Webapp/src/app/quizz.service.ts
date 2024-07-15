@@ -39,14 +39,15 @@ export class QuizzService {
     this.quizSource.next(quiz);
   }
   updateQuizStatus(quizz: Quizz, arg1: number) {
+    
     quizz.statusId = 2;
     quizz.adminId = quizz.admin.id;
-    quizz.technologyId = quizz.technology.id;
+    quizz.technologyId = quizz.technologies.id;
     quizz.agentId = quizz.agent.id;
     quizz.candidateId = quizz.candidate.id;
     quizz.agent = null;
     quizz.admin = null;
-    quizz.technology = null;
+    quizz.technologies = null;
     return this.httpApiService.put(`quizz/${quizz.id}`, quizz);
   }
 }
