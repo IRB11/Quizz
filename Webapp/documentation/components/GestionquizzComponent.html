@@ -1,0 +1,380 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>webapp documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">webapp documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  GestionquizzComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/gestionquizz/gestionquizz.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-gestionquizz</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                                <code><a href="../components/GeneratequizzComponent.html" target="_self" >GeneratequizzComponent</a></code>
+                                <code><a href="../components/CustomQuizzesComponent.html" target="_self" >CustomQuizzesComponent</a></code>
+                                <code><a href="../components/ResultsComponent.html" target="_self" >ResultsComponent</a></code>
+                                <code><a href="../components/QuizzBankComponent.html" target="_self" >QuizzBankComponent</a></code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./gestionquizz.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./gestionquizz.component.css</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+
+
+
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
+import { FormsModule } from &#x27;@angular/forms&#x27;;
+import { RouterOutlet } from &#x27;@angular/router&#x27;;
+import GeneratequizzComponent from &#x27;../generatequizz/generatequizz.component&#x27;;
+import { CustomQuizzesComponent } from &#x27;../custom-quizzes/custom-quizzes.component&#x27;;
+import ResultsComponent from &#x27;../results/results.component&#x27;;
+import { QuizzBankComponent } from &#x27;../quizz-bank/quizz-bank.component&#x27;;
+
+@Component({
+  selector: &#x27;app-gestionquizz&#x27;,
+  standalone: true,
+  imports: [GeneratequizzComponent,CustomQuizzesComponent,ResultsComponent, QuizzBankComponent],
+  templateUrl: &#x27;./gestionquizz.component.html&#x27;,
+  styleUrl: &#x27;./gestionquizz.component.css&#x27;
+})
+export default class GestionquizzComponent {
+
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;section&gt;
+    &lt;div class&#x3D;&quot;flex justify-center py-6&quot;&gt;
+      &lt;h1 class&#x3D;&quot;max-w-5xl text-2xl font-bold leading-none text-white md:text-5xl lg:text-6xl lg:max-w-7xl&quot;&gt;
+        Configuration des Quizz
+      &lt;/h1&gt;
+    &lt;/div&gt;
+  &lt;/section&gt; 
+  
+  &lt;section&gt;
+    &lt;div class&#x3D;&quot;flex flex-col items-center py-6&quot;&gt;
+      &lt;h2 class&#x3D;&quot;text-4xl font-bold leading-none text-white&quot;&gt;Générateur de Quizz&lt;/h2&gt;
+      &lt;p class&#x3D;&quot;mt-5 text-white text-lg&quot;&gt;Créez des quizz pour tester vos candidats&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/section&gt; 
+  
+        &lt;div class&#x3D;&quot;flex justify-center space-x-4 py-6 custom-container&quot;&gt;
+          &lt;div class&#x3D;&quot;w-full md:w-1/2 custom-container&quot;&gt;
+            &lt;app-generatequizz&gt;&lt;/app-generatequizz&gt;
+          &lt;/div&gt;
+          &lt;div class&#x3D;&quot;w-full md:w-1/2 custom-container&quot;&gt;
+            &lt;app-custom-quizzes&gt;&lt;/app-custom-quizzes&gt;
+            &lt;app-results&gt;&lt;/app-results&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+    
+  
+  &lt;section&gt;
+    &lt;div class&#x3D;&quot;flex flex-col items-center py-6&quot;&gt;
+      &lt;h2 class&#x3D;&quot;text-4xl font-bold leading-none text-white&quot;&gt;Quizz Bank&lt;/h2&gt;
+      &lt;p class&#x3D;&quot;mt-5 text-white text-lg&quot;&gt;Gérer votre bibliothèque de questions et de réponses&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/section&gt; 
+
+  &lt;div class&#x3D;&quot;flex flex-col items-center py-10 max-w-7x1&quot;&gt;
+    &lt;app-quizz-bank&gt;&lt;/app-quizz-bank&gt;
+  &lt;/div&gt;
+
+&lt;!--&lt;app-QuizzesBank&gt;&lt;/app-QuizzesBank&gt; --&gt;</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><section>    <div class="flex justify-center py-6">      <h1 class="max-w-5xl text-2xl font-bold leading-none text-white md:text-5xl lg:text-6xl lg:max-w-7xl">        Configuration des Quizz      </h1>    </div>  </section>     <section>    <div class="flex flex-col items-center py-6">      <h2 class="text-4xl font-bold leading-none text-white">Générateur de Quizz</h2>      <p class="mt-5 text-white text-lg">Créez des quizz pour tester vos candidats</p>    </div>  </section>           <div class="flex justify-center space-x-4 py-6 custom-container">          <div class="w-full md:w-1/2 custom-container">            <app-generatequizz></app-generatequizz>          </div>          <div class="w-full md:w-1/2 custom-container">            <app-custom-quizzes></app-custom-quizzes>            <app-results></app-results>          </div>        </div>        <section>    <div class="flex flex-col items-center py-6">      <h2 class="text-4xl font-bold leading-none text-white">Quizz Bank</h2>      <p class="mt-5 text-white text-lg">Gérer votre bibliothèque de questions et de réponses</p>    </div>  </section>   <div class="flex flex-col items-center py-10 max-w-7x1">    <app-quizz-bank></app-quizz-bank>  </div><!--<app-QuizzesBank></app-QuizzesBank> --></div>'
+    var COMPONENTS = [{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AgentCrudComponent', 'selector': 'app-user-crud'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CandidatComponent', 'selector': 'app-candidat'},{'name': 'CrudComponent', 'selector': 'app-crud'},{'name': 'CustomQuizzesComponent', 'selector': 'app-custom-quizzes'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'GeneratequizzComponent', 'selector': 'app-generatequizz'},{'name': 'GestionCrudComponent', 'selector': 'app-gestion-crud'},{'name': 'GestionquizzComponent', 'selector': 'app-gestionquizz'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LevelComponent', 'selector': 'app-level'},{'name': 'LoginPageComponent', 'selector': 'app-login-page'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'QuizComponent', 'selector': 'app-quiz'},{'name': 'QuizzBankComponent', 'selector': 'app-quizz-bank'},{'name': 'ResultsComponent', 'selector': 'app-results'},{'name': 'ShortcutsComponent', 'selector': 'app-shortcuts'},{'name': 'UserComponent', 'selector': 'app-user'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'GestionquizzComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'GestionquizzComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
