@@ -1,0 +1,34 @@
+<div class="container mx-auto py-8">
+  <h1 class="text-3xl font-bold text-center mb-6">Quizz List</h1>
+  <div class="w-2/3 mx-auto">
+    <ul class="space-y-4">
+        <li  class="flex justify-between items-center p-4 bg-gray-100 rounded-lg">
+            <span class="font-bold">quizz Id </span> - 
+            <span class="italic"> numero de quizz  </span> - 
+            <span>titre </span> - 
+            <span>Completion </span> - 
+            <span>Temps </span> - 
+            <span>Validité </span> - 
+            <span>Nombre de question </span> - 
+            <span>Resultat </span> - 
+            <span class="underline"> URL</span>
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2">Modifier</button>
+          </li>
+      <li *ngFor="let quizz of quizzList" class="flex justify-between items-center p-4 bg-gray-100 rounded-lg">
+        <span class="font-bold">{{ quizz.id }}</span> - 
+        <span class="italic">{{ quizz.quizzNumber }}</span> - 
+        <span>{{ quizz.comment }}</span> - 
+        <span>{{ quizz.completionLevel }}</span> - 
+        <span>{{ quizz.completionTime }}</span> - 
+        <span>{{ quizz.isValid ? 'vrai' : 'faux' }}</span> - 
+        <span>{{ quizz.numberOfQuestion }}</span> - 
+        <span>{{ quizz.result }}</span> - 
+        <span class="underline">{{ quizz.url }}</span>
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2">Modifier</button>
+      </li>
+    </ul>
+    <div class="mt-4 text-center">
+      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Navigate to quizz bank</button>
+    </div>
+  </div>
+</div>

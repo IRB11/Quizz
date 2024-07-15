@@ -15,6 +15,7 @@ export const routes: Routes = [
     { path: 'quizzBank', loadComponent: () => import('../app/quizz-bank/quizz-bank.component').then(m=> m.QuizzBankComponent)},
     { path: 'quizz/:id', loadComponent: () => import('../app/quiz-detail/quiz-detail.component').then(m => m.QuizDetailComponent)},
     { path: 'quizz/:id/question/:questionId', loadComponent: () => import('../app/quiz-question/quiz-question.component').then(m => m.QuizzQuestionComponent) },
+    { path: 'quizz-list', loadComponent: () => import('../app/quizz-list/quizz-list.component').then(m => m.QuizzListComponent) },
     // Example de shortcut  pour les routes
     // { path: 'le nom de mon link ', loadComponent: () => import('../app/gestionquizz/gestionquizz.component')},
 ]

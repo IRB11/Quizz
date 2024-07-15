@@ -53,6 +53,7 @@ namespace Quizz.Domain.Core
             builder.RegisterType<DeleteTechno>().As<IDeleteTechno>().InstancePerLifetimeScope();
             builder.RegisterType<UpdateTechno>().As<IUpdateTechno>().InstancePerLifetimeScope();
 
+            builder.RegisterType<GetAllQuizz>().As<IGetAllQuizz>().InstancePerLifetimeScope();
             builder.RegisterType<GenerateQuiz>().As<IGenerateQuiz>().InstancePerLifetimeScope();
             builder.RegisterType<GetQuizzById>().As<IGetQuizzById>().InstancePerLifetimeScope();
             builder.RegisterType<UpdateQuizz>().As<IUpdateQuizz>().InstancePerLifetimeScope();

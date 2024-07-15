@@ -23,10 +23,7 @@ export class QuizDetailComponent {
     const quizzId = this.route.snapshot.paramMap.get('id');
     if (quizzId !== null) {
       this.quizzService.getQuizz(Number(quizzId)).subscribe(data => {
-        this.quizz = data;
-        console.log(this.quizz);
-        console.log(this.quizz.numberOfQuestion);
-        
+        this.quizz = data;      
       });
     }
   }

@@ -1,9 +1,10 @@
 export interface Quizz {
-    candidateId: any;
-    agentId: any;
-    technologyId: any;
-    adminId: any;
     id: number;
+    candidateId: number;
+    agentId: number;
+    technologyId: number;
+    adminId: any;
+
     comment: string;
     completionLevel: number;
     completionTime: Date;
@@ -18,6 +19,7 @@ export interface Quizz {
     candidate: any;
     statusId: number;
     status: any;
+    levelId: number;
     level: any;
     technologies: any;
 }
