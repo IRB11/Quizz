@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Quizz.Domain.Core.Dto;
-using Quizz.Domain.Core.Interfaces;
+using Quizz.Domain.Core.Interfaces.IUser;
+using Quizz.Domain.Core.UseCases.User;
 
 
 namespace Quizz.Controllers
@@ -14,19 +15,28 @@ namespace Quizz.Controllers
         private readonly IGetAllUsers getAllUsers;
         private readonly IGetUserById getUserById;
         private readonly IDeleteUser deleteUser;
+        private readonly IGetUsersByRoleId getUsersByRoleId;
 
-        public UserController(ICreateUser user, IUpdateUser updateUser, IGetAllUsers getAllUsers, IGetUserById getUserById, IDeleteUser deleteUser)
+        public UserController(ICreateUser user, IUpdateUser updateUser, IGetAllUsers getAllUsers, IGetUserById getUserById, IDeleteUser deleteUser, IGetUsersByRoleId getUsersByRoleId)
         {
             this.createUser = user;
             this.updateUser = updateUser;
             this.getAllUsers = getAllUsers;
             this.getUserById = getUserById;
             this.deleteUser = deleteUser;
+            this.getUsersByRoleId = getUsersByRoleId;
+
         }
         [HttpGet]
         public async Task<IActionResult> Get()
         {
             return Ok(await getAllUsers.Handle());
+        }
+
+        [HttpGet("Role/{id}")]
+        public async Task<IActionResult> GetUsersByRole(int id)
+        {
+            return Ok(await getUsersByRoleId.Handle(id));
         }
 
         [HttpGet("{id}")]

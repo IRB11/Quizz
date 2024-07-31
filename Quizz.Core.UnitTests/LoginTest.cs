@@ -2,9 +2,9 @@
 using NUnit.Framework;
 using Quizz.Common.Interfaces;
 using Quizz.Domain.Core.Dto;
-using Quizz.Domain.Core.Interfaces;
+using Quizz.Domain.Core.Interfaces.IUser;
 using Quizz.Domain.Core.Services;
-using Quizz.Domain.Core.UseCases;
+using Quizz.Domain.Core.UseCases.User;
 using Quizz.Domain.Infrastructure.InMemory;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -38,7 +38,7 @@ namespace Quizz.Core.UnitTests
         public async Task Should_Return_Null_If_Email_Not_Found()
         {
             var loginRequest = GetLoginRequest();
-            loginRequest.EmailAddress = "nonexistentemail@example.com"; // Adresse e-mail non trouvée
+            loginRequest.EmailAddress = "nonexistentemail@example.com";
 
             var response = await UserRepository.GetByEmailAndPassword(loginRequest);
 

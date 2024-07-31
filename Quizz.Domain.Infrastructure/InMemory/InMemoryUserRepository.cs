@@ -1,6 +1,6 @@
 ﻿using Quizz.Domain.Core.Dto;
 using Quizz.Domain.Core.Entities;
-using Quizz.Domain.Core.Interfaces;
+using Quizz.Domain.Core.Interfaces.IUser;
 
 
 namespace Quizz.Domain.Infrastructure.InMemory
@@ -438,6 +438,11 @@ namespace Quizz.Domain.Infrastructure.InMemory
 
                 }
             };
+        }
+
+        public Task<List<UserResponse>> GetUsersByRolesId(int roleId)
+        {
+            throw new NotImplementedException();
         }
         #endregion
     }

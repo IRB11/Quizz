@@ -34,22 +34,18 @@ namespace Quizz.Controllers
             _technoRepository = technoRepository;
         }
 
-        // GET: api/techno
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            //var technos = await _technoRepository.GetAll();
             return Ok(await _getAllTechnos.Handle());
         }
 
-        // GET: api/techno/{id}
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
             return Ok(_getTechnoById.Handle(id));
         }
 
-        // POST: api/techno
 
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] TechnologiesRequest request)
@@ -58,18 +54,15 @@ namespace Quizz.Controllers
             return Ok(await _createTechno.Handle(request)); 
         }
 
-        // PUT: api/techno/{id}
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] TechnologiesRequest request)
         {
             return Ok(await _updateTechno.Handle(request));
         }
 
-        // DELETE: api/techno/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(TechnologiesRequest technologiesRequest)
         {
-            // Implement the delete logic here
             return Ok(await _deleteTechno.Handle(technologiesRequest));
         }
     }

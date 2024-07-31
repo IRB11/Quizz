@@ -1,8 +1,8 @@
 ﻿using Quizz.Common.Interfaces;
 using Quizz.Domain.Core.Dto;
-using Quizz.Domain.Core.Interfaces;
+using Quizz.Domain.Core.Interfaces.IUser;
 
-namespace Quizz.Domain.Core.UseCases
+namespace Quizz.Domain.Core.UseCases.User
 {
     public class UpdateUser : IUpdateUser
     {
@@ -44,7 +44,7 @@ namespace Quizz.Domain.Core.UseCases
 
             bool CheckIfRuleNotRespected(UserRequest userRequest)
             {
-                return _rules.Any(r => (r.CheckRule(userRequest)).ConfigureAwait(false).GetAwaiter().GetResult() == true);
+                return _rules.Any(r => r.CheckRule(userRequest).ConfigureAwait(false).GetAwaiter().GetResult() == true);
             }
         }
     }

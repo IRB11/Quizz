@@ -1,45 +1,60 @@
-﻿using Quizz.Domain.Core.Dto;
+﻿using Quizz.Common.Interfaces;
+using Quizz.Domain.Core.Dto;
 using Quizz.Domain.Core.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Quizz.Domain.Core.UseCases.Candidate
 {
     public class UpdateCandidate : IUpdateCandidate
     {
-        //private readonly IEnumerable<ICandidateRepository<CandidateRequest>> _rules;
         private readonly ICandidateRepository _candidateRepository;
-        //private ICandidateRepository _candidateRepository;
+        private readonly IEnumerable<ICheckRuleCandidate<CandidateRequest>> _rules;
 
-        public UpdateCandidate(ICandidateRepository CandidateRepository)
+        public UpdateCandidate(ICandidateRepository CandidateRepository, IEnumerable<ICheckRuleCandidate<CandidateRequest>> rules)
         {
             _candidateRepository = CandidateRepository;
+            _rules = rules;
         }
 
         public async Task<CandidateResponse> Handle(CandidateRequest candidateRequest)
         {
-            if (await CheckIfRulesAreNotOKAsync(candidateRequest)) return null;
+            if (CheckIfRulesAreNotOK()) return null;
             return await _candidateRepository.Update(candidateRequest);
-            
-            async Task<bool> CheckIfRulesAreNotOKAsync(CandidateRequest candidateRequest)
+
+
+            bool CheckIfRulesAreNotOK()
             {
-               bool IsExist = await _candidateRepository.CandidateAlreadyExist(candidateRequest);
-                return IsExist;
+                if (CheckIfRuleNotRespected(candidateRequest))
+                {
+                    List<string> errorList = new List<string>();
+                    _rules.ToList().ForEach(r =>
+                    {
+                        string currentErrorMessage = r.GetErrorMessage();
+                        if (!string.IsNullOrWhiteSpace(currentErrorMessage))
+                        {
+                            errorList.Add(currentErrorMessage);
+                        }
+                    });
+
+                    return true;
+                }
+
+                return false;
             }
+
+            bool CheckIfRuleNotRespected(CandidateRequest candidateRequest)
+            {
+                return _rules.Any(r => (r.CheckRule(candidateRequest)).ConfigureAwait(false).GetAwaiter().GetResult() == true);
+            }
+
         }
-
     }
-
 }
 
-   
-
-         
-        
 
 
-            
- 
+
+
+
+
+
+

@@ -2,9 +2,9 @@
 using Quizz.Common.Interfaces;
 using Quizz.Domain.Core.Dto;
 using Quizz.Domain.Core.Dto.Enum;
-using Quizz.Domain.Core.Interfaces;
+using Quizz.Domain.Core.Interfaces.IUser;
 using Quizz.Domain.Core.Services;
-using Quizz.Domain.Core.UseCases;
+using Quizz.Domain.Core.UseCases.User;
 using Quizz.Domain.Core.UseCases.Rules;
 using Quizz.Domain.Infrastructure.InMemory;
 using System.Collections.Generic;

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Quizz.Domain.Core.Dto;
-using Quizz.Domain.Core.Interfaces;
+using Quizz.Domain.Core.Interfaces.IUser;
 using Quizz.Domain.Core.UseCases;
 using System.Collections.Generic;
 using System.Threading.Tasks;

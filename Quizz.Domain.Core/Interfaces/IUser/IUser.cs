@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Quizz.Domain.Core.Interfaces
+namespace Quizz.Domain.Core.Interfaces.IUser
 {
     public interface IUser
     {
         int Id { get; set; }
         string FirstName { get; set; }
-        string LastName {  get; set; }        
+        string LastName { get; set; }
         string EmailAddress { get; set; }
 
     }
