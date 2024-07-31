@@ -28,9 +28,9 @@ namespace Quizz.Domain.Core.UseCases.Candidate
                 return new CandidateResponse()
                 {
                     Id = (long)candidateRequest.Id,
-                    EmailAdress = candidateRequest.EmailAddress,
+                    EmailAddress = candidateRequest.EmailAddress,
                     FirstName = candidateRequest.FirstName,
-                    Lastname =candidateRequest.Lastname,
+                    LastName =candidateRequest.LastName,
                     PhoneNumber = candidateRequest.PhoneNumber,
                 };
             }

@@ -1,91 +1,4 @@
-﻿/*using Quizz.Domain.Core.Dto;
-using Quizz.Domain.Core.Entities;
-using Quizz.Domain.Core.Interfaces.Repositories;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Quizz.Domain.Core.Interfaces;
-using AutoMapper;
-using Quizz.Domain.Infrastructure.Data.Entities;
-
-namespace Quizz.Domain.Infrastructure.Data.Repositories
-{
-    public class CandidateRepository : ICandidateRepository
-    {
-        private readonly Context context;
-        private readonly IMapper mapper;
-
-        public CandidateRepository(Context context, IMapper mapper) : base()
-        {
-            this.context = context;
-            this.mapper = mapper;
-        }
-        public async Task<CandidateRequest> Add(CandidateRequest request)
-        {
-            if (request == null) throw new ArgumentNullException(nameof(request));
-
-            var Efcandidate = mapper.Map<CandidateRequest>(request);
-
-            context.Add(Efcandidate);
-            context.SaveChanges();
-
-            TechnologiesResponse technologiesResponse = mapper.Map<TechnologiesResponse>(request);
-            return CandidateResponse;
-        }
-        public async Task<TechnologiesResponse> GetCandidatById(int id)
-        {
-            var efCandidate = context.Technologies.FirstOrDefault(t => t.Id == id);
-            var candidate = mapper.Map<TechnologiesResponse>(efCandidate);
-            return candidate;
-
-        }
-
-        public Task<bool> CandidateAlreadyExist(TechnologiesRequest technologiesRequest)
-        {
-            return Task.Run(() => context.Technologies.Any(q => q.Name.Trim().ToLower() == technologiesRequest.Name.Trim().ToLower()));
-        }
-
-        public Task<bool> CandidateISUser(int candidateId)
-        {
-            return Task.Run(() => context.Questions.Any(q => q.Id == candidateId)) || context.Quizzes.Any(qz => qz.Id == candidateId);
-        }
-
-        public async Task<TechnologiesResponse> Update(TechnologiesRequest candidateRequest);
-        
-        {
-         EFTechnology eFTechnology = mapper.Map<EFTechnology>(candidateRequest);
-        TechnologiesResponse technologiesResponse = null;
-        try
-        { await Task.Run(() =>
-                                                            
-         {
-            _context.Technologies.Update(eFTechnology);
-            _context.SaveChangesAsync();
-
-            catch (Exception ex)
-            {
-                technologiesResponse.Id = -1;
-                technologiesResponse.Name = $"An error occurred: {ex.Message}";
-            }
-            technologiesResponse = mapper.Map<TechnologiesResponse>(eFTechnology);
-
-            return technologiesResponse;
-
-        }
-        }
-
-
-
-
-        }
-
-    }
-
-}*/
-
-
-
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Quizz.Domain.Core.Dto;
 using Quizz.Domain.Core.Entities;
@@ -130,12 +43,46 @@ namespace Quizz.Domain.Infrastructure.Data.Repositories
 
         public async Task<CandidateResponse> Update(CandidateRequest request)
         {
-            if (request == null) throw new ArgumentNullException(nameof(request));
+            EFCandidate eFCandidate = _mapper.Map<EFCandidate>(request);
+            CandidateResponse candidateResponse = new CandidateResponse();
 
-            var candidateEntity = _mapper.Map<EFCandidate>(request);
-            _context.Candidates.Update(candidateEntity);
-            await _context.SaveChangesAsync();
-            return _mapper.Map<CandidateResponse>(candidateEntity);
+            try
+            {
+                // Trouvez le candidat existant
+                EFCandidate existingCandidate = _context.Candidates.Include(r => r.Agent).SingleOrDefault(u => u.Id == request.Id);
+
+                if (existingCandidate == null)
+                {
+                    candidateResponse.Id = -1;
+                    candidateResponse.FirstName = "User not found.";
+                    return candidateResponse;
+                }
+
+                // Appliquez les modifications nécessaires
+                existingCandidate.FirstName = request.FirstName;
+                existingCandidate.LastName = request.LastName;
+                existingCandidate.EmailAddress = request.EmailAddress;
+                existingCandidate.PhoneNumber = request.PhoneNumber;
+
+                // Chargez le nouvel agent et mettez à jour la référence de l'agent
+                EFUser newAgent = await _context.Users.FindAsync((int)request.AgentId);
+                if (newAgent != null)
+                {
+                    existingCandidate.Agent = newAgent;
+                }
+
+                await _context.SaveChangesAsync();
+
+                candidateResponse = _mapper.Map<CandidateResponse>(existingCandidate);
+            }
+            catch (Exception ex)
+            {
+                // Gestion des exceptions et initialisation de la réponse
+                candidateResponse.Id = -1;
+                candidateResponse.FirstName = $"An error occurred: {ex.Message}";
+            }
+
+            return candidateResponse;
         }
 
         public async Task<bool> Delete(CandidateRequest request)
@@ -148,7 +95,6 @@ namespace Quizz.Domain.Infrastructure.Data.Repositories
 
         public async Task<bool> CandidateIsUsed(CandidateRequest candidateRequest)
         {
-            // Implémentez la logique pour vérifier si le candidat est utilisé
             return await Task.FromResult(false);
         }
 
