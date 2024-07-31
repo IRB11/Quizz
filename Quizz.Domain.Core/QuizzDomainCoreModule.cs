@@ -14,6 +14,8 @@ using Quizz.Domain.Core.UseCases.Rules.QuestionRules;
 using Quizz.Domain.Core.UseCases.Rules.CandidateRules;
 using Quizz.Domain.Core.UseCases.Candidate;
 using Quizz.Domain.Core.UseCases.Rules.QuizzRules;
+using Quizz.Domain.Core.UseCases.User;
+using Quizz.Domain.Core.Interfaces.IUser;
 
 namespace Quizz.Domain.Core
 {
@@ -35,6 +37,7 @@ namespace Quizz.Domain.Core
 
             builder.RegisterType<CreateUser>().As<ICreateUser>().InstancePerLifetimeScope();
             builder.RegisterType<GetUserById>().As<IGetUserById>().InstancePerLifetimeScope();
+            builder.RegisterType<GetUsersByRoleId>().As<IGetUsersByRoleId>().InstancePerLifetimeScope();
             builder.RegisterType<GetAllUsers>().As<IGetAllUsers>().InstancePerLifetimeScope();
             builder.RegisterType<UpdateUser>().As<IUpdateUser>().InstancePerLifetimeScope();
             builder.RegisterType<DeleteUser>().As<IDeleteUser>().InstancePerLifetimeScope();

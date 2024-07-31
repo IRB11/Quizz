@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Quizz.Domain.Core.Dto;
 using Quizz.Domain.Core.Entities;
 using Quizz.Domain.Core.Interfaces;
+using Quizz.Domain.Core.Interfaces.IUser;
 using Quizz.Domain.Infrastructure.Data.Entities;
 using System.Data.SqlTypes;
 using System.Security.Cryptography;
@@ -36,7 +37,7 @@ namespace Quizz.Domain.Infrastructure.Data.Repositories
 
             if (hashingPassword.UserVerify(LoginRequest).Result == true)
             {
-                eFUser = await this.context.Users
+                eFUser = await context.Users
                     .AsNoTracking()
                     .Include(u => u.Role)
                     .FirstOrDefaultAsync(e => e.EmailAddress == LoginRequest.EmailAddress);
@@ -115,7 +116,7 @@ namespace Quizz.Domain.Infrastructure.Data.Repositories
 
         public async Task<bool> Delete(UserRequest request)
         {
-            if (context.Users.Any(u => u.Id == request.Id))
+            if (await context.Users.AnyAsync(u => u.Id == request.Id))
             {
                 EFUser eFUser = mapper.Map<EFUser>(request);
                 context.Users.Remove(eFUser);
@@ -127,14 +128,14 @@ namespace Quizz.Domain.Infrastructure.Data.Repositories
 
         public async Task<List<UserResponse>> getAll()
         {
-            var efUsers = context.Users.Include(r => r.Role).ToList();
+            var efUsers = await context.Users.Include(r => r.Role).ToListAsync();
             var users = mapper.Map<List<UserResponse>>(efUsers);
             return users;
         }
 
         public async Task<UserResponse> GetById(int id)
         {
-            var user = context.Users.FirstOrDefault(r => r.Id == id);
+            var user = await context.Users.Include(r => r.Role).FirstOrDefaultAsync(r => r.Id == id);
             if (user == null)
             {
                 return null;
@@ -150,7 +151,7 @@ namespace Quizz.Domain.Infrastructure.Data.Repositories
             try
             {
                 // Récupérez l'entité existante avec la propriété de navigation incluse
-                EFUser existingUser =  context.Users.Include(r => r.Role).SingleOrDefault(u => u.Id == request.Id);
+                EFUser existingUser =  await context.Users.Include(r => r.Role).SingleOrDefaultAsync(u => u.Id == request.Id);
 
                 if (existingUser == null)
                 {
@@ -167,7 +168,7 @@ namespace Quizz.Domain.Infrastructure.Data.Repositories
                 existingUser.IsActive = request.IsActive;
                 existingUser.Role.Id = (int)request.Role.Id;
                 existingUser.Role.Name = request.Role.Name;
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
                 userResponse = mapper.Map<UserResponse>(eFUser);
             }
@@ -183,19 +184,27 @@ namespace Quizz.Domain.Infrastructure.Data.Repositories
 
         public Task<bool> UserIsUsed(UserRequest userRequest)
         {
-            return Task.Run(() => 
-            context.Questions.Any(q => q.AdminId == userRequest.Id)
-            || context.Levels.Any(l => l.AdminId == userRequest.Id)
-            || context.Technologies.Any(t => t.AdminId == userRequest.Id)
-            || context.Quizzes.Any(qz => qz.AdminId == userRequest.Id)
-            || context.Quizzes.Any(qz => qz.AgentId == userRequest.Id)
-            || context.Candidates.Any(c => c.AgentId == userRequest.Id)
+            return Task.Run(async () => 
+            await context.Questions.AnyAsync(q => q.AdminId == userRequest.Id)
+            || await context.Levels.AnyAsync(l => l.AdminId == userRequest.Id)
+            || await context.Technologies.AnyAsync(t => t.AdminId == userRequest.Id)
+            || await context.Quizzes.AnyAsync(qz => qz.AdminId == userRequest.Id)
+            || await context.Quizzes.AnyAsync(qz => qz.AgentId == userRequest.Id)
+            || await context.Candidates.AnyAsync(c => c.AgentId == userRequest.Id)
             );
         }
 
         public Task<bool> IdIsNotAvailable(int id)
         {
             return Task.Run(() => context.Users.Any(f => f.Id == id));
+        }
+
+        public async Task<List<UserResponse>> GetUsersByRolesId(int roleId)
+        {
+            var efUsers = await context.Users.Where(u => u.RoleId == roleId).Include(r => r.Role).ToListAsync();
+            var users = mapper.Map<List<UserResponse>>(efUsers);
+            Console.WriteLine(users + " userssssssssssssssssssss" );
+            return users;
         }
     }
 }
