@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using Quizz.Common.Interfaces;
 using Quizz.Domain.Core.Dto;
-using Quizz.Domain.Core.Interfaces;
+using Quizz.Domain.Core.Interfaces.IUser;
 using Quizz.Domain.Core.Services;
 
-namespace Quizz.Domain.Core.UseCases
+namespace Quizz.Domain.Core.UseCases.User
 {
     public class CreateUser : ICreateUser
     {
@@ -17,7 +17,7 @@ namespace Quizz.Domain.Core.UseCases
         {
             this.rules = rules;
             this.userRepository = userRepository;
-            this.jwtService = jWTService;
+            jwtService = jWTService;
         }
 
         public async Task<UserResponse> Handle(UserRequest createUserRequest)
@@ -58,7 +58,7 @@ namespace Quizz.Domain.Core.UseCases
 
             bool CheckIfRuleNotRespected(UserRequest userRequest)
             {
-                return rules.Any(r => (r.CheckRule(userRequest)).ConfigureAwait(false).GetAwaiter().GetResult() == true);
+                return rules.Any(r => r.CheckRule(userRequest).ConfigureAwait(false).GetAwaiter().GetResult() == true);
             }
             #endregion
         }

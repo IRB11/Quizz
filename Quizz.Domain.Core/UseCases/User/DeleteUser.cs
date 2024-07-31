@@ -1,8 +1,8 @@
 ﻿using Quizz.Common.Interfaces;
 using Quizz.Domain.Core.Dto;
-using Quizz.Domain.Core.Interfaces;
+using Quizz.Domain.Core.Interfaces.IUser;
 
-namespace Quizz.Domain.Core.UseCases
+namespace Quizz.Domain.Core.UseCases.User
 {
     public class DeleteUser : IDeleteUser
     {
@@ -65,7 +65,7 @@ namespace Quizz.Domain.Core.UseCases
                     FirstName = $"An error occurred: {ex.Message}"
                 };
             }
-          
+
             #region local methods
 
             bool CheckIfUserIsUsed(UserRequest userRequest)

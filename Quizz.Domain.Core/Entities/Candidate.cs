@@ -1,4 +1,4 @@
-﻿using Quizz.Domain.Core.Interfaces;
+﻿using Quizz.Domain.Core.Interfaces.IUser;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -6,6 +6,7 @@ using Quizz.Domain.Infrastructure.Data.Repositories;
 using Quizz.Domain.Infrastructure.Utils;
 using Quizz.Domain.Core.Interfaces.Questions;
 using Quizz.Domain.Core.Interfaces.Quizz;
+using Quizz.Domain.Core.Interfaces.IUser;
 
 namespace Quizz.Domain.Infrastructure
 {

@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using Quizz.Common.Interfaces;
 using Quizz.Domain.Core.Dto;
-using Quizz.Domain.Core.Interfaces;
+using Quizz.Domain.Core.Interfaces.IUser;
 using Quizz.Domain.Core.Services;
 using Quizz.Domain.Core.UseCases;
 using Quizz.Domain.Infrastructure.InMemory;
