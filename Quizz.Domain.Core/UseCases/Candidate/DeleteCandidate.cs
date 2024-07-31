@@ -1,10 +1,6 @@
 ﻿using Quizz.Common.Interfaces;
 using Quizz.Domain.Core.Dto;
 using Quizz.Domain.Core.Interfaces;
-using Quizz.Domain.Core.UseCases.Candidate;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Quizz.Domain.Core.UseCases.Candidate
 {
@@ -30,7 +26,7 @@ namespace Quizz.Domain.Core.UseCases.Candidate
                     Id = (long)candidateRequest.Id,
                     EmailAddress = candidateRequest.EmailAddress,
                     FirstName = candidateRequest.FirstName,
-                    LastName =candidateRequest.LastName,
+                    LastName = candidateRequest.LastName,
                     PhoneNumber = candidateRequest.PhoneNumber,
                 };
             }

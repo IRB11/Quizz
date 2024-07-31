@@ -48,7 +48,6 @@ namespace Quizz.Domain.Infrastructure.Data.Repositories
 
             try
             {
-                // Trouvez le candidat existant
                 EFCandidate existingCandidate = _context.Candidates.Include(r => r.Agent).SingleOrDefault(u => u.Id == request.Id);
 
                 if (existingCandidate == null)
@@ -57,14 +56,11 @@ namespace Quizz.Domain.Infrastructure.Data.Repositories
                     candidateResponse.FirstName = "User not found.";
                     return candidateResponse;
                 }
-
-                // Appliquez les modifications nécessaires
                 existingCandidate.FirstName = request.FirstName;
                 existingCandidate.LastName = request.LastName;
                 existingCandidate.EmailAddress = request.EmailAddress;
                 existingCandidate.PhoneNumber = request.PhoneNumber;
 
-                // Chargez le nouvel agent et mettez à jour la référence de l'agent
                 EFUser newAgent = await _context.Users.FindAsync((int)request.AgentId);
                 if (newAgent != null)
                 {
@@ -77,7 +73,6 @@ namespace Quizz.Domain.Infrastructure.Data.Repositories
             }
             catch (Exception ex)
             {
-                // Gestion des exceptions et initialisation de la réponse
                 candidateResponse.Id = -1;
                 candidateResponse.FirstName = $"An error occurred: {ex.Message}";
             }

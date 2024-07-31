@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-using Quizz.Domain.Core.Dto;
-using Quizz.Domain.Core.Entities;
+﻿using Quizz.Domain.Core.Dto;
 using Quizz.Domain.Core.Interfaces;
 
 
@@ -13,7 +11,7 @@ namespace Quizz.Domain.Core.UseCases.Candidate
         public CreateCandidate(ICandidateRepository candidateRepository)
         {
             this.candidateRepository = candidateRepository;
-        }         
+        }
 
         public async Task<CandidateResponse> Handle(CandidateRequest candidateRequest)
         {
@@ -27,12 +25,12 @@ namespace Quizz.Domain.Core.UseCases.Candidate
             else return null;
 
         }
-    
+
     }
 
 
-    
-     
-    
+
+
+
 
 }

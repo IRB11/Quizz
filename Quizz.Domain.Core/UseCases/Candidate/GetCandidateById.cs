@@ -1,26 +1,5 @@
-﻿/*using Quizz.Domain.Core.Dto;
+﻿using Quizz.Domain.Core.Dto;
 using Quizz.Domain.Core.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Quizz.Domain.Core.UseCases.Candidate
-{
-     
-    public class GetCandidateById : IGetCandidateById
-    {
-        public Task<CandidateResponse> Handle(int id)
-        {
-            throw new NotImplementedException();
-        }
-    }
-}*/
-
-using Quizz.Domain.Core.Dto;
-using Quizz.Domain.Core.Interfaces;
-using System.Threading.Tasks;
 
 namespace Quizz.Domain.Core.UseCases.Candidate
 {
